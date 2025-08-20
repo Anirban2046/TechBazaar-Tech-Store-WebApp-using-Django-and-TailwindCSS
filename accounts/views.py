@@ -284,11 +284,9 @@ def change_password(request):
 
 @login_required(login_url='login')
 def order_detail(request, order_id):
-    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
     order = Order.objects.get(order_number=order_id)
-    subtotal = 0
-    for i in order_detail:
-        subtotal += i.product_price * i.quantity
+    subtotal = order.order_total - order.tax  # works even without OrderProduct entries
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
 
     context = {
         'order_detail': order_detail,
@@ -296,3 +294,21 @@ def order_detail(request, order_id):
         'subtotal': subtotal,
     }
     return render(request, 'accounts/order_detail.html', context)
+
+
+#This is the main one function below: (Above is without payment function)
+
+# @login_required(login_url='login')
+# def order_detail(request, order_id):
+#     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+#     order = Order.objects.get(order_number=order_id)
+#     subtotal = 0
+#     for i in order_detail:
+#         subtotal += i.product_price * i.quantity
+
+#     context = {
+#         'order_detail': order_detail,
+#         'order': order,
+#         'subtotal': subtotal,
+#     }
+#     return render(request, 'accounts/order_detail.html', context)
