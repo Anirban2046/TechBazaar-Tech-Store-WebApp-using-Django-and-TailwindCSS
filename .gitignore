@@ -1,0 +1,23 @@
+# Ignore virtual environment
+django_env/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore SQLite database (if used)
+db.sqlite3
+
+# Ignore PostgreSQL dumps/backups
+*.sql
+*.dump
+
+# Ignore media files (optional)
+media/
+
+# Ignore environment variables file
+.env
+
+# Ignore VS Code settings
+.vscode/
