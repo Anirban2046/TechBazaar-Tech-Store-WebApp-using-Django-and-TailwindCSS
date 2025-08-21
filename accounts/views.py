@@ -154,7 +154,9 @@ def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
 
-    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    # Use get_or_create instead of get
+    userprofile, created = UserProfile.objects.get_or_create(user=request.user)
+    
     context = {
         'orders_count': orders_count,
         'userprofile': userprofile,
@@ -287,7 +289,7 @@ def order_detail(request, order_id):
     order = Order.objects.get(order_number=order_id)
     subtotal = order.order_total - order.tax  # works even without OrderProduct entries
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
-
+    
     context = {
         'order_detail': order_detail,
         'order': order,
@@ -297,7 +299,6 @@ def order_detail(request, order_id):
 
 
 #This is the main one function below: (Above is without payment function)
-
 # @login_required(login_url='login')
 # def order_detail(request, order_id):
 #     order_detail = OrderProduct.objects.filter(order__order_number=order_id)

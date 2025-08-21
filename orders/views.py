@@ -9,71 +9,13 @@ from store.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
-
-def payments(request):
-    return render(request, 'orders/payments.html')
-    # body = json.loads(request.body)
-    # order = Order.objects.get(user=request.user, is_ordered=False, order_number=body['orderID'])
-
-    # # Store transaction details inside Payment model
-    # payment = Payment(
-    #     user = request.user,
-    #     payment_id = body['transID'],
-    #     payment_method = body['payment_method'],
-    #     amount_paid = order.order_total,
-    #     status = body['status'],
-    # )
-    # payment.save()
-
-    # order.payment = payment
-    # order.is_ordered = True
-    # order.save()
-
-    # # Move the cart items to Order Product table
-    # cart_items = CartItem.objects.filter(user=request.user)
-
-    # for item in cart_items:
-    #     orderproduct = OrderProduct()
-    #     orderproduct.order_id = order.id
-    #     orderproduct.payment = payment
-    #     orderproduct.user_id = request.user.id
-    #     orderproduct.product_id = item.product_id
-    #     orderproduct.quantity = item.quantity
-    #     orderproduct.product_price = item.product.price
-    #     orderproduct.ordered = True
-    #     orderproduct.save()
-
-    #     cart_item = CartItem.objects.get(id=item.id)
-    #     product_variation = cart_item.variations.all()
-    #     orderproduct = OrderProduct.objects.get(id=orderproduct.id)
-    #     orderproduct.variations.set(product_variation)
-    #     orderproduct.save()
-
-
-    #     # Reduce the quantity of the sold products
-    #     product = Product.objects.get(id=item.product_id)
-    #     product.stock -= item.quantity
-    #     product.save()
-
-    # # Clear cart
-    # CartItem.objects.filter(user=request.user).delete()
-
-    # # Send order recieved email to customer
-    # mail_subject = 'Thank you for your order!'
-    # message = render_to_string('orders/order_recieved_email.html', {
-    #     'user': request.user,
-    #     'order': order,
-    # })
-    # to_email = request.user.email
-    # send_email = EmailMessage(mail_subject, message, to=[to_email])
-    # send_email.send()
-
-    # # Send order number and transaction id back to sendData method via JsonResponse
-    # data = {
-    #     'order_number': order.order_number,
-    #     'transID': payment.payment_id,
-    # }
-    # return JsonResponse(data)
+## SSLCommerz imports
+import requests
+from django.conf import settings
+from django.urls import reverse
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 
 def place_order(request, total=0, quantity=0,):
@@ -136,28 +78,166 @@ def place_order(request, total=0, quantity=0,):
         return redirect('checkout')
 
 
-# def order_complete(request):
-#     order_number = request.GET.get('order_number')
-#     transID = request.GET.get('payment_id')
+# SSLCOMMERZ functions
+@csrf_exempt
+def sslcommerz_init(request):
+    if request.method == "POST":
+        order_number = request.POST.get('order_id')
+        try:
+            order = Order.objects.get(order_number=order_number, is_ordered=False)
+        except Order.DoesNotExist:
+            return HttpResponse("Order not found or already processed.")
 
-#     try:
-#         order = Order.objects.get(order_number=order_number, is_ordered=True)
-#         ordered_products = OrderProduct.objects.filter(order_id=order.id)
+        store_id = settings.STORE_ID
+        store_passwd = settings.STORE_PASSWORD
+        total_amount = order.order_total
 
-#         subtotal = 0
-#         for i in ordered_products:
-#             subtotal += i.product_price * i.quantity
+        payload = {
+            'store_id': store_id,
+            'store_passwd': store_passwd,
+            'total_amount': total_amount,
+            'currency': 'BDT',
+            'tran_id': order.order_number,
+            'success_url': request.build_absolute_uri(reverse('sslcommerz_success')),
+            'fail_url': request.build_absolute_uri(reverse('sslcommerz_fail')),
+            'cancel_url': request.build_absolute_uri(reverse('sslcommerz_cancel')),
 
-#         payment = Payment.objects.get(payment_id=transID)
+            'cus_name': f'{order.first_name} {order.last_name}',
+            'cus_email': order.email,
+            'cus_add1': order.address_line_1 or 'N/A',
+            'cus_add2': order.address_line_2 or '',
+            'cus_city': order.city or 'Dhaka',
+            'cus_state': order.state or 'Dhaka',
+            'cus_postcode': '1234',
+            'cus_country': order.country or 'Bangladesh',
+            'cus_phone': order.email or '01581440841',
 
-#         context = {
-#             'order': order,
-#             'ordered_products': ordered_products,
-#             'order_number': order.order_number,
-#             'transID': payment.payment_id,
-#             'payment': payment,
-#             'subtotal': subtotal,
-#         }
-#         return render(request, 'orders/order_complete.html', context)
-#     except (Payment.DoesNotExist, Order.DoesNotExist):
-#         return redirect('home')
+            # Required by SSLCommerz even if not shipping
+            'shipping_method': 'NO',
+            'product_name': 'Product',
+            'product_category': 'Category',
+            'product_profile': 'general',
+        }
+
+        try:
+            response = requests.post(
+                'https://sandbox.sslcommerz.com/gwprocess/v4/api.php',
+                data=payload,
+                timeout=10
+            )
+            data = response.json()
+        except requests.RequestException as e:
+            return HttpResponse(f"Payment gateway request failed: {e}")
+
+        gateway_url = data.get('GatewayPageURL')
+        if gateway_url:
+            return redirect(gateway_url)
+        else:
+            # SSLCommerz returned an error
+            return HttpResponse(
+                f"SSLCommerz initialization failed. Response: {data}"
+            )
+
+    return HttpResponse("Invalid request method.")
+
+
+# Helper function for moving cart items → order products
+def finalize_order(order, payment):
+    from carts.models import CartItem
+    from store.models import Product
+    from django.core.mail import EmailMessage
+    from django.template.loader import render_to_string
+
+    cart_items = CartItem.objects.filter(user=order.user)
+
+    for item in cart_items:
+        orderproduct = OrderProduct.objects.create(
+            order=order,
+            payment=payment,
+            user=order.user,
+            product=item.product,
+            quantity=item.quantity,
+            product_price=item.product.price,
+            ordered=True
+        )
+        orderproduct.variations.set(item.variations.all())
+        # Reduce stock
+        item.product.stock -= item.quantity
+        item.product.save()
+
+    # Clear cart
+    CartItem.objects.filter(user=order.user).delete()
+
+    # Send email
+    mail_subject = 'Thank you for your order!'
+    message = render_to_string('orders/order_recieved_email.html', {
+        'user': order.user,
+        'order': order,
+    })
+    send_email = EmailMessage(mail_subject, message, to=[order.user.email])
+    send_email.send()
+
+
+# Callbacks
+@csrf_exempt
+def sslcommerz_success(request):
+    data = request.POST
+    order_number = data.get('tran_id')
+    val_id = data.get('val_id')
+
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=False)
+        payment = Payment.objects.create(
+            user=order.user,
+            payment_id=val_id,
+            payment_method="SSLCOMMERZ",
+            amount_paid=order.order_total,
+            status="Completed"
+        )
+        order.payment = payment
+        order.is_ordered = True
+        order.save()
+
+        finalize_order(order, payment)
+        return redirect(f"{reverse('order_complete')}?order_number={order.order_number}&payment_id={payment.payment_id}")
+
+    except Order.DoesNotExist:
+        return redirect('home')
+
+
+@csrf_exempt
+def sslcommerz_fail(request):
+    messages.error(request, "Payment Failed. Please try again.")
+    return redirect('checkout')
+
+
+@csrf_exempt
+def sslcommerz_cancel(request):
+    messages.warning(request, "Payment Cancelled.")
+    return redirect('checkout')
+
+
+@login_required
+def order_complete(request):
+    order_number = request.GET.get('order_number')
+    payment_id = request.GET.get('payment_id')
+
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        payment = Payment.objects.get(payment_id=payment_id)
+
+        ordered_products = OrderProduct.objects.filter(order=order)
+        subtotal = sum([p.product_price * p.quantity for p in ordered_products])
+
+        return render(request, 'orders/order_complete.html', {
+            'order': order,
+            'payment': payment,
+            'ordered_products': ordered_products,
+            'subtotal': subtotal,
+        })
+
+    except (Order.DoesNotExist, Payment.DoesNotExist):
+        return redirect('home')
+
+
+
