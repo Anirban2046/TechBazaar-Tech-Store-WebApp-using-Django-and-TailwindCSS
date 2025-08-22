@@ -1,16 +1,18 @@
 {% if messages %}
     {% for message in messages %}
-        <div id="message" class="container">
-            <div class="alert 
-                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                    alert-danger
-                {% else %}
-                    alert-success
-                {% endif %}" 
-                role="alert">
+        <div id="message" class="container mx-auto px-2 sm:px-4 my-2">
+            <div class="relative rounded-md p-4 text-sm sm:text-base md:text-lg 
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            bg-red-100 text-red-800
+                        {% else %}
+                            bg-green-100 text-green-800
+                        {% endif %}" 
+                 role="alert">
                 
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" 
+                        class="absolute top-2 right-2 text-xl font-bold leading-none outline-none focus:outline-none"
+                        onclick="this.parentElement.parentElement.remove()">
+                    &times;
                 </button>
 
                 {{ message }}

@@ -3,50 +3,182 @@
 
 {% block content %}
 
-<div style="background-color: #eaeff2ff; min-height: 100vh; padding: 0;">
+<div class="bg-gray-100 min-h-screen p-0">
 
-<!-- Main Banner -->
-<section class="section-intro padding-y-sm">
-  <div class="container" style="width: 90% !important; max-width: 90% !important;">
-    <div class="intro-banner-wrap">
-      <img src="{% static 'images/banners/banner_static.jpg' %}" class="rounded" style="width: 100%; height: 400px;">
-    </div>
-  </div>
-</section>
+  <!-- Main Banner Slider -->
+  <section class="relative overflow-hidden mb-6">
+    <div class="w-[90vw] max-w-none mx-auto">
 
-<!-- Popular Products -->
-<section class="section-name padding-y-sm">
-  <div class="container" style="width: 90% !important; max-width: 90% !important;">
-    <header class="section-heading">
-      <a href="{% url 'store' %}" class="btn btn-outline-info float-right">See all</a>
-      <h3 class="section-title">Popular products</h3>
-    </header>
-
-    <div class="row">
-      {% for product in products %}
-      <div class="col-md-3">
-        <div class="card card-product-grid">
-          <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
-          <figcaption class="info-wrap">
-            <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-            <div class="price mt-1">Tk {{ product.price }}</div>
-              <div class="rating-star">
-                <span>
-                  <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
-                  </span>
-				        </div>
-          </figcaption>
+      <!-- Swiper -->
+      <div class="swiper rounded">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <img src="{% static 'images/banners/banner_1.jpg' %}" 
+                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded">
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <img src="{% static 'images/banners/banner_2.jpg' %}" 
+                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded">
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <img src="{% static 'images/banners/banner_3.jpg' %}" 
+                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded">
+          </div>
+          <!-- Slide 4 -->
+          <div class="swiper-slide">
+            <img src="{% static 'images/banners/banner_4.jpg' %}" 
+                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded">
+          </div>
         </div>
       </div>
-      {% endfor %}
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Sliding/Train Text -->
+  <section class="overflow-hidden my-4 flex justify-center"> <!-- reduced vertical margin -->
+    <div class="relative w-[90%] bg-white rounded-full-container px-4 py-2 overflow-hidden">
+      <div class="marquee text-gray-800 text-sm sm:text-base md:text-lg whitespace-nowrap font-poppins">
+        Discover computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment at TechBazaar with fast and dependable delivery throughout Bangladesh.
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Products -->
+  <section class="padding-y-sm">
+    <div class="container mx-auto w-[90%] px-0">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xs sm:text-sm md:text-lg lg:text-xl font-semibold text-gray-800">Featured Products</h3>
+        <a href="{% url 'store' %}" class="border border-blue-500 text-blue-500 px-3 py-1 rounded hover:bg-blue-500 hover:text-white text-xs sm:text-sm md:text-base">See all</a>
+      </div>
+
+      <div class="grid gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {% for product in products %}
+        <div class="bg-white rounded shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-md">
+          <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t">
+            <img src="{{ product.images.url }}" 
+                 class="w-full h-auto max-h-60 sm:max-h-64 md:max-h-72 lg:max-h-80 object-contain transition duration-300">
+          </a>
+          <div class="p-2 sm:p-3">
+            <a href="{{ product.get_url }}" class="block text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-800 hover:text-blue-500 transition duration-300">
+              {{ product.product_name }}
+            </a>
+            <div class="text-xs sm:text-sm md:text-base text-gray-700 mt-1">Tk {{ product.price }}</div>
+            <div class="flex items-center gap-0.5 mt-1">
+              <span class="text-yellow-500">
+                <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- TechBazaar Description Section -->
+  <section class="mt-12 px-6 py-14 bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-800 border-t border-gray-200">
+    <div class="w-[90%] mx-auto text-left"> <!-- 90% width, left aligned -->
+      
+      <!-- Heading -->
+      <h1 class="text-1xl sm:text-2xl lg:text-3xl font-extrabold mb-8 leading-snug text-gray-900">
+        Trusted Online Shop for <span class="text-blue-600">Computers, Laptops, Smartphones</span>, Gadgets & Accessories Across Bangladesh
+      </h1>
+
+      <!-- Paragraphs -->
+      <div class="space-y-5">
+        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
+          TechBazaar is your <span class="font-semibold text-gray-900">one-stop online shop</span> for all things technology. We offer a wide range of computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment. Our goal is to make technology accessible and convenient for everyone, providing a seamless online shopping experience.
+        </p>
+
+        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
+          At TechBazaar, we focus on <span class="font-semibold text-blue-600">quality, reliability, and customer satisfaction</span>. Every product we offer is carefully selected to meet high standards, ensuring that you receive the best technology solutions for work, gaming, or everyday life. Our user-friendly platform makes it easy to find the right products for your needs.
+        </p>
+
+        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
+          Whether you are building a custom PC, upgrading your office setup, or exploring the latest gadgets, TechBazaar provides <span class="font-semibold text-gray-900">fast and trusted service</span> every time. Our mission is to help you stay connected, productive, and entertained with the right technology at your fingertips.
+        </p>
+
+        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
+          We are committed to offering an <span class="font-semibold text-gray-900">exceptional online shopping experience</span>, combining a wide product selection, reliable service, and a secure platform. At TechBazaar, technology meets convenience, helping you get the most out of your digital life.
+        </p>
+      </div>
+    </div>
+  </section>
+
 
 </div> <!-- End wrapper -->
+
+<!-- Swiper.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+<!-- Swiper.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    pagination: false, // Hide dots
+    navigation: false, // Hide arrows
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+  });
+</script>
+
+
+<!-- Tailwind CSS + Custom Marquee -->
+<style>
+  /* Arc-like left/right with straight top/bottom */
+  .rounded-full-container {
+    border-radius: 50px / 25px; /* horizontal/vertical radius for left/right curves */
+  }
+
+  /* Marquee animation inside container */
+  .marquee {
+    display: inline-flex; /* changed from inline-block */
+    white-space: nowrap;
+    animation: marquee 40s linear infinite;
+    font-weight: 300;
+    animation-delay: 2s;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Arc-like left/right with straight top/bottom */
+  .rounded-full-container {
+    border-radius: 50px / 25px;
+  }
+
+  .font-poppins {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+  }
+
+  /* Ensure container hides overflow */
+  .overflow-hidden {
+    overflow: hidden;
+  }
+
+  /* Responsive font tweak */
+  @media (max-width: 640px) {
+    .marquee {
+      font-size: 0.875rem;
+    }
+  }
+</style>
 
 {% endblock %}

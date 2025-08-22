@@ -1,23 +1,43 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<section class="section-content padding-y" style="min-height:84vh">
-    <div class="container mx-auto" style="max-width: 400px; margin-top:100px;">
-        <div class="card p-4">
-            <h4 class="card-title mb-3 text-center">Verify Your Account</h4>
-            {% include 'includes/alerts.html' %}
-            <p class="text-center text-muted mb-3">Enter the OTP sent to your email.</p>
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" name="otp" class="form-control text-center" placeholder="Enter OTP" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mt-3">Verify</button>
-            </form>
-            <p class="text-center mt-3 text-muted" style="font-size: 0.9rem;">
-                Or, you can also verify by clicking the link sent to your email.
-            </p>
-        </div>
-    </div>
+
+<section class="min-h-[84vh] flex items-start justify-center bg-gray-50 pt-28">
+  <div class="w-full max-w-sm bg-white rounded-lg shadow-md p-6">
+    
+    <!-- Title -->
+    <h4 class="text-xl sm:text-2xl font-semibold mb-3 text-center">
+      Verify Your Account
+    </h4>
+
+    {% include 'includes/alerts.html' %}
+
+    <!-- Subtitle -->
+    <p class="text-center text-gray-500 mb-3 text-sm sm:text-base">
+      Enter the OTP sent to your email.
+    </p>
+
+    <!-- Form -->
+    <form method="POST" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <input type="text" name="otp" placeholder="Enter OTP" required
+          class="w-full text-center px-4 py-2 rounded-md border border-gray-300 
+                 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 
+                 text-sm sm:text-base">
+      </div>
+
+      <button type="submit"
+        class="w-full bg-blue-600 text-white font-medium py-2 rounded-md 
+               hover:bg-blue-700 transition duration-200 text-sm sm:text-base">
+        Verify
+      </button>
+    </form>
+
+    <!-- Extra note -->
+    <p class="text-center mt-3 text-gray-500 text-xs sm:text-sm">
+      Or, you can also verify by clicking the link sent to your email.
+    </p>
+  </div>
 </section>
+
 {% endblock %}

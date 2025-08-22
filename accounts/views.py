@@ -371,7 +371,7 @@ def change_password(request):
 @login_required(login_url='login')
 def order_detail(request, order_id):
     order = Order.objects.get(order_number=order_id)
-    subtotal = order.order_total - order.tax  # works even without OrderProduct entries
+    subtotal = order.order_total - order.shipping_charge  # works even without OrderProduct entries
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
     
     context = {

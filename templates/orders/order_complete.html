@@ -3,115 +3,103 @@
 
 {% block content %}
 
-
-<div class="container" style="margin-top: 50px;">
-    <center><i class="fas fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745;"></i></center>
-    <h2 class="text-center">Payment Successful</h2>
-	<br>
-	<div class="text-center">
-		<a href="{% url 'store' %}" class="btn btn-success">Shop more</a>
-	</div>
-</div>
-
-<div class="container" style="margin: 0 auto;width: 50%;padding: 50px;background: #f1f1f1;margin-top: 50px;margin-bottom: 50px;">
-    <div class="row invoice row-printable">
-        <div class="col-md-12">
-            <!-- col-lg-12 start here -->
-            <div class="panel panel-default plain" id="dash_0">
-                <!-- Start .panel -->
-                <div class="panel-body p30">
-                    <div class="row">
-                        <!-- Start .row -->
-                        <div class="col-lg-6">
-                            <!-- col-lg-6 start here -->
-                            <div class="invoice-logo"><img src="{% static '/images/logo.png' %}" alt="Invoice logo" style="max-height: 40px;"></div>
-                        </div>
-                        <!-- col-lg-6 end here -->
-                        <div class="col-lg-6">
-                            <!-- col-lg-6 start here -->
-                            <div class="invoice-from">
-                                <ul class="list-unstyled text-right">
-                                    <li><strong>Invoiced To</strong></li>
-                                    <li>{{order.full_name}}</li>
-                                    <li>{{order.full_address}}</li>
-                                    <li>{{order.city}}, {{order.state}}</li>
-                                    <li>{{order.country}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- col-lg-6 end here -->
-                        <div class="col-lg-12">
-                            <!-- col-lg-12 start here -->
-                            <div class="invoice-details mt25">
-                                <div class="well">
-                                    <ul class="list-unstyled mb0">
-                                        <li><strong>Order</strong> #{{order.order_number}}</li>
-                                        <li><strong>Transaction ID</strong> {{order.payment.payment_id}}</li>
-                                        <li><strong>Order Date:</strong> {{order.created_at}}</li>
-                                        <li><strong>Status:</strong> {{payment.status}}</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="invoice-items">
-                                <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="per70 text-center">Products</th>
-                                                <th class="per5 text-center">Qty</th>
-                                                <th class="per25 text-center">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          {% for item in ordered_products %}
-                                            <tr>
-                                                <td>{{item.product.product_name}}
-                                                  <p class="text-muted small">
-                                          					{% if item.variations.all %}
-                                          						{% for i in item.variations.all %}
-                                          							{{ i.variation_category | capfirst }} : {{ i.variation_value | capfirst }} <br>
-                                          						{% endfor %}
-                                          					{% endif %}
-                                          				</p>
-                                                </td>
-                                                <td class="text-center">{{item.quantity}}</td>
-                                                <td class="text-center">Tk {{item.product_price}} </td>
-                                            </tr>
-                                          {% endfor %}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th colspan="2" class="text-right">Sub Total:</th>
-                                                <th class="text-center">Tk {{subtotal}} </th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2" class="text-right">Tax:</th>
-                                                <th class="text-center">Tk {{order.tax}} </th>
-                                            </tr>
-
-                                            <tr>
-                                                <th colspan="2" class="text-right">Grand Total:</th>
-                                                <th class="text-center">Tk {{order.order_total}} </th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="invoice-footer mt25">
-                                <p class="text-center">Thank you for shopping with us!</p>
-                            </div>
-                        </div>
-                        <!-- col-lg-12 end here -->
-                    </div>
-                    <!-- End .row -->
-                </div>
-            </div>
-            <!-- End .panel -->
-        </div>
-        <!-- col-lg-12 end here -->
+<!-- Payment Success Header -->
+<section class="py-10 bg-gray-50">
+  <div class="container mx-auto max-w-3xl text-center px-4">
+    <i class="fas fa-check-circle text-green-600 text-[72px] mb-4"></i>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6">Payment Successful</h2>
+    <div>
+      <a href="{% url 'store' %}" class="bg-green-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-green-700 transition-colors duration-300">
+        Shop more
+      </a>
     </div>
+  </div>
+</section>
+
+<!-- Invoice Section -->
+<section class="py-10 bg-gray-100">
+  <div class="container mx-auto max-w-3xl bg-white rounded-lg shadow-md p-6 sm:p-8 md:p-10">
+
+    <!-- Header: Logo and Customer Info -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+      <!-- Logo -->
+      <div class="flex-1">
+        <img src="{% static '/images/logo.png' %}" alt="Invoice Logo" class="h-10 md:h-12 object-contain">
+      </div>
+
+      <!-- Invoiced To -->
+      <div class="flex-1 text-right">
+        <ul class="list-none space-y-1">
+          <li><strong class="block text-sm sm:text-base md:text-lg">Invoiced To</strong></li>
+          <li class="text-sm sm:text-base md:text-lg">{{ order.full_name }}</li>
+          <li class="text-sm sm:text-base md:text-lg">{{ order.full_address }}</li>
+          <li class="text-sm sm:text-base md:text-lg">{{ order.city }}, {{ order.state }}</li>
+          <li class="text-sm sm:text-base md:text-lg">{{ order.country }}</li>
+        </ul>
+      </div>
     </div>
 
+    <!-- Invoice Details -->
+    <div class="bg-gray-50 rounded-md shadow-inner p-4 sm:p-6 md:p-8 mb-6">
+      <ul class="list-none space-y-1 text-sm sm:text-base md:text-lg">
+        <li><strong>Order</strong> #{{ order.order_number }}</li>
+        <li><strong>Transaction ID</strong> {{ order.payment.payment_id }}</li>
+        <li><strong>Order Date:</strong> {{ order.created_at }}</li>
+        <li><strong>Status:</strong> {{ order.payment.status }}</li>
+      </ul>
+    </div>
+
+    <!-- Ordered Products Table -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-300 border-collapse">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-2 px-3 text-center w-7/12">Products</th>
+            <th class="py-2 px-3 text-center w-1/12">Qty</th>
+            <th class="py-2 px-3 text-center w-4/12">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in ordered_products %}
+          <tr class="border-t border-gray-300">
+            <td class="py-2 px-3">
+              {{ item.product.product_name }}
+              <p class="text-gray-500 text-xs sm:text-sm md:text-base mt-1">
+                {% if item.variations.all %}
+                  {% for i in item.variations.all %}
+                    {{ i.variation_category|capfirst }} : {{ i.variation_value|capfirst }} <br>
+                  {% endfor %}
+                {% endif %}
+              </p>
+            </td>
+            <td class="text-center py-2 px-3">{{ item.quantity }}</td>
+            <td class="text-center py-2 px-3">Tk {{ item.product_price }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot class="bg-gray-50 font-semibold">
+          <tr>
+            <th colspan="2" class="text-right py-2 px-3">Sub Total:</th>
+            <th class="text-center py-2 px-3">Tk {{ subtotal }}</th>
+          </tr>
+          <tr>
+            <th colspan="2" class="text-right py-2 px-3">Shipping:</th>
+            <th class="text-center py-2 px-3">Tk {{ order.shipping_charge }}</th>
+          </tr>
+          <tr>
+            <th colspan="2" class="text-right py-2 px-3">Grand Total:</th>
+            <th class="text-center py-2 px-3">Tk {{ order.order_total }}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-6">
+      <p class="text-sm sm:text-base md:text-lg">Thank you for shopping with us!</p>
+    </div>
+
+  </div>
+</section>
 
 {% endblock %}

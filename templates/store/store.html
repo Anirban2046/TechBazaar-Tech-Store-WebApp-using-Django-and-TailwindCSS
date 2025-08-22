@@ -3,120 +3,164 @@
 
 {% block content %}
 <!-- ========================= SECTION PAGETOP ========================= -->
-<section class="section-pagetop bg">
-<div class="container">
-	{% if 'search' in request.path %}
-		<h2 class="title-page">Search Result</h2>
-	{% else %}
-		<h2 class="title-page">Our Store</h2>
-	{% endif %}
-
-</div> <!-- container //  -->
+<section class="py-4 bg-gray-100">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {% if 'search' in request.path %}
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold">Search Result</h2>
+    {% else %}
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold">Our Store</h2>
+    {% endif %}
+  </div>
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-<div class="container">
+<section class="py-6">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
-<div class="row">
-	<aside class="col-md-3">
+    <div class="flex flex-col md:flex-row gap-6">
 
-<div class="card">
-	<article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Categories</h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse_1" style="">
-			<div class="card-body">
+      <!-- Sidebar -->
+      <aside class="w-full md:w-1/4">
+        <div class="bg-gray-50 rounded-lg p-4 md:p-6 mb-6 md:mb-0">
+          <article>
+            <!-- Categories -->
+            <header class="mb-4">
+              <h6 class="text-gray-800 font-semibold text-lg sm:text-xl border-b border-gray-300 pb-2">Categories</h6>
+            </header>
+            <ul class="space-y-2 mb-6">
+              <li>
+                <a href="{% url 'store' %}?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}{% endif %}"
+                   class="block py-1 px-2 rounded transition-colors duration-150 ease-in-out
+                          {% if not category_obj %}text-blue-600 font-semibold{% else %}text-gray-700 hover:text-blue-600{% endif %}">
+                  All Products
+                </a>
+              </li>
+              {% for category in links %}
+              <li>
+                <a href="{{ category.get_url }}?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}{% endif %}"
+                   class="block py-1 px-2 rounded transition-colors duration-150 ease-in-out
+                          {% if category_obj and category_obj.id == category.id %}text-blue-600 font-semibold{% else %}text-gray-700 hover:text-blue-600{% endif %}">
+                  {{ category.category_name }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
 
-				<ul class="list-menu">
-					<li><a href="{% url 'store' %}">All Products  </a></li>
-					{% for category in links %}
-				<li><a href="{{ category.get_url }}">{{ category.category_name }}  </a></li>
-					{% endfor %}
-				</ul>
+            <!-- Price Filter -->
+            <div class="border-t border-gray-300 pt-4">
+				{% include 'includes/alerts.html' %}
+              <h6 class="text-gray-800 font-semibold text-lg sm:text-xl mb-3">Filter by Price</h6>
+              <form method="get" class="space-y-3">
+                <div class="flex items-center space-x-2">
+                  <input type="number" name="min_price" placeholder="Min"
+                         value="{{ min_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm">
+                  <input type="number" name="max_price" placeholder="Max"
+                         value="{{ max_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm"
+                         max="{{ max_product_price }}">
+                </div>
+                {% if category_obj %}
+                  <input type="hidden" name="category_slug" value="{{ category_obj.slug }}">
+                {% endif %}
+                {% comment %} {% include 'includes/alerts.html' %} {% endcomment %}
+				<button type="submit"
+                        class="w-full bg-blue-500 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition">
+                  Apply
+                </button>
+              </form>
+            </div>
+          </article>
+        </div>
+      </aside>
 
-			</div> <!-- card-body.// -->
-		</div>
-	</article> <!-- filter-group  .// -->
+      <!-- Main Content -->
+      <main class="flex-1">
+        <header class="border-b mb-4 pb-3 flex items-center justify-between">
+          <span class="font-medium"><b>{{ product_count }}</b> items found</span>
+        </header>
 
-</div> <!-- card.// -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {% if products %}
+            {% for product in products %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <figure class="flex flex-col">
+                <div class="w-full h-auto flex justify-center items-center">
+                  <a href="{{ product.get_url }}">
+                    <img src="{{ product.images.url }}" alt="{{ product.product_name }}" class="w-full h-auto object-contain">
+                  </a>
+                </div>
+                <figcaption class="p-4 flex-1 flex flex-col justify-between">
+                  <div class="mb-2">
+                    <a href="{{ product.get_url }}" class="font-medium text-gray-900 hover:text-blue-600">{{ product.product_name }}</a>
+                    <div class="mt-2">
+                      <span class="font-semibold text-gray-800">Tk {{ product.price }}</span>
+                    </div>
+                  </div>
+                  <a href="{{ product.get_url }}" class="bg-blue-500 text-white text-center py-2 rounded-md font-medium hover:bg-blue-600 transition duration-200">View Details</a>
+                </figcaption>
+              </figure>
+            </div>
+            {% endfor %}
+          {% else %}
+            <div class="col-span-full text-center text-gray-700">
+              <h2 class="text-lg sm:text-xl md:text-2xl">No result found. Please try again.</h2>
+            </div>
+          {% endif %}
+        </div>
 
-	</aside> <!-- col.// -->
-	<main class="col-md-9">
+        <!-- Pagination -->
+        {% if products.has_other_pages %}
+        <nav class="mt-6 flex justify-start" aria-label="Page navigation">
+          <ul class="inline-flex space-x-2">
 
-<header class="border-bottom mb-4 pb-3">
-		<div class="form-inline">
-			<span class="mr-md-auto"><b>{{ product_count }}</b> items found </span>
+            {% if products.has_previous %}
+            <li>
+              <a href="?page={{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                 class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-200">
+                Previous
+              </a>
+            </li>
+            {% else %}
+            <li>
+              <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">Previous</span>
+            </li>
+            {% endif %}
 
-		</div>
-</header><!-- sect-heading -->
+            {% for i in products.paginator.page_range %}
+              {% if products.number == i %}
+              <li>
+                <span class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-inner">{{ i }}</span>
+              </li>
+              {% else %}
+              <li>
+                <a href="?page={{ i }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                   class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-200">
+                  {{ i }}
+                </a>
+              </li>
+              {% endif %}
+            {% endfor %}
 
-<div class="row">
-	{% if products %}
-	{% for product in products %}
-	<div class="col-md-4">
-		<figure class="card card-product-grid">
-			<div class="img-wrap">
+            {% if products.has_next %}
+            <li>
+              <a href="?page={{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                 class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-200">
+                Next
+              </a>
+            </li>
+            {% else %}
+            <li>
+              <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">Next</span>
+            </li>
+            {% endif %}
 
-				<a href="{{ product.get_url }}"><img src="{{ product.images.url }}"></a>
+          </ul>
+        </nav>
+        {% endif %}
+      </main>
 
-			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
-				<div class="fix-height">
-					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-					<div class="price-wrap mt-2">
-						<span class="price">$ {{ product.price }}</span>
-					</div> <!-- price-wrap.// -->
-				</div>
-				<a href="{{ product.get_url}}" class="btn btn-block btn-primary"> View Details </a>
-			</figcaption>
-		</figure>
-	</div> <!-- col.// -->
-	{% endfor %}
-	{% else %}
-	<div>
-		<h2>No result found. Please try again.</h2>
-	</div>
-	{% endif %}
-</div> <!-- row end.// -->
-
-
-<nav class="mt-4" aria-label="Page navigation sample">
-	{% if products.has_other_pages %}
-	  <ul class="pagination">
-			{% if products.has_previous %}
-	    <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a></li>
-			{% else %}
-			<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-			{% endif %}
-
-			{% for i in products.paginator.page_range %}
-				{% if products.number == i %}
-	    		<li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
-				{% else %}
-					<li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-				{% endif %}
-	    {% endfor %}
-
-			{% if products.has_next %}
-	    	<li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a></li>
-			{% else %}
-				<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-			{% endif %}
-	  </ul>
-	{% endif %}
-</nav>
-
-	</main> <!-- col.// -->
-
-</div>
-
-</div> <!-- container .//  -->
+    </div>
+  </div>
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 

@@ -1,63 +1,86 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 
 {% block content %}
 
-<section class="section-content padding-y">
+<section class="py-8 bg-gray-50">
 
-<!-- ============================ COMPONENT REGISTER   ================================= -->
-	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
-      <article class="card-body">
-    {% include 'includes/alerts.html' %}
-		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-		<form action="{% url 'register' %}" method="POST">
-      {% csrf_token %}
+<!-- ============================ COMPONENT REGISTER ================================= -->
+<div class="container mx-auto mt-6 mb-8 px-3 sm:px-6">
+  <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
 
+    <article class="space-y-8">
+      {% include 'includes/alerts.html' %}
 
-				<div class="form-row">
-					<div class="col form-group">
-						<label>First name</label>
-					  	{{ form.first_name }}
-					</div> <!-- form-group end.// -->
-					<div class="col form-group">
-						<label>Last name</label>
-					  	{{ form.last_name }}
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row end.// -->
+      <!-- Header -->
+      <header class="mb-6">
+        <h4 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center sm:text-left">Sign up</h4>
+      </header>
 
+      <!-- Form -->
+      <form action="{% url 'register' %}" method="POST" class="space-y-6">
+        {% csrf_token %}
 
-				<div class="form-row">
-					<div class="form-group col-md-6">
-					  <label>Email Address</label>
-					  {{form.email}}
-					</div> <!-- form-group end.// -->
-					<div class="form-group col-md-6">
-					  <label>Phone Number</label>
-					  {{form.phone_number}}
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row.// -->
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Create password</label>
-					    {{ form.password }}
-					</div> <!-- form-group end.// -->
-					<div class="form-group col-md-6">
-						<label>Repeat password</label>
-            {{form.confirm_password}}
-					</div> <!-- form-group end.// -->
-				</div>
-			    <div class="form-group">
-			        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-			    </div> <!-- form-group// -->
-      {{ form.email.errors }}
-      {{ form.non_field_errors }}
-			</form>
-		</article><!-- card-body.// -->
-    </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
-    <br><br>
-<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+        <!-- First & Last Name -->
+        <div class="flex flex-col sm:flex-row sm:gap-6">
+          <div class="flex-1 flex flex-col">
+            <label class="mb-2 text-sm sm:text-base md:text-lg">First name</label>
+            {{ form.first_name|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          </div>
+          <div class="flex-1 flex flex-col mt-4 sm:mt-0">
+            <label class="mb-2 text-sm sm:text-base md:text-lg">Last name</label>
+            {{ form.last_name|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          </div>
+        </div>
 
+        <!-- Email & Phone -->
+        <div class="flex flex-col sm:flex-row sm:gap-6">
+          <div class="flex-1 flex flex-col">
+            <label class="mb-2 text-sm sm:text-base md:text-lg">Email Address</label>
+            {{ form.email|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          </div>
+          <div class="flex-1 flex flex-col mt-4 sm:mt-0">
+            <label class="mb-2 text-sm sm:text-base md:text-lg">Phone Number</label>
+            {{ form.phone_number|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          </div>
+        </div>
+
+        <!-- Password & Confirm Password -->
+        <div class="flex flex-col sm:flex-row sm:gap-6">
+          <div class="flex-1 flex flex-col">
+            <label class="mb-2 text-sm sm:text-base md:text-lg">Create password</label>
+            {{ form.password|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          </div>
+          <div class="flex-1 flex flex-col mt-4 sm:mt-0">
+            <label class="mb-2 text-sm sm:text-base md:text-lg">Repeat password</label>
+            {{ form.confirm_password|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div>
+          <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-lg py-2.5 sm:py-3 md:py-3.5 text-base sm:text-lg md:text-xl hover:bg-blue-600 transition-colors duration-300">
+            Register
+          </button>
+        </div>
+
+        <!-- Form Errors -->
+        <div class="text-red-600 text-sm sm:text-base">
+          {{ form.email.errors }}
+          {{ form.non_field_errors }}
+        </div>
+
+      </form>
+    </article>
+  </div>
+
+  <!-- Login Link -->
+  <p class="text-center mt-6 mb-2 text-sm sm:text-base md:text-lg">
+    Have an account? 
+    <a href="{% url 'login' %}" class="text-blue-600 hover:text-blue-800 no-underline">Log In</a>
+  </p>
+</div>
+<!-- ============================ COMPONENT REGISTER END.// ================================= -->
 
 </section>
 

@@ -26,3 +26,26 @@ class CartItem(models.Model):
 
     def __unicode__(self):
         return self.product
+    
+    
+    
+    
+class Wishlist(models.Model):
+    wishlist_id = models.CharField(max_length=250, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.wishlist_id
+
+
+class WishlistItem(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True, blank=True)
+    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE, null=True, blank=True)  # For guest users
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    variations = models.ManyToManyField(Variation, blank=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.user:
+            return f"{self.user.username} - {self.product.product_name}"
+        return f"Guest - {self.product.product_name}"

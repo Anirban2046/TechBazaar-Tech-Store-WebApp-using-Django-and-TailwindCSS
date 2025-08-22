@@ -1,61 +1,139 @@
 {% load static %}
 
-  <section class="header-main border-bottom bg-white">
-    <div class="container" style="width: 90% !important; max-width: 90% !important;">
-      <div class="row align-items-center">
-        <div class="col-lg-2 col-md-4 col-6">
-          <a href="{% url 'home' %}" class="brand-wrap d-inline-block me-3">
-            <img class="logo" src="{% static 'images/logo.png' %}">
-          </a>
-        </div>
-        <div class="col-lg col-sm col-md col-6 flex-grow-0">
-          <div class="category-wrap dropdown d-inline-block float-right">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bars"></i> All category
-            </button>
-            <div class="dropdown-menu">
-              {% for category in links %}
-                <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
-              {% endfor %}
-            </div>
+<section class="border-b bg-white shadow-sm">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between py-2 md:py-4">
+
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="{% url 'home' %}" class="inline-flex items-center">
+          <img src="{% static 'images/logo.png' %}" alt="Logo" 
+               class="h-6 md:h-10 object-contain">
+        </a>
+
+        <!-- Category Dropdown -->
+        <div class="relative ml-1 sm:ml-3">
+          <button id="catToggle" type="button" 
+                  class="flex items-center gap-1 sm:gap-2 bg-blue-500 text-white px-2 md:px-4 py-1 md:py-2 rounded-lg hover:bg-blue-600 focus:outline-none
+                         text-[6px] xs:text-[7px] sm:text-[8px] md:text-sm lg:text-base">
+            <i data-feather="menu" class="w-3 h-3 xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-6 md:h-6"></i>
+            <span class="hidden md:inline">
+              {% if category_obj %}{{ category_obj.category_name }}{% else %}All Category{% endif %}
+            </span>
+          </button>
+          <div id="catMenu" class="absolute mt-2 w-48 bg-white rounded-lg shadow-lg hidden z-50">
+            <a href="{% url 'store' %}{% if request.GET.min_price %}?min_price={{ request.GET.min_price }}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% endif %}" 
+               class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-xs md:text-sm lg:text-base {% if not category_obj %}font-semibold text-blue-600{% endif %}">
+              All Products
+            </a>
+            {% for category in links %}
+            <a href="{{ category.get_url }}{% if request.GET.min_price %}?min_price={{ request.GET.min_price }}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% endif %}" 
+               class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-xs md:text-sm lg:text-base {% if category_obj and category_obj.id == category.id %}font-semibold text-blue-600{% endif %}">
+              {{ category.category_name }}
+            </a>
+            {% endfor %}
           </div>
         </div>
-        {% comment %} <a href="/store/" class="btn btn-outline-info">Store</a> {% endcomment %}
-        <div class="col-lg col-md-6 col-sm-12 col">
-          <form action="{% url 'search' %}" class="search" method='GET'>
-            <div class="input-group w-100">
-              <input type="text" class="form-control" placeholder="Search" name="keyword">
-              <div class="input-group-append">
-                <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-          <div class="d-flex justify-content-end align-items-center mb-3 mb-lg-0">
-            {% if user.id is None %}
-            <div class="auth-links">
-                <a href="{% url 'login' %}" class="mr-2 text-info">Sign in</a>
-                <span class="dark-transp">|</span>
-                <a href="{% url 'register' %}" class="ml-2 text-info">Register</a>
-              </div>
-              {% else %}
-              <div class="widget-header">
-                <small class="title text-muted">Welcome {{user.first_name}}!</small>
-                <div>
-                  <a href="{% url 'dashboard' %}" class="mr-2 text-info">Dashboard</a> <span class="dark-transp mr-2 text-info"> | </span>
-                  <a href="{% url 'logout' %}" class="mr-2 text-info"> Logout</a>
-                </div>
-              </div>
-              {% endif %}
-              <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
-              <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-              <span class="badge badge-pill badge-danger notify">{{cart_count}}</span>
-              </a>
+      </div>
 
-              </div>
+      <!-- Search (retains min_price & max_price & category) -->
+      <div class="flex-1 mx-2 sm:mx-6 md:mx-8 w-full sm:w-auto">
+        <form action="{% url 'search' %}" method="GET" class="flex w-full">
+          <input type="text" name="keyword" placeholder="Search" 
+                 value="{{ request.GET.keyword|default_if_none:'' }}"
+                 class="w-full rounded-l-lg border border-gray-300
+                        text-[8px] sm:text-[10px] md:text-sm lg:text-base
+                        px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2
+                        focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
+          <!-- Preserve min_price, max_price, category_slug -->
+          {% if request.GET.min_price %}
+            <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+          {% endif %}
+          {% if request.GET.max_price %}
+            <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+          {% endif %}
+          {% if category_obj %}
+            <input type="hidden" name="category_slug" value="{{ category_obj.slug }}">
+          {% endif %}
+
+          <button type="submit" 
+                  class="bg-blue-500 text-white rounded-r-lg
+                         px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 hover:bg-blue-600">
+            <i data-feather="search" class="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Auth + Cart -->
+      <div class="flex items-center gap-1 xs:gap-2 sm:gap-3 md:gap-5 
+                  text-[8px] xs:text-[10px] sm:text-[11px] md:text-sm mr-3">
+        {% if user.id is None %}
+          <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600">
+            <a href="{% url 'login' %}" class="hover:text-blue-900">Login</a>
+            <span>|</span>
+            <a href="{% url 'register' %}" class="hover:text-blue-900">Register</a>
+          </div>
+        {% else %}
+          <div class="text-[8px] xs:text-[10px] sm:text-[11px] md:text-sm">
+            <p class="text-gray-500">Welcome {{ user.first_name }}!</p>
+            <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600">
+              <a href="{% url 'dashboard' %}" class="hover:text-blue-900">Dashboard</a>
+              <span>|</span>
+              <a href="{% url 'logout' %}" class="hover:text-blue-900">Logout</a>
             </div>
           </div>
+        {% endif %}
+      </div>
+
+
+        <!-- Wishlist -->
+        <a href="{% url 'wishlist' %}" class="relative inline-flex items-center mr-3">
+          <div class="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 
+                      flex items-center justify-center rounded-full border text-gray-600 
+                      hover:bg-red-100 hover:text-red-600 transition-colors duration-500">
+            <i data-feather="heart" class="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"></i>
+          </div>
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] sm:text-xs rounded-full px-1 sm:px-2">
+            {{ wishlist_count }}
+          </span>
+        </a>
+
+        <!-- Cart -->
+        <a href="{% url 'cart' %}" class="relative inline-flex items-center">
+          <div class="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 
+                      flex items-center justify-center rounded-full border text-gray-600 
+                      hover:bg-blue-100 hover:text-blue-700 transition-colors duration-500">
+            <i data-feather="shopping-cart" class="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"></i>
+          </div>
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] sm:text-xs rounded-full px-1 sm:px-2">
+            {{ cart_count }}
+          </span>
+        </a>
+        
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<script>
+  // Dropdown toggle
+  const catToggle = document.getElementById('catToggle');
+  const catMenu = document.getElementById('catMenu');
+  catToggle.addEventListener('click', () => {
+    catMenu.classList.toggle('hidden');
+  });
+
+  // Feather icons init
+  feather.replace();
+
+  // Prevent empty search
+  const searchForm = document.querySelector('form[action="{% url "search" %}"]');
+  const searchInput = searchForm.querySelector('input[name="keyword"]');
+  searchForm.addEventListener('submit', function(e) {
+    if (!searchInput.value.trim()) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+</script>

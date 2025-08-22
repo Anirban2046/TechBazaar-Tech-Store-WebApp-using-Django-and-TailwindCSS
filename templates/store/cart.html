@@ -1,120 +1,126 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 
-<section class="section-content padding-y bg">
-<div class="container">
+<section class="py-6 bg-gray-50">
+  <div class="container mx-auto px-2 sm:px-4">
 
-<!-- ============================ COMPONENT 1 ================================= -->
-{% if not cart_items %}
-	<br>
-	<div class="text-center">
-		<h2>Your cart is empty</h2>
-		<a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
-{% else %}
+    {% if not cart_items %}
+      <div class="text-center mt-10">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold">Your cart is empty</h2>
+        <a href="{% url 'store' %}" class="inline-block mt-4 bg-blue-500 text-white py-2 px-4 rounded-md text-sm sm:text-base md:text-lg hover:bg-blue-600 transition-colors duration-300">
+          Continue Shopping
+        </a>
+      </div>
+    {% else %}
 
-<div class="row">
-	<aside class="col-lg-9">
-<div class="card">
-<table class="table table-borderless table-shopping-cart">
-<thead class="text-muted">
-<tr class="small text-uppercase">
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width="120">Price</th>
-  <th scope="col" class="text-right" width="200"> </th>
-</tr>
-</thead>
-<tbody>
+    <div class="flex flex-col lg:flex-row lg:gap-6">
 
-{% for cart_item in cart_items %}
-<tr>
-	<td>
-		<figure class="itemside align-items-center">
-			<div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
-			<figcaption class="info">
-				<a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-				<p class="text-muted small">
-					{% if cart_item.variations.all %}
-						{% for item in cart_item.variations.all %}
-							{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
-						{% endfor %}
-					{% endif %}
-				</p>
-			</figcaption>
-		</figure>
-	</td>
-	<td> 
-		<!-- col.// -->
-			<div class="col">
-				<div class="input-group input-spinner">
-					<div class="input-group-prepend">
-					<a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
-					</div>
-					<input type="text" class="form-control"  value="{{ cart_item.quantity }}">
-					<div class="input-group-append">
-						<form action="{% url 'add_cart' cart_item.product.id %}" method="POST">
-							{% csrf_token %}
-							{% for item in cart_item.variations.all %}
-								<input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
-							{% endfor %}
-							<button class="btn btn-light" type="submit" id="button-minus"> <i class="fa fa-plus"></i> </button>
-						</form>
-					</div>
-				</div> <!-- input-group.// -->
-			</div> <!-- col.// -->
-	</td>
-	<td> 
-		<div class="price-wrap"> 
-			<var class="price"> Tk {{ cart_item.sub_total }}</var> 
-			<small class="text-muted"> Tk {{ cart_item.product.price }} each </small> 
-		</div> <!-- price-wrap .// -->
-	</td>
-	<td class="text-right"> 
-	<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger"> Remove</a>
-	</td>
-</tr>
-{% endfor %}
+      <!-- Cart Items -->
+      <aside class="flex-1">
+        <div class="bg-white rounded-lg shadow-md overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 text-sm sm:text-base md:text-lg">
+            <thead class="bg-gray-100 text-gray-700 uppercase text-xs sm:text-sm md:text-base">
+              <tr>
+                <th scope="col" class="px-4 py-3 text-left">Product</th>
+                <th scope="col" class="px-4 py-3 text-center" style="width:120px;">Quantity</th>
+                <th scope="col" class="px-4 py-3 text-center" style="width:120px;">Price</th>
+                <th scope="col" class="px-4 py-3 text-right" style="width:200px;"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {% for cart_item in cart_items %}
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-4">
+                    <img src="{{ cart_item.product.images.url }}" class="w-16 h-16 object-cover rounded">
+                    <div class="flex-1">
+                      <a href="{{ cart_item.product.get_url }}" class="font-medium text-gray-900 hover:text-blue-500">{{ cart_item.product.product_name }}</a>
+                      <p class="text-gray-500 text-xs sm:text-sm">
+                        {% if cart_item.variations.all %}
+                          {% for item in cart_item.variations.all %}
+                            {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                          {% endfor %}
+                        {% endif %}
+                      </p>
+                    </div>
+                  </div>
+                </td>
 
-</tbody>
-</table>
-</div> <!-- card.// -->
+                <!-- Quantity controls -->
+                <td class="px-4 py-3 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" 
+                       class="inline-flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-700 rounded-md shadow-sm hover:bg-gray-200 transition-colors duration-200">
+                      <i class="fa fa-minus"></i>
+                    </a>
 
-	</aside> <!-- col.// -->
-	<aside class="col-lg-3">
+                    <input type="text" class="w-12 text-center border border-gray-300 rounded-md py-1" value="{{ cart_item.quantity }}">
 
-		<div class="card">
-		<div class="card-body">
-			<dl class="dlist-align">
-			  <dt>Total price:</dt>
-			  <dd class="text-right"> Tk {{ total }}</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Tax:</dt>
-			  <dd class="text-right"> Tk {{ tax }}</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Grand Total:</dt>
-			  <dd class="text-right text-dark b"><strong>Tk {{ grand_total }}</strong></dd>
-			</dl>
-			<hr>
-			{% comment %} <p class="text-center mb-3">
-				<img src="{% static 'images/misc/payments.png' %}" height="26">
-			</p> {% endcomment %}
-			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
-		</div> <!-- card-body.// -->
-		</div> <!-- card.// -->
+                    <form action="{% url 'add_cart' cart_item.product.id %}" method="POST" class="inline-block">
+                      {% csrf_token %}
+                      {% for item in cart_item.variations.all %}
+                        <input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
+                      {% endfor %}
+                      <button type="submit" 
+                              class="inline-flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-700 rounded-md shadow-sm hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </form>
+                  </div>
+                </td>
 
-</aside> <!-- col.// -->
+                <!-- Price -->
+                <td class="px-4 py-3 text-center">
+                  <div>
+                    <span class="font-medium">Tk {{ cart_item.sub_total }}</span><br>
+                    <small class="text-gray-500">Tk {{ cart_item.product.price }} each</small>
+                  </div>
+                </td>
 
+                <!-- Remove button -->
+                <td class="px-4 py-3 text-right">
+                  <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" 
+                    onclick="return confirm('Are you sure you want to delete this item?')" 
+                    class="inline-block bg-red-500 text-white px-4 py-1.5 rounded-md font-medium 
+                            hover:text-gray-300 hover:bg-red-600 transition-colors duration-200">
+                    Remove
+                  </a>
+                </td>
 
-</div> <!-- row.// -->
-{% endif %}
-<!-- ============================ COMPONENT 1 END .// ================================= -->
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </aside>
 
-</div> <!-- container .//  -->
+      <!-- Cart Summary -->
+      <aside class="w-full lg:w-1/3 mt-6 lg:mt-0">
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 md:p-8 space-y-4">
+          <div class="flex justify-between">
+            <span>Total price:</span>
+            <span class="font-medium">Tk {{ total }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Shipping:</span>
+            <span class="font-medium">Tk {{ shipping_charge }}</span>
+          </div>
+          <div class="flex justify-between font-semibold text-gray-900 text-lg">
+            <span>Grand Total:</span>
+            <span>Tk {{ grand_total }}</span>
+          </div>
+          <hr class="border-gray-300">
+          <a href="{% url 'checkout' %}" class="block w-full bg-blue-500 text-white py-2 rounded-md text-center hover:bg-blue-600 transition-colors duration-300">Checkout</a>
+          <a href="{% url 'store' %}" class="block w-full bg-gray-200 text-gray-800 py-2 rounded-md text-center hover:bg-gray-300 transition-colors duration-300">Continue Shopping</a>
+        </div>
+      </aside>
+
+    </div>
+    {% endif %}
+
+  </div>
 </section>
 
 {% endblock %}

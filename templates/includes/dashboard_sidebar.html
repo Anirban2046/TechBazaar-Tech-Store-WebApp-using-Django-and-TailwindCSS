@@ -1,12 +1,34 @@
-<aside class="col-md-3">
-  <!--   SIDEBAR   -->
-  <ul class="list-group">
-    <a class="list-group-item {% if '/accounts/' == request.path %}active{% endif %}" href="{% url 'dashboard' %}"> Dashboard </a>
-    <a class="list-group-item {% if '/my_orders/' in request.path %}active{% endif %}" href="{% url 'my_orders' %}"> My Orders </a>
-    <a class="list-group-item {% if '/edit_profile/' in request.path %}active{% endif %}" href="{% url 'edit_profile' %}"> Edit Profile </a>
-    <a class="list-group-item {% if '/change_password/' in request.path %}active{% endif %}" href="{% url 'change_password' %}"> Change Password </a>
+<aside class="w-full md:w-1/3 flex-shrink-0">
+  <!-- SIDEBAR -->
+  <ul class="flex flex-col space-y-2">
+    <a href="{% url 'dashboard' %}" 
+       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
+              {% if '/accounts/' == request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
+      Dashboard
+    </a>
+    <a href="{% url 'my_orders' %}" 
+       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
+              {% if '/my_orders/' in request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
+      My Orders
+    </a>
+    <a href="{% url 'edit_profile' %}" 
+       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
+              {% if '/edit_profile/' in request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
+      Edit Profile
+    </a>
+    <a href="{% url 'change_password' %}" 
+       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
+              {% if '/change_password/' in request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
+      Change Password
+    </a>
   </ul>
-  <br>
-  <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a>
-  <!--   SIDEBAR .//END   -->
+
+  <div class="mt-4">
+    <a href="{% url 'logout' %}" 
+       class="block w-full text-center py-2 rounded-md bg-gray-200 text-gray-800 font-medium hover:bg-gray-300 transition-colors duration-200">
+      <i class="fa fa-power-off mr-2"></i> 
+      <span class="align-middle">Log out</span>
+    </a>
+  </div>
+  <!-- SIDEBAR .//END -->
 </aside>
