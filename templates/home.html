@@ -70,24 +70,34 @@
       <div class="grid gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {% for product in products %}
         <div class="bg-white rounded shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-md">
+          
+          <!-- Fixed image container -->
           <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t">
-            <img src="{{ product.images.url }}" 
-                 class="w-full h-auto max-h-60 sm:max-h-64 md:max-h-72 lg:max-h-80 object-contain transition duration-300">
+            <div class="w-full h-60 sm:h-64 md:h-72 lg:h-80 flex items-center justify-center bg-white">
+              <img src="{{ product.images.url }}" 
+                  class="h-full w-full object-contain transition duration-300">
+            </div>
           </a>
-          <div class="p-2 sm:p-3">
-            <a href="{{ product.get_url }}" class="block text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-800 hover:text-blue-500 transition duration-300 mb-2">
+
+          <!-- Product details -->
+          <div class="p-2 sm:p-3 flex flex-col">
+            <!-- Product name with min height -->
+            <a href="{{ product.get_url }}" 
+              class="block text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-800 hover:text-blue-500 transition duration-300 mb-2 min-h-[3rem] sm:min-h-[3.5rem]">
               {{ product.product_name }}
             </a>
-            <div class="text-xs sm:text-sm md:text-base text-gray-700 mt-1 font-sans font-bold"> Tk {{ product.price }}</div>
-            <div class="flex items-center gap-0.5 mt-1">
-              <span class="text-yellow-500">
-                <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
-                <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
-                <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
-                <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
-                <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
-              </span>
+
+            <!-- Price -->
+            <div class="text-xs sm:text-sm md:text-base text-gray-700 mt-1 font-sans font-bold"> 
+              Tk {{ product.price }}
             </div>
+
+            <!-- Ratings -->
+              <div class="flex items-center gap-0.5 mt-1 text-yellow-500">
+                {% for star in product.avg_stars %}
+                  <i class="{{ star }}"></i>
+                {% endfor %}
+              </div>
           </div>
         </div>
         {% endfor %}

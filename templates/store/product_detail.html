@@ -53,21 +53,6 @@
             <p class="mb-4">{{ single_product.description|safe }}</p>
             <hr class="my-4">
 
-            {% comment %} <!-- Color Selection -->
-            <div class="mb-4">
-              <h6 class="font-medium mb-1">Choose Color</h6>
-              <div class="inline-block w-1/2">
-                <select name="color" class="w-full border border-gray-300 rounded py-2 px-3" required>
-                  <option value="" disabled selected>Select</option>
-                  {% for i in single_product.variation_set.colors %}
-                    <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <hr class="my-4"> {% endcomment %}
-
             <!-- STOCK & ADD TO CART -->
               {% if single_product.stock > 0 %}
 
@@ -130,18 +115,17 @@
         <!-- Rating -->
         <div class="mb-4">
           <label class="block font-medium mb-1">How do you rate this product?</label>
-            <div class="rate">
-              <input type="radio" id="rating10" name="rating" value="5" required /><label for="rating10" title="5"></label>
-              <input type="radio" id="rating9" name="rating" value="4.5" required /><label for="rating9" class="half" title="4.5"></label>
-              <input type="radio" id="rating8" name="rating" value="4" required /><label for="rating8" title="4"></label>
-              <input type="radio" id="rating7" name="rating" value="3.5" required /><label for="rating7" class="half" title="3.5"></label>
-              <input type="radio" id="rating6" name="rating" value="3" required /><label for="rating6" title="3"></label>
-              <input type="radio" id="rating5" name="rating" value="2.5" required /><label for="rating5" class="half" title="2.5"></label>
-              <input type="radio" id="rating4" name="rating" value="2" required /><label for="rating4" title="2"></label>
-              <input type="radio" id="rating3" name="rating" value="1.5" required /><label for="rating3" class="half" title="1.5"></label>
-              <input type="radio" id="rating2" name="rating" value="1" required /><label for="rating2" title="1"></label>
-              <input type="radio" id="rating1" name="rating" value="0.5" required /><label for="rating1" class="half" title="0.5"></label>
+            <!-- Rating stars -->
+              <div class="rating flex flex-row-reverse justify-end space-x-1">
+              {% for i in "54321" %}
+                <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" class="hidden peer" required />
+                <label for="star{{ i }}" class="cursor-pointer text-gray-300 text-2xl peer-checked:text-yellow-400 hover:text-yellow-400">
+                  <i class="fas fa-star"></i>
+                </label>
+              {% endfor %}
             </div>
+            <br>
+
         <!-- Review Title -->
         <div class="mb-4">
           <label class="block font-medium mb-1">Review Title</label>
@@ -198,6 +182,15 @@
   </div>
 </section>
 
+
+<!-- Review Stars -->
+<style>
+  .rating label:hover,
+  .rating label:hover ~ label,
+  .rating input:checked ~ label {
+    color: #fbbf24; /* Tailwind yellow-400 */
+  }
+</style>
 
 <!-- ImageGallery Script -->
 <script>
