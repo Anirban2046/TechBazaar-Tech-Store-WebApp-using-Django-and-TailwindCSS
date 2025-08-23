@@ -6,17 +6,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .utils import _cart_id, _wishlist_id
+from django.http import HttpResponse
+from django.contrib import messages
 
 # Create your views here.
-from django.http import HttpResponse
-
-# def _cart_id(request):
-#     cart = request.session.session_key
-#     if not cart:
-#         cart = request.session.create()
-#     return cart
-
-from django.contrib import messages
 
 def add_cart(request, product_id):
     current_user = request.user
@@ -25,6 +18,7 @@ def add_cart(request, product_id):
     product_variation = []
 
     if request.method == 'POST':
+        # Collect variations (color, size, etc.)
         for key, value in request.POST.items():
             if key not in ['csrfmiddlewaretoken', 'quantity']:
                 try:
@@ -35,16 +29,33 @@ def add_cart(request, product_id):
                     )
                     product_variation.append(variation)
                 except Variation.DoesNotExist:
-                    messages.error(request, "Please select color")
+                    messages.error(request, "Please select Color")
                     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-        # Ensure ALL variation categories are selected
+        # Ensure all variation categories are selected
         required_categories = product.variation_set.values_list('variation_category', flat=True).distinct()
         selected_categories = [v.variation_category for v in product_variation]
         missing = set(required_categories) - set(selected_categories)
         if missing:
             messages.error(request, f"Please select: {', '.join(missing)}")
             return redirect(request.META.get('HTTP_REFERER', '/'))
+
+        # Handle quantity input
+        quantity_input = request.POST.get('quantity')
+        if quantity_input:
+            try:
+                quantity = int(quantity_input)
+                if quantity <= 0:
+                    messages.error(request, "Quantity must be greater than 0")
+                    return redirect(request.META.get('HTTP_REFERER', '/'))
+            except ValueError:
+                messages.error(request, "Invalid quantity input.")
+                return redirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            quantity = 1  # default increment when no input
+    else:
+        quantity = 1  # fallback if somehow GET request comes in
+
 
     # Authenticated user
     if current_user.is_authenticated:
@@ -62,15 +73,20 @@ def add_cart(request, product_id):
                 index = ex_var_list.index(product_variation)
                 item_id = id_list[index]
                 item = CartItem.objects.get(product=product, id=item_id)
-                item.quantity += 1
+
+                # If user entered quantity → set, else increment
+                if 'quantity' in request.POST:
+                    item.quantity = quantity
+                else:
+                    item.quantity += quantity
                 item.save()
             else:
-                item = CartItem.objects.create(product=product, quantity=1, user=current_user)
+                item = CartItem.objects.create(product=product, quantity=quantity, user=current_user)
                 if product_variation:
                     item.variations.set(product_variation)
                 item.save()
         else:
-            cart_item = CartItem.objects.create(product=product, quantity=1, user=current_user)
+            cart_item = CartItem.objects.create(product=product, quantity=quantity, user=current_user)
             if product_variation:
                 cart_item.variations.set(product_variation)
             cart_item.save()
@@ -99,15 +115,19 @@ def add_cart(request, product_id):
                 index = ex_var_list.index(product_variation)
                 item_id = id_list[index]
                 item = CartItem.objects.get(product=product, id=item_id)
-                item.quantity += 1
+
+                if 'quantity' in request.POST:
+                    item.quantity = quantity
+                else:
+                    item.quantity += quantity
                 item.save()
             else:
-                item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+                item = CartItem.objects.create(product=product, quantity=quantity, cart=cart)
                 if product_variation:
                     item.variations.set(product_variation)
                 item.save()
         else:
-            cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+            cart_item = CartItem.objects.create(product=product, quantity=quantity, cart=cart)
             if product_variation:
                 cart_item.variations.set(product_variation)
             cart_item.save()
@@ -206,7 +226,7 @@ def add_to_wishlist(request, product_id):
                 )
                 product_variation.append(variation)
             except Variation.DoesNotExist:
-                messages.error(request, f"Please select color")
+                messages.error(request, f"Please select Color")
                 return redirect(request.META.get("HTTP_REFERER", "/"))
 
     # Ensure all variations are selected
