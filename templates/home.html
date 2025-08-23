@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 
@@ -89,7 +90,7 @@
 
             <!-- Price -->
             <div class="text-xs sm:text-sm md:text-base text-gray-700 mt-1 font-sans font-bold"> 
-              Tk {{ product.price }}
+              Tk {{ product.price |intcomma }}
             </div>
 
             <!-- Ratings -->

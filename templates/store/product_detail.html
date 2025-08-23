@@ -14,7 +14,7 @@
         <!-- LEFT: Product Images -->
         <aside class="w-full lg:w-1/2 p-4">
           <div class="gallery-wrap mb-4">
-            <div class="img-big-wrap text-center mb-3">
+            <div class="img-big-wrap text-center mb-24">
               <img id="mainImage" src="{{ single_product.images.url }}" alt="{{ single_product.product_name }}" class="inline-block object-contain max-h-96">
             </div>
             <ul class="thumb flex flex-wrap justify-center gap-2">
@@ -62,17 +62,17 @@
                 {% if variation_groups %}
                 <div class="mb-4">
                     {% for group in variation_groups %}
-                    <div class="mb-2">
-                        <label class="text-base text-gray-700 font-medium">{{ group.grouper|capfirst }}:</label>
-                        <select name="{{ group.grouper|lower }}" id="select-{{ group.grouper|lower }}" class="border rounded-lg p-1 w-2/3 sm:w-1/4" required>
-                            <option value="" disabled selected>Choose {{ group.grouper|capfirst }}</option>
-                            {% for item in group.list %}
-                                {% if item.is_active %}
-                                    <option value="{{ item.variation_value }}">{{ item.variation_value|capfirst }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
+                      <div class="mb-2 relative">
+                          <label class="text-base text-gray-700 font-medium">{{ group.grouper|capfirst }}:</label>
+                          <select name="{{ group.grouper|lower }}" id="select-{{ group.grouper|lower }}" class="border rounded-lg p-1 w-2/3 sm:w-1/4" required>
+                              <option value="" disabled selected>Choose {{ group.grouper|capfirst }}</option>
+                              {% for item in group.list %}
+                                  {% if item.is_active %}
+                                      <option value="{{ item.variation_value }}">{{ item.variation_value|capfirst }}</option>
+                                  {% endif %}
+                              {% endfor %}
+                          </select>
+                      </div>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -95,6 +95,12 @@
                     </button>
                   </form>
                 </div>
+
+                {% else %}
+                  <!-- Out of Stock -->
+                  <div class="mt-4">
+                      <span class="text-red-600 font-semibold text-2xl">Out of Stock</span>
+                  </div>
               {% endif %}
 
               </div>
