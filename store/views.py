@@ -47,21 +47,17 @@ def store(request, category_slug=None):
     if max_product_price is None:
         max_product_price = Product.objects.filter(is_available=True).aggregate(Max('price'))['price__max'] or 100000
 
-    # Validate min/max
     try:
-        if min_price != '':
-            min_price_val = int(min_price)
-        else:
-            min_price_val = None
-        if max_price != '':
-            max_price_val = int(max_price)
-        else:
-            max_price_val = None
+        min_price_val = int(min_price) if min_price != '' else None
+        max_price_val = int(max_price) if max_price != '' else None
 
+        # Cap max_price_val at max_product_price (no error, just adjust silently)
+        if max_price_val is not None and max_price_val > max_product_price:
+            max_price_val = max_product_price
+
+        # Ensure min <= max (only error when truly invalid)
         if min_price_val is not None and max_price_val is not None and min_price_val > max_price_val:
-            # Redirect to the same page without min/max price
             messages.error(request, "Minimum price cannot be greater!")
-            # Build URL without min/max price
             base_url = request.path
             query_params = request.GET.copy()
             query_params.pop('min_price', None)
@@ -80,6 +76,7 @@ def store(request, category_slug=None):
         min_price = ''
         max_price = ''
         products = products.filter(price__gte=0, price__lte=max_product_price)
+
 
     # Pagination: 3 per page
     paginator = Paginator(products, 3)

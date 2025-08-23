@@ -53,18 +53,13 @@
               <h6 class="text-gray-800 font-semibold text-lg sm:text-xl mb-3">Filter by Price</h6>
               <form method="get" class="space-y-3">
                 <div class="flex items-center space-x-2">
-                  <input type="number" name="min_price" placeholder="Min"
-                         value="{{ min_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm">
-                  <input type="number" name="max_price" placeholder="Max"
-                         value="{{ max_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm"
-                         max="{{ max_product_price }}">
+                  <input type="number" name="min_price" placeholder="Min" value="{{ min_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm">
+                  <input type="number" name="max_price" placeholder="Max" value="{{ max_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm">
                 </div>
                 {% if category_obj %}
                   <input type="hidden" name="category_slug" value="{{ category_obj.slug }}">
                 {% endif %}
-                {% comment %} {% include 'includes/alerts.html' %} {% endcomment %}
-				<button type="submit"
-                        class="w-full bg-blue-500 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition">
+				        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition">
                   Apply
                 </button>
               </form>
@@ -84,19 +79,34 @@
             {% for product in products %}
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
               <figure class="flex flex-col">
-                <div class="w-full h-auto flex justify-center items-center">
-                  <a href="{{ product.get_url }}">
-                    <img src="{{ product.images.url }}" alt="{{ product.product_name }}" class="w-full h-auto object-contain">
-                  </a>
-                </div>
-                <figcaption class="p-4 flex-1 flex flex-col justify-between">
-                  <div class="mb-2">
-                    <a href="{{ product.get_url }}" class="font-medium text-gray-900 hover:text-blue-600">{{ product.product_name }}</a>
-                    <div class="mt-2">
-                      <span class="font-semibold text-gray-800">Tk {{ product.price }}</span>
-                    </div>
+                
+                <!-- Fixed image container -->
+                <a href="{{ product.get_url }}">
+                  <div class="w-full h-60 sm:h-64 md:h-72 flex items-center justify-center bg-white">
+                    <img src="{{ product.images.url }}" 
+                        alt="{{ product.product_name }}" 
+                        class="h-full w-full object-contain">
                   </div>
-                  <a href="{{ product.get_url }}" class="bg-blue-500 text-white text-center py-2 rounded-md font-medium hover:bg-blue-600 transition duration-200">View Details</a>
+                </a>
+                
+                <!-- Product details -->
+                <figcaption class="p-4">
+                  <!-- Name with min-height -->
+                  <a href="{{ product.get_url }}" 
+                    class="block font-medium text-gray-900 hover:text-blue-600 mb-2 min-h-[3rem] sm:min-h-[3.5rem]">
+                    {{ product.product_name }}
+                  </a>
+
+                  <!-- Price -->
+                  <div class="text-gray-800 font-semibold mb-3">
+                    Tk {{ product.price }}
+                  </div>
+
+                  <!-- View Details button -->
+                  <a href="{{ product.get_url }}" 
+                      class="block bg-blue-500 hover:bg-blue-600 text-white text-center py-2 rounded-md font-medium transition-colors duration-200">
+                      View Details
+                    </a>
                 </figcaption>
               </figure>
             </div>
@@ -108,55 +118,58 @@
           {% endif %}
         </div>
 
+
+
         <!-- Pagination -->
-        {% if products.has_other_pages %}
-        <nav class="mt-6 flex justify-start" aria-label="Page navigation">
-          <ul class="inline-flex space-x-2">
+          {% if products.has_other_pages %}
+          <nav class="mt-6 flex justify-start" aria-label="Page navigation">
+            <ul class="inline-flex space-x-1 text-sm">
 
-            {% if products.has_previous %}
-            <li>
-              <a href="?page={{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
-                 class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-200">
-                Previous
-              </a>
-            </li>
-            {% else %}
-            <li>
-              <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">Previous</span>
-            </li>
-            {% endif %}
-
-            {% for i in products.paginator.page_range %}
-              {% if products.number == i %}
+              {% if products.has_previous %}
               <li>
-                <span class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-inner">{{ i }}</span>
+                <a href="?page={{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                  class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-sm hover:bg-gray-100 transition font-semibold">
+                  Previous
+                </a>
               </li>
               {% else %}
               <li>
-                <a href="?page={{ i }}{% if query_params %}&{{ query_params }}{% endif %}" 
-                   class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-200">
-                  {{ i }}
-                </a>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 border border-gray-200 rounded-sm cursor-not-allowed font-semibold">Previous</span>
               </li>
               {% endif %}
-            {% endfor %}
 
-            {% if products.has_next %}
-            <li>
-              <a href="?page={{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
-                 class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-200">
-                Next
-              </a>
-            </li>
-            {% else %}
-            <li>
-              <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">Next</span>
-            </li>
-            {% endif %}
+              {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                <li>
+                  <span class="px-3 py-1 bg-blue-500 text-white border border-blue-500 rounded-sm font-semibold">{{ i }}</span>
+                </li>
+                {% else %}
+                <li>
+                  <a href="?page={{ i }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                    class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-sm hover:bg-gray-100 transition font-semibold">
+                    {{ i }}
+                  </a>
+                </li>
+                {% endif %}
+              {% endfor %}
 
-          </ul>
-        </nav>
-        {% endif %}
+              {% if products.has_next %}
+              <li>
+                <a href="?page={{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                  class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-sm hover:bg-gray-100 transition font-semibold">
+                  Next
+                </a>
+              </li>
+              {% else %}
+              <li>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 border border-gray-200 rounded-sm cursor-not-allowed font-semibold">Next</span>
+              </li>
+              {% endif %}
+
+            </ul>
+          </nav>
+          {% endif %}
+
       </main>
 
     </div>
