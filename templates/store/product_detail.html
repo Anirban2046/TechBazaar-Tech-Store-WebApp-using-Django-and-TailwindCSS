@@ -74,21 +74,24 @@
                 {% regroup single_product.variation_set.all|dictsort:"variation_category" by variation_category as variation_groups %}
 
                 <!-- Variation Selection (only one set) -->
+                {% if variation_groups %}
                 <div class="mb-4">
-                  {% for group in variation_groups %}
+                    {% for group in variation_groups %}
                     <div class="mb-2">
-                      <label class="text-base text-gray-700 font-medium">{{ group.grouper|capfirst }}:</label>
-                      <select name="{{ group.grouper|lower }}" id="select-{{ group.grouper|lower }}" class="border rounded-lg p-1 w-2/3 sm:w-1/4" required>
-                        <option value="" disabled selected>Choose {{ group.grouper|capfirst }}</option>
-                        {% for item in group.list %}
-                          {% if item.is_active %}
-                            <option value="{{ item.variation_value }}">{{ item.variation_value|capfirst }}</option>
-                          {% endif %}
-                        {% endfor %}
-                      </select>
+                        <label class="text-base text-gray-700 font-medium">{{ group.grouper|capfirst }}:</label>
+                        <select name="{{ group.grouper|lower }}" id="select-{{ group.grouper|lower }}" class="border rounded-lg p-1 w-2/3 sm:w-1/4" required>
+                            <option value="" disabled selected>Choose {{ group.grouper|capfirst }}</option>
+                            {% for item in group.list %}
+                                {% if item.is_active %}
+                                    <option value="{{ item.variation_value }}">{{ item.variation_value|capfirst }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
                     </div>
-                  {% endfor %}
+                    {% endfor %}
                 </div>
+                {% endif %}
+
 
                 <div class="flex flex-col gap-2 mt-2 items-start">
                   <!-- Add to Cart Form -->
