@@ -1,47 +1,51 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
+from django.contrib import messages
 from carts.models import CartItem
 from .forms import OrderForm
 import datetime
 from .models import Order, Payment, OrderProduct
-import json
 from store.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
-## SSLCommerz imports
 import requests
 from django.conf import settings
 from django.urls import reverse
-from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 
-def place_order(request, total=0, quantity=0,):
+@login_required
+def place_order(request, total=0, quantity=0):
     current_user = request.user
 
-    # If the cart count is less than or equal to 0, then redirect back to shop
+    # Get cart items
     cart_items = CartItem.objects.filter(user=current_user)
     cart_count = cart_items.count()
     if cart_count <= 0:
         return redirect('store')
 
+    # Check stock for each cart item
+    for item in cart_items:
+        if item.quantity > item.product.stock:
+            messages.error(request, f"'{item.product.product_name}': only {item.product.stock} left in stock.")
+            return redirect('cart')
+
+    # Calculate totals
     grand_total = 0
     shipping_charge = 0
     for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity)
+        total += cart_item.product.price * cart_item.quantity
         quantity += cart_item.quantity
-    if total > 5000:
-        shipping_charge = 0
-    else:
-        shipping_charge = 150
+
+    shipping_charge = 0 if total > 5000 else 150
     grand_total = total + shipping_charge
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            # Store all the billing information inside Order table
+            # Store order info
             data = Order()
             data.user = current_user
             data.first_name = form.cleaned_data['first_name']
@@ -58,16 +62,13 @@ def place_order(request, total=0, quantity=0,):
             data.shipping_charge = shipping_charge
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
+
             # Generate order number
-            yr = int(datetime.date.today().strftime('%Y'))
-            dt = int(datetime.date.today().strftime('%d'))
-            mt = int(datetime.date.today().strftime('%m'))
-            d = datetime.date(yr,mt,dt)
-            current_date = d.strftime("%Y%m%d") #20210305
+            current_date = datetime.date.today().strftime("%Y%m%d")
             order_number = current_date + str(data.id)
             data.order_number = order_number
             data.save()
-            
+
             order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
             context = {
                 'order': order,
@@ -77,11 +78,11 @@ def place_order(request, total=0, quantity=0,):
                 'grand_total': grand_total,
             }
             return render(request, 'orders/payments.html', context)
-    else:
-        return redirect('checkout')
+
+    return redirect('checkout')
 
 
-# SSLCOMMERZ functions
+# SSLCOMMERZ initialization remains the same
 @csrf_exempt
 def sslcommerz_init(request):
     if request.method == "POST":
@@ -104,7 +105,6 @@ def sslcommerz_init(request):
             'success_url': request.build_absolute_uri(reverse('sslcommerz_success')),
             'fail_url': request.build_absolute_uri(reverse('sslcommerz_fail')),
             'cancel_url': request.build_absolute_uri(reverse('sslcommerz_cancel')),
-
             'cus_name': f'{order.first_name} {order.last_name}',
             'cus_email': order.email,
             'cus_add1': order.address_line_1 or 'N/A',
@@ -113,9 +113,7 @@ def sslcommerz_init(request):
             'cus_state': order.state or 'Dhaka',
             'cus_postcode': '1234',
             'cus_country': order.country or 'Bangladesh',
-            'cus_phone': order.email or '01581440841',
-
-            # Required by SSLCommerz even if not shipping
+            'cus_phone': order.phone or '01581440841',
             'shipping_method': 'NO',
             'product_name': 'Product',
             'product_category': 'Category',
@@ -136,24 +134,21 @@ def sslcommerz_init(request):
         if gateway_url:
             return redirect(gateway_url)
         else:
-            # SSLCommerz returned an error
-            return HttpResponse(
-                f"SSLCommerz initialization failed. Response: {data}"
-            )
+            return HttpResponse(f"SSLCommerz initialization failed. Response: {data}")
 
     return HttpResponse("Invalid request method.")
 
 
-# Helper function for moving cart items → order products
+# Helper to finalize order
 def finalize_order(order, payment):
-    from carts.models import CartItem
-    from store.models import Product
-    from django.core.mail import EmailMessage
-    from django.template.loader import render_to_string
-
     cart_items = CartItem.objects.filter(user=order.user)
 
     for item in cart_items:
+        # Check stock again before finalizing
+        if item.quantity > item.product.stock:
+            messages.error(order.user, f"Cannot finalize order: '{item.product.product_name}' out of stock.")
+            return
+
         orderproduct = OrderProduct.objects.create(
             order=order,
             payment=payment,
@@ -164,6 +159,7 @@ def finalize_order(order, payment):
             ordered=True
         )
         orderproduct.variations.set(item.variations.all())
+
         # Reduce stock
         item.product.stock -= item.quantity
         item.product.save()
@@ -241,6 +237,3 @@ def order_complete(request):
 
     except (Order.DoesNotExist, Payment.DoesNotExist):
         return redirect('home')
-
-
-

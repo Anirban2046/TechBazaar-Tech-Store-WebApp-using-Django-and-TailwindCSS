@@ -1,7 +1,7 @@
 {% if messages %}
     {% for message in messages %}
         <div id="message" class="container mx-auto px-2 sm:px-4 my-2">
-            <div class="relative rounded-md p-4 text-sm sm:text-base md:text-lg 
+            <div class="relative rounded-md p-2 text-sm sm:text-base md:text-lg 
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                             bg-red-100 text-red-800
                         {% else %}
@@ -10,7 +10,7 @@
                  role="alert">
                 
                 <button type="button" 
-                        class="absolute top-2 right-2 text-xl font-bold leading-none outline-none focus:outline-none"
+                        class="absolute top-1 right-1 text-lg font-bold leading-none outline-none focus:outline-none"
                         onclick="this.parentElement.parentElement.remove()">
                     &times;
                 </button>
