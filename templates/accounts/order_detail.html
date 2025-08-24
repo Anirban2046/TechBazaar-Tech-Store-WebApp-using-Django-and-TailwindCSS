@@ -3,33 +3,33 @@
 
 {% block content %}
 
-<div class="mx-auto my-12 bg-gray-100 p-8 max-w-3xl sm:p-10 md:p-12">
+<div class="mx-auto my-8 bg-gray-100 p-4 sm:p-6 md:p-8 max-w-full sm:max-w-3xl">
 
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-4 sm:gap-6">
 
         <!-- Header: Logo and Customer Info -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="flex flex-row justify-between items-center gap-2 sm:gap-4 mb-4 sm:mb-6 flex-nowrap">
             <!-- Logo -->
-            <div class="flex-1">
-                <img src="{% static '/images/logo.png' %}" alt="Invoice logo" class="h-10 md:h-12 object-contain">
+            <div class="flex-shrink-0">
+                <img src="{% static '/images/logo.png' %}" alt="Invoice logo" class="h-6 sm:h-8 md:h-10 object-contain">
             </div>
 
             <!-- Invoiced To -->
-            <div class="flex-1 text-right">
-                <ul class="list-none space-y-1">
-                    <li><strong class="block text-sm sm:text-base md:text-lg">Invoiced To</strong></li>
-                    <li class="text-sm sm:text-base md:text-lg">{{ order.full_name }}</li>
-                    <li class="text-sm sm:text-base md:text-lg">{{ order.full_address }}</li>
-                    <li class="text-sm sm:text-base md:text-lg"> District: {{ order.district }}, Division: {{ order.division }}</li>
+            <div class="text-right flex-1">
+                <ul class="list-none space-y-0.5 sm:space-y-1 text-[10px] sm:text-xs md:text-sm">
+                    <li><strong class="block">Invoiced To</strong></li>
+                    <li>{{ order.full_name }}</li>
+                    <li>{{ order.full_address }}</li>
+                    <li>District: {{ order.district }}, Division: {{ order.division }}</li>
                 </ul>
             </div>
         </div>
 
         <!-- Invoice Details -->
-        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 md:p-8">
-            <div class="mb-6">
-                <div class="bg-gray-50 p-4 rounded-md shadow-inner">
-                    <ul class="list-none space-y-1 text-sm sm:text-base md:text-lg">
+        <div class="bg-white rounded-lg shadow-md p-3 sm:p-5 md:p-6">
+            <div class="mb-4 sm:mb-6">
+                <div class="bg-gray-50 p-3 sm:p-4 rounded-md shadow-inner text-[10px] sm:text-xs md:text-sm">
+                    <ul class="list-none space-y-1">
                         <li><strong>Order</strong> #{{ order.order_number }}</li>
                         <li><strong>Transaction ID</strong> {{ order.payment.payment_id }}</li>
                         <li><strong>Order Date:</strong> {{ order.created_at }}</li>
@@ -40,20 +40,20 @@
 
             <!-- Invoice Items -->
             <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-300 border-collapse">
+                <table class="min-w-full border border-gray-300 border-collapse text-[10px] sm:text-xs md:text-sm">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="py-2 px-3 text-center w-7/12">Products</th>
-                            <th class="py-2 px-3 text-center w-1/12">Qty</th>
-                            <th class="py-2 px-3 text-center w-4/12">Total</th>
+                            <th class="py-1 sm:py-2 px-2 text-center w-7/12">Products</th>
+                            <th class="py-1 sm:py-2 px-2 text-center w-1/12">Qty</th>
+                            <th class="py-1 sm:py-2 px-2 text-center w-4/12">Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for item in order_detail %}
                         <tr class="border-t border-gray-300">
-                            <td class="py-2 px-3">
+                            <td class="py-1 sm:py-2 px-2">
                                 {{ item.product.product_name }}
-                                <p class="text-gray-500 text-xs sm:text-sm md:text-base mt-1">
+                                <p class="text-gray-500 mt-1 text-[9px] sm:text-[10px] md:text-xs">
                                     {% if item.variations.all %}
                                         {% for i in item.variations.all %}
                                             {{ i.variation_category|capfirst }} : {{ i.variation_value|capfirst }} <br>
@@ -61,32 +61,33 @@
                                     {% endif %}
                                 </p>
                             </td>
-                            <td class="text-center py-2 px-3">{{ item.quantity }}</td>
-                            <td class="text-center py-2 px-3">Tk {{ item.product_price }}</td>
+                            <td class="text-center py-1 sm:py-2 px-2">{{ item.quantity }}</td>
+                            <td class="text-center py-1 sm:py-2 px-2">Tk {{ item.product_price }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
-                    <tfoot class="bg-gray-50 font-semibold">
+                    <tfoot class="bg-gray-50 font-semibold text-[10px] sm:text-xs md:text-sm">
                         <tr>
-                            <th colspan="2" class="text-right py-2 px-3">Sub Total:</th>
-                            <th class="text-center py-2 px-3">Tk {{ subtotal }}</th>
+                            <th colspan="2" class="text-right py-1 sm:py-2 px-2">Sub Total:</th>
+                            <th class="text-center py-1 sm:py-2 px-2">Tk {{ subtotal }}</th>
                         </tr>
                         <tr>
-                            <th colspan="2" class="text-right py-2 px-3">Shipping:</th>
-                            <th class="text-center py-2 px-3">Tk {{ order.shipping_charge }}</th>
+                            <th colspan="2" class="text-right py-1 sm:py-2 px-2">Shipping:</th>
+                            <th class="text-center py-1 sm:py-2 px-2">Tk {{ order.shipping_charge }}</th>
                         </tr>
                         <tr>
-                            <th colspan="2" class="text-right py-2 px-3">Grand Total:</th>
-                            <th class="text-center py-2 px-3">Tk {{ order.order_total }}</th>
+                            <th colspan="2" class="text-right py-1 sm:py-2 px-2">Grand Total:</th>
+                            <th class="text-center py-1 sm:py-2 px-2">Tk {{ order.order_total }}</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
-        <div class="mt-6 text-center">
-        <a href="{% url 'invoice_pdf' order.id %}" class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
-            Download PDF
-        </a>
+
+        <div class="mt-4 sm:mt-6 text-center">
+            <a href="{% url 'invoice_pdf' order.id %}" class="bg-blue-600 text-white font-semibold px-3 py-1.5 sm:px-5 sm:py-2 md:px-6 md:py-2.5 rounded-md hover:bg-blue-700 transition-colors duration-300 text-[10px] sm:text-xs md:text-sm">
+                Download PDF
+            </a>
         </div>
 
     </div>
