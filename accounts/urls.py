@@ -20,5 +20,6 @@ urlpatterns = [
     
     path('verify-otp/', views.verify_otp, name='verify_otp'),
     path('verify-reset-otp/', views.verify_reset_otp, name='verify_reset_otp'),
-
+    path('resend-register-otp/', views.resend_register_otp, name='resend_register_otp'),
+    path('resend-reset-otp/', views.resend_reset_otp, name='resend_reset_otp'),
 ]

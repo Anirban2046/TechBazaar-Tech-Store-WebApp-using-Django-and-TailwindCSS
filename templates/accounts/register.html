@@ -3,85 +3,126 @@
 
 {% block content %}
 
-<section class="py-8 bg-gray-50">
+<section class="min-h-[83vh] py-6 bg-gray-50">
 
-<!-- ============================ COMPONENT REGISTER ================================= -->
-<div class="container mx-auto mt-6 mb-8 px-3 sm:px-6">
-  <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
+  <!-- ============================ COMPONENT REGISTER ================================= -->
+  <div class="container mx-auto mt-12 mb-6 px-3 sm:px-5">
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-5 sm:p-6 md:p-8">
 
-    <article class="space-y-8">
-      {% include 'includes/alerts.html' %}
+      <article class="space-y-6">
+        {% include 'includes/alerts.html' %}
 
-      <!-- Header -->
-      <header class="mb-6">
-        <h4 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center sm:text-left">Sign up</h4>
-      </header>
+        <!-- Header -->
+        <header class="mb-4">
+          <h4 class="text-lg sm:text-xl md:text-2xl font-semibold text-center sm:text-left">
+            Sign up
+          </h4>
+        </header>
 
-      <!-- Form -->
-      <form action="{% url 'register' %}" method="POST" class="space-y-6">
-        {% csrf_token %}
+        <!-- Form -->
+        <form action="{% url 'register' %}" method="POST" class="space-y-5">
+          {% csrf_token %}
 
-        <!-- First & Last Name -->
-        <div class="flex flex-col sm:flex-row sm:gap-6">
-          <div class="flex-1 flex flex-col">
-            <label class="mb-2 text-sm sm:text-base md:text-lg">First name</label>
-            {{ form.first_name|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          <!-- First & Last Name -->
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <div class="flex-1 flex flex-col">
+              <label class="mb-1 text-xs sm:text-sm md:text-base">First name</label>
+              {{ form.first_name|add_class:"w-full border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+            </div>
+            <div class="flex-1 flex flex-col mt-3 sm:mt-0">
+              <label class="mb-1 text-xs sm:text-sm md:text-base">Last name</label>
+              {{ form.last_name|add_class:"w-full border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+            </div>
           </div>
-          <div class="flex-1 flex flex-col mt-4 sm:mt-0">
-            <label class="mb-2 text-sm sm:text-base md:text-lg">Last name</label>
-            {{ form.last_name|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-          </div>
-        </div>
 
-        <!-- Email & Phone -->
-        <div class="flex flex-col sm:flex-row sm:gap-6">
-          <div class="flex-1 flex flex-col">
-            <label class="mb-2 text-sm sm:text-base md:text-lg">Email Address</label>
-            {{ form.email|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          <!-- Email & Phone -->
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <div class="flex-1 flex flex-col">
+              <label class="mb-1 text-xs sm:text-sm md:text-base">Email Address</label>
+              {{ form.email|add_class:"w-full border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+            </div>
+            <div class="flex-1 flex flex-col mt-3 sm:mt-0">
+              <label class="mb-1 text-xs sm:text-sm md:text-base">Phone Number</label>
+              {{ form.phone_number|add_class:"w-full border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+            </div>
           </div>
-          <div class="flex-1 flex flex-col mt-4 sm:mt-0">
-            <label class="mb-2 text-sm sm:text-base md:text-lg">Phone Number</label>
-            {{ form.phone_number|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+
+          <!-- Password & Confirm Password -->
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+
+            <!-- Create Password -->
+            <div class="flex-1 flex flex-col">
+              <label class="mb-1 text-xs sm:text-sm md:text-base">Create password</label>
+              <div class="relative flex items-center">
+                <input type="password" name="password" id="password1"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <button type="button"
+                        class="absolute right-3 flex items-center justify-center text-gray-500 hover:text-gray-700 focus:outline-none toggle-password">
+                  <i data-feather="eye" class="w-6 h-3 sm:w-3 sm:h-3 md:w-6 md:h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="flex-1 flex flex-col mt-3 sm:mt-0">
+              <label class="mb-1 text-xs sm:text-sm md:text-base">Repeat password</label>
+              <div class="relative flex items-center">
+                <input type="password" name="confirm_password" id="password2"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <button type="button"
+                        class="absolute right-3 flex items-center justify-center text-gray-500 hover:text-gray-700 focus:outline-none toggle-password">
+                  <i data-feather="eye" class="w-6 h-3 sm:w-3 sm:h-3 md:w-6 md:h-4"></i>
+                </button>
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <!-- Password & Confirm Password -->
-        <div class="flex flex-col sm:flex-row sm:gap-6">
-          <div class="flex-1 flex flex-col">
-            <label class="mb-2 text-sm sm:text-base md:text-lg">Create password</label>
-            {{ form.password|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+          <!-- Submit -->
+          <div>
+            <button type="submit"
+                    class="w-full bg-blue-500 text-white font-semibold rounded-lg py-2 text-sm sm:text-base md:text-lg hover:bg-blue-600 transition-colors duration-300">
+              Register
+            </button>
           </div>
-          <div class="flex-1 flex flex-col mt-4 sm:mt-0">
-            <label class="mb-2 text-sm sm:text-base md:text-lg">Repeat password</label>
-            {{ form.confirm_password|add_class:"w-full border border-gray-300 rounded-lg px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+
+          <!-- Form Errors -->
+          <div class="text-red-600 text-xs sm:text-sm">
+            {{ form.email.errors }}
+            {{ form.non_field_errors }}
           </div>
-        </div>
 
-        <!-- Submit -->
-        <div>
-          <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-lg py-2.5 sm:py-3 md:py-3.5 text-base sm:text-lg md:text-xl hover:bg-blue-600 transition-colors duration-300">
-            Register
-          </button>
-        </div>
+        </form>
+      </article>
+    </div>
 
-        <!-- Form Errors -->
-        <div class="text-red-600 text-sm sm:text-base">
-          {{ form.email.errors }}
-          {{ form.non_field_errors }}
-        </div>
-
-      </form>
-    </article>
+    <!-- Login Link -->
+    <p class="text-center mt-4 mb-2 text-xs sm:text-sm md:text-base">
+      Have an account? 
+      <a href="{% url 'login' %}" class="text-blue-600 hover:text-blue-800 no-underline">Log In</a>
+    </p>
   </div>
-
-  <!-- Login Link -->
-  <p class="text-center mt-6 mb-2 text-sm sm:text-base md:text-lg">
-    Have an account? 
-    <a href="{% url 'login' %}" class="text-blue-600 hover:text-blue-800 no-underline">Log In</a>
-  </p>
-</div>
-<!-- ============================ COMPONENT REGISTER END.// ================================= -->
+  <!-- ============================ COMPONENT REGISTER END.// ================================= -->
 
 </section>
+
+<script>
+  feather.replace();
+
+  // Password toggle
+  document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', () => {
+      const input = button.previousElementSibling;
+      if (input.type === 'password') {
+        input.type = 'text';
+        button.innerHTML = '<i data-feather="eye-off" class="w-6 h-3 sm:w-3 sm:h-3 md:w-6 md:h-4"></i>';
+      } else {
+        input.type = 'password';
+        button.innerHTML = '<i data-feather="eye" class="w-6 h-3 sm:w-3 sm:h-3 md:w-6 md:h-4"></i>';
+      }
+      feather.replace();
+    });
+  });
+</script>
 
 {% endblock %}

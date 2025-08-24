@@ -24,7 +24,7 @@ from django.db.models import Q
 
 def store(request, category_slug=None):
     category_obj = None
-    products = Product.objects.filter(is_available=True).order_by('id')
+    products = Product.objects.filter(is_available=True)
 
     # Category filter
     if category_slug:
@@ -42,8 +42,6 @@ def store(request, category_slug=None):
 
     # Determine max price in current queryset
     max_product_price = products.aggregate(Max('price'))['price__max']
-
-    # If no products, fallback to global max price
     if max_product_price is None:
         max_product_price = Product.objects.filter(is_available=True).aggregate(Max('price'))['price__max'] or 100000
 
@@ -51,11 +49,9 @@ def store(request, category_slug=None):
         min_price_val = int(min_price) if min_price != '' else None
         max_price_val = int(max_price) if max_price != '' else None
 
-        # Cap max_price_val at max_product_price (no error, just adjust silently)
         if max_price_val is not None and max_price_val > max_product_price:
             max_price_val = max_product_price
 
-        # Ensure min <= max (only error when truly invalid)
         if min_price_val is not None and max_price_val is not None and min_price_val > max_price_val:
             messages.error(request, "Minimum price cannot be greater!")
             base_url = request.path
@@ -65,18 +61,32 @@ def store(request, category_slug=None):
             redirect_url = f"{base_url}?{query_params.urlencode()}" if query_params else base_url
             return redirect(redirect_url)
 
-        # Apply filters
         if min_price_val is not None:
             products = products.filter(price__gte=min_price_val)
         if max_price_val is not None:
             products = products.filter(price__lte=max_price_val)
 
     except ValueError:
-        # Invalid input, ignore price filter
         min_price = ''
         max_price = ''
         products = products.filter(price__gte=0, price__lte=max_product_price)
 
+    # Sorting
+    sort_option = request.GET.get('sort', 'latest')
+    if sort_option == 'latest':
+        products = products.order_by('-id')
+    elif sort_option == 'oldest':
+        products = products.order_by('id')
+    elif sort_option == 'price_low':
+        products = products.order_by('price')
+    elif sort_option == 'price_high':
+        products = products.order_by('-price')
+    elif sort_option == 'alpha_az':
+        products = products.order_by('product_name')
+    elif sort_option == 'alpha_za':
+        products = products.order_by('-product_name')
+    else:
+        products = products.order_by('-id')  # fallback
 
     # Pagination: 3 per page
     paginator = Paginator(products, 3)
@@ -168,12 +178,8 @@ def product_detail(request, category_slug, product_slug):
 
 
 def search(request):
-    # Determine category from GET (optional)
     category_slug = request.GET.get('category_slug')
-    if category_slug:
-        return store(request, category_slug=category_slug)
-    else:
-        return store(request)
+    return store(request, category_slug=category_slug)
 
 
 def submit_review(request, product_id):

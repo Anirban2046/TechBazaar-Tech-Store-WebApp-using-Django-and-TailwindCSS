@@ -4,66 +4,67 @@
 {% block content %}
 
 <section class="py-6 bg-gray-50">
-  <div class="container mx-auto px-2 sm:px-4 max-w-screen-xl">
+  <div class="container mx-auto px-2 sm:px-4 lg:px-6 max-w-[90vw]">
 
     <!-- ============================ COMPONENT 1 ================================= -->
-    <h4 class="text-center mb-6 sm:mb-10 text-lg sm:text-xl md:text-2xl font-semibold max-w-3xl mx-auto">
+    <h4 class="text-center mb-6 sm:mb-10 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold max-w-3xl mx-auto">
       Review Your Order and Make Payment
     </h4>
 
     <div class="flex flex-col lg:flex-row lg:gap-6">
 
       <!-- Left Column -->
-      <aside class="flex-1 mb-6 lg:mb-0">
+      <aside class="flex-1 mb-6 lg:mb-0 space-y-4 lg:space-y-6">
+
         <!-- Billing Address -->
-        <div class="bg-white rounded-lg shadow-md mb-6">
-          <h5 class="bg-gray-100 p-4 rounded-t-lg text-sm sm:text-base md:text-lg font-semibold">
+        <div class="bg-white rounded-lg shadow-md">
+          <h5 class="bg-gray-100 p-3 sm:p-4 md:p-5 rounded-t-lg text-xs sm:text-sm md:text-base lg:text-lg font-semibold">
             Billing Address
           </h5>
-          <div class="p-4 sm:p-6 md:p-8 space-y-1">
-            <p class="text-sm sm:text-base md:text-lg">{{ order.full_name }}</p>
-            <p class="text-sm sm:text-base md:text-lg">{{ order.full_address }}</p>
-            <p class="text-sm sm:text-base md:text-lg">District: {{ order.district }}, Division: {{ order.division }}</p>
-            <p class="text-sm sm:text-base md:text-lg">{{ order.email }}</p>
-            <p class="text-sm sm:text-base md:text-lg">{{ order.phone }}</p>
+          <div class="p-3 sm:p-4 md:p-5 space-y-1 text-xs sm:text-sm md:text-base lg:text-base">
+            <p>{{ order.full_name }}</p>
+            <p>{{ order.full_address }}</p>
+            <p>District: {{ order.district }}, Division: {{ order.division }}</p>
+            <p>{{ order.email }}</p>
+            <p>{{ order.phone }}</p>
             {% if order.order_note %}
-              <p class="text-sm sm:text-base md:text-lg"><b>Order Note:</b> {{ order.order_note }}</p>
+              <p><b>Order Note:</b> {{ order.order_note }}</p>
             {% endif %}
           </div>
         </div>
 
         <!-- Payment Method -->
-        <div class="bg-white rounded-lg shadow-md mb-6">
-          <h5 class="bg-gray-100 p-4 rounded-t-lg text-sm sm:text-base md:text-lg font-semibold">
+        <div class="bg-white rounded-lg shadow-md">
+          <h5 class="bg-gray-100 p-3 sm:p-4 md:p-5 rounded-t-lg text-xs sm:text-sm md:text-base lg:text-lg font-semibold">
             Payment Method
           </h5>
-          <div class="p-4 sm:p-6 md:p-8">
-            <p class="text-sm sm:text-base md:text-lg">SSLCOMMERZ</p>
+          <div class="p-3 sm:p-4 md:p-5 text-xs sm:text-sm md:text-base lg:text-base">
+            <p>SSLCOMMERZ</p>
           </div>
         </div>
 
         <!-- Review Products -->
         <div class="bg-white rounded-lg shadow-md">
-          <h5 class="bg-gray-100 p-4 rounded-t-lg text-sm sm:text-base md:text-lg font-semibold">
+          <h5 class="bg-gray-100 p-3 sm:p-4 md:p-5 rounded-t-lg text-xs sm:text-sm md:text-base lg:text-lg font-semibold">
             Review Products
           </h5>
-          <div class="p-4 sm:p-6 md:p-8 overflow-x-auto">
-            <table class="w-full text-sm sm:text-base md:text-lg divide-y divide-gray-200">
-              <thead class="text-gray-500 uppercase text-xs sm:text-sm md:text-base">
+          <div class="p-3 sm:p-4 md:p-5 overflow-x-auto">
+            <table class="w-full text-xs sm:text-sm md:text-base lg:text-base divide-y divide-gray-200">
+              <thead class="text-gray-500 uppercase">
                 <tr>
-                  <th scope="col" class="py-2 text-left">Product</th>
-                  <th scope="col" class="py-2 w-24">Quantity</th>
-                  <th scope="col" class="py-2 w-24">Price</th>
+                  <th class="py-2 text-left">Product</th>
+                  <th class="py-2 w-24 text-center">Quantity</th>
+                  <th class="py-2 w-24 text-center">Price</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-100">
                 {% for cart_item in cart_items %}
                 <tr>
                   <td class="py-2">
-                    <div class="flex items-center gap-2">
-                      <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}" class="w-12 h-12 object-cover rounded">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                      <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}" class="w-12 sm:w-16 h-12 sm:h-16 object-cover rounded">
                       <div>
-                        <a href="{{ cart_item.product.get_url }}" class="font-medium text-gray-800 hover:underline">
+                        <a href="{{ cart_item.product.get_url }}" class="font-medium text-gray-800 hover:underline text-xs sm:text-sm md:text-base lg:text-base">
                           {{ cart_item.product.product_name }}
                         </a>
                         <p class="text-gray-500 text-xs sm:text-sm">
@@ -77,7 +78,7 @@
                     </div>
                   </td>
                   <td class="py-2 text-center">{{ cart_item.quantity }}</td>
-                  <td class="py-2">
+                  <td class="py-2 text-center">
                     <div>
                       <span class="font-medium">Tk {{ cart_item.sub_total }}</span><br>
                       <small class="text-gray-500">Tk {{ cart_item.product.price }} each</small>
@@ -95,7 +96,7 @@
       <!-- Right Column -->
       <aside class="flex-1">
         <div class="bg-white rounded-lg shadow-md">
-          <div class="p-4 sm:p-6 md:p-8 space-y-2">
+          <div class="p-3 sm:p-4 md:p-5 lg:p-6 space-y-2 text-xs sm:text-sm md:text-base lg:text-base">
             <dl class="flex justify-between">
               <dt class="font-medium">Total price:</dt>
               <dd> Tk {{ total }}</dd>
@@ -114,7 +115,7 @@
             <form action="{% url 'sslcommerz_init' %}" method="POST">
               {% csrf_token %}
               <input type="hidden" name="order_id" value="{{ order.order_number }}">
-              <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-md py-3 hover:bg-blue-600 transition-colors duration-300">
+              <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-md py-2 sm:py-2.5 md:py-3 lg:py-3 hover:bg-blue-600 transition-colors duration-300 text-xs sm:text-sm md:text-base lg:text-base">
                 Pay With SSLCommerz
               </button>
             </form>

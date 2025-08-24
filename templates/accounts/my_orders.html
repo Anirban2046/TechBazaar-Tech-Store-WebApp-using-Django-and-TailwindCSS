@@ -6,8 +6,8 @@
 
   {% include 'includes/alerts.html' %}
 
-  <div class="container mx-auto px-2 sm:px-4">
-    <div class="flex flex-col md:flex-row md:gap-6">
+  <div class="container mx-auto px-2 sm:px-4 lg:px-6">
+    <div class="flex flex-col lg:flex-row lg:gap-6">
 
       <!-- Sidebar -->
       {% include 'includes/dashboard_sidebar.html' %}
@@ -17,36 +17,42 @@
         <article class="bg-white rounded-lg shadow-md mb-6">
 
           <!-- Header -->
-          <header class="bg-gray-100 p-4 rounded-t-lg text-sm sm:text-base md:text-lg font-semibold">
+          <header class="bg-gray-100 p-3 sm:p-4 rounded-t-lg text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-semibold">
             <strong>Your order history</strong>
           </header>
 
           <!-- Table -->
-          <div class="p-4 sm:p-6 md:p-8">
+          <div class="p-3 sm:p-4 md:p-6 lg:p-8">
             <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200 text-sm sm:text-base md:text-lg">
+              <table class="min-w-full divide-y divide-gray-200 text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg">
                 <thead class="bg-gray-100">
                   <tr>
-                    <th class="px-4 py-2 text-left">Order #</th>
-                    <th class="px-4 py-2 text-left">Billing Name</th>
-                    <th class="px-4 py-2 text-left">Phone</th>
-                    <th class="px-4 py-2 text-left">Order Total</th>
-                    <th class="px-4 py-2 text-left">Date</th>
+                    <th class="px-3 sm:px-4 py-2 text-left">Order #</th>
+                    <th class="px-3 sm:px-4 py-2 text-left">Billing Name</th>
+                    <th class="px-3 sm:px-4 py-2 text-left">Phone</th>
+                    <th class="px-3 sm:px-4 py-2 text-left">Order Total</th>
+                    <th class="px-3 sm:px-4 py-2 text-left">Date</th>
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                   {% for order in orders %}
                   <tr class="hover:bg-gray-50">
-                    <th class="px-4 py-2 text-blue-600">
-						<a href="{% url 'order_detail' order.order_number %}" 
-							class="no-underline hover:text-blue-800 transition duration-200">
-							{{ order.order_number }}
-						</a>
-						</th>
-                    <td class="px-4 py-2">{{ order.full_name }}</td>
-                    <td class="px-4 py-2">{{ order.phone }}</td>
-                    <td class="px-4 py-2">Tk {{ order.order_total }}</td>
-                    <td class="px-4 py-2">{{ order.created_at }}</td>
+                    <th class="px-3 sm:px-4 py-2 text-blue-600">
+                      <a href="{% url 'order_detail' order.order_number %}" 
+                         class="no-underline hover:text-blue-800 transition duration-200">
+                        {{ order.order_number }}
+                      </a>
+                    </th>
+                    <td class="px-3 sm:px-4 py-2">{{ order.full_name }}</td>
+                    <td class="px-3 sm:px-4 py-2">{{ order.phone }}</td>
+                    <td class="px-3 sm:px-4 py-2">Tk {{ order.order_total }}</td>
+                    <td class="px-3 sm:px-4 py-2">{{ order.created_at }}</td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="5" class="px-3 sm:px-4 py-2 text-center text-gray-500">
+                      No orders found.
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -57,8 +63,8 @@
         </article>
       </main>
 
-    </div>
-  </div>
+    </div> <!-- flex row -->
+  </div> <!-- container -->
 
 </section>
 

@@ -53,44 +53,28 @@
 <!-- Chatbot Begin -->
 
 <!-- Floating Chatbot Button -->
-<div id="chatbot" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #17a2b8, #138496);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 9999;
-    transition: transform 0.2s ease;
-">
-    <i id="chatbot-icon" class="fa fa-comments" style="color: #fff; font-size: 28px;"></i>
+<div id="chatbot" class="fixed bottom-5 right-5 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-teal-500 to-teal-700 shadow-lg flex items-center justify-center cursor-pointer z-50 transition-transform duration-200">
+    <i id="chatbot-icon" class="fa fa-comments text-white text-lg sm:text-xl"></i>
 </div>
 
-<!-- Chatbot Panel -->
-<div id="chatbot-panel" style="
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 360px;
-    max-height: 500px;
-    border-radius: 15px;
-    background: #fff;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    z-index: 9999;
-">
+<style>
+  /* Ultra-small screens: shrink chatbot button and icon */
+  @media (max-width: 400px) {
+    #chatbot {
+      width: 50px !important;
+      height: 50px !important;
+    }
+    #chatbot-icon {
+      font-size: 18px !important;
+    }
+  }
+</style>
 
+
+<!-- Chatbot Panel -->
+<div id="chatbot-panel" class="fixed bottom-20 right-5 w-72 sm:w-80 max-h-[400px] sm:max-h-[500px] rounded-xl bg-white shadow-lg flex-col overflow-hidden font-sans text-sm sm:text-base hidden z-50">
     <!-- Header -->
-    <div style="
+        <div style="
         background: linear-gradient(135deg, #17a2b8, #138496);
         color: #fff;
         padding: 12px 15px;
@@ -101,43 +85,20 @@
         font-size: 16px;
     ">
         TechBazaar Help
-        <div>
+        <div class="flex gap-3 sm:gap-4"> <!-- adjust gap for small screens -->
             <!-- Back to root icon -->
-            <i id="chatbot-back" class="fa fa-arrow-left" style="
-                cursor: pointer;
-                margin-right: 12px; /* spacing between icons */
-                font-size: 16px;
-            " title="Back to root"></i>
+            <i id="chatbot-back" class="fa fa-arrow-left cursor-pointer text-base sm:text-lg" title="Back to root"></i>
 
             <!-- Clear chat icon -->
-            <i id="chatbot-clear" class="fa fa-broom" style="
-                cursor: pointer;
-                font-size: 16px;
-            " title="Clear chat"></i>
+            <i id="chatbot-clear" class="fa fa-broom cursor-pointer text-base sm:text-lg" title="Clear chat"></i>
         </div>
     </div>
 
     <!-- Options -->
-    <div id="chatbot-options" style="
-        flex: 1;
-        padding: 12px;
-        overflow-y: auto;
-        background: #f9f9f9;
-        font-size: 14px;
-    "></div>
+    <div id="chatbot-options" class="flex-1 overflow-y-auto p-2 sm:p-3 bg-gray-50 text-xs sm:text-sm"></div>
 
     <!-- Messages -->
-    <div id="chatbot-messages" style="
-        padding: 12px;
-        font-size: 14px;
-        border-top: 1px solid #ddd;
-        max-height: 180px;
-        overflow-y: auto;
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    "></div>
+    <div id="chatbot-messages" class="flex flex-col gap-1 sm:gap-2 p-2 sm:p-3 overflow-y-auto max-h-[140px] sm:max-h-[180px] border-t border-gray-200 bg-white text-xs sm:text-sm"></div>
 </div>
 
 <!-- Chatbot Script -->
@@ -149,92 +110,58 @@
     const clearBtn = document.getElementById('chatbot-clear');
     const backBtn = document.getElementById('chatbot-back');
 
-    // Floating button animation
+    // Hover scale effect
     chatbot.addEventListener('mouseenter', () => chatbot.style.transform = 'scale(1.1)');
     chatbot.addEventListener('mouseleave', () => chatbot.style.transform = 'scale(1)');
 
-    // Toggle chatbot panel
+    // Toggle panel
     chatbot.addEventListener('click', () => {
-        panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
-        if(panel.style.display === 'flex') renderOptions(faqTree);
+        panel.classList.toggle('hidden');
+        if (!panel.classList.contains('hidden')) renderOptions(faqTree);
     });
 
     // Clear chat
-    clearBtn.addEventListener('click', () => {
-        messages.innerHTML = '';
-    });
+    clearBtn.addEventListener('click', () => messages.innerHTML = '');
 
     // Back to root
-    backBtn.addEventListener('click', () => {
-        renderOptions(faqTree);
-    });
+    backBtn.addEventListener('click', () => renderOptions(faqTree));
 
-    // FAQ data
     const faqTree = [
-        {
-            question: "Shipping & Delivery",
-            children: [
-                { question: "What are your shipping charges?", answer: "Shipping is free for orders over Tk 5000. Otherwise Tk 150." },
-                { question: "How long does delivery take?", answer: "Delivery usually takes 2-5 business days within Bangladesh." },
-                { question: "Do you ship internationally?", answer: "Currently, we only ship within Bangladesh." },
-                { question: "Can I change my shipping address?", answer: "Yes, before the order is dispatched, contact support to change the address." }
-            ]
-        },
-        {
-            question: "Warranty & Returns",
-            children: [
-                { question: "Do you provide warranty?", answer: "Yes, all products come with manufacturer warranty." },
-                { question: "How can I return an item?", answer: "You can return items within 7 days of delivery. Contact support to start the process." },
-                { question: "What if my product is damaged?", answer: "Contact support immediately, and we will assist with replacement or refund." }
-            ]
-        },
-        {
-            question: "Orders & Support",
-            children: [
-                { question: "Can I cancel my order?", answer: "Yes, cancel before shipment. Contact support to cancel." },
-                { question: "Can I modify my order?", answer: "Only before dispatch. Contact support for changes." },
-                { question: "What if I receive a wrong product?", answer: "Contact support immediately for a replacement or refund." }
-            ]
-        },
-        {
-            question: "Payments",
-            children: [
-                { question: "What payment methods do you accept?", answer: "We accept bKash, Rocket, Nagad, Upay, VisaCard, MasterCard and DBBL Nexus Card." },
-                { question: "Is online payment secure?", answer: "Yes, all payments are encrypted and secure." },
-                { question: "Can I pay on delivery?", answer: "Currently, Cash on Delivery is not available; please use online payment methods." }
-            ]
-        },
-        {
-            question: "Products",
-            children: [
-                { question: "Do you have smartphones?", answer: "Yes, all popular brands and models are available." },
-                { question: "Do you sell laptops?", answer: "Yes, laptops from multiple brands are available." },
-                { question: "Do you sell accessories?", answer: "Yes, keyboards, mice, headphones, speakers, tablets, and more." },
-                { question: "Are your products genuine?", answer: "Yes, we sell only genuine, brand new products." }
-            ]
-        }
+        { question: "Shipping & Delivery", children: [
+            { question: "What are your shipping charges?", answer: "Shipping is free for orders over Tk 5000. Otherwise Tk 150." },
+            { question: "How long does delivery take?", answer: "Delivery usually takes 2-5 business days within Bangladesh." },
+            { question: "Do you ship internationally?", answer: "Currently, we only ship within Bangladesh." },
+            { question: "Can I change my shipping address?", answer: "Yes, before the order is dispatched, contact support to change the address." }
+        ]},
+        { question: "Warranty & Returns", children: [
+            { question: "Do you provide warranty?", answer: "Yes, all products come with manufacturer warranty." },
+            { question: "How can I return an item?", answer: "You can return items within 7 days of delivery. Contact support to start the process." },
+            { question: "What if my product is damaged?", answer: "Contact support immediately, and we will assist with replacement or refund." }
+        ]},
+        { question: "Orders & Support", children: [
+            { question: "Can I cancel my order?", answer: "Yes, cancel before shipment. Contact support to cancel." },
+            { question: "Can I modify my order?", answer: "Only before dispatch. Contact support for changes." },
+            { question: "What if I receive a wrong product?", answer: "Contact support immediately for a replacement or refund." }
+        ]},
+        { question: "Payments", children: [
+            { question: "What payment methods do you accept?", answer: "We accept bKash, Rocket, Nagad, Upay, VisaCard, MasterCard and DBBL Nexus Card." },
+            { question: "Is online payment secure?", answer: "Yes, all payments are encrypted and secure." },
+            { question: "Can I pay on delivery?", answer: "Currently, Cash on Delivery is not available; please use online payment methods." }
+        ]},
+        { question: "Products", children: [
+            { question: "Do you have smartphones?", answer: "Yes, all popular brands and models are available." },
+            { question: "Do you sell laptops?", answer: "Yes, laptops from multiple brands are available." },
+            { question: "Do you sell accessories?", answer: "Yes, keyboards, mice, headphones, speakers, tablets, and more." },
+            { question: "Are your products genuine?", answer: "Yes, we sell only genuine, brand new products." }
+        ]}
     ];
 
-    // Render option buttons
     function renderOptions(tree) {
         options.innerHTML = '';
         tree.forEach(item => {
             const btn = document.createElement('button');
             btn.textContent = item.question;
-            btn.style.cssText = `
-                width:100%;
-                margin-bottom:6px;
-                padding:10px;
-                border:none;
-                border-radius:8px;
-                background:#fff;
-                cursor:pointer;
-                text-align:left;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                transition: background 0.2s, transform 0.1s;
-            `;
-            btn.onmouseover = () => { btn.style.background='#f1f9ff'; btn.style.transform='translateX(3px)'; }
-            btn.onmouseout = () => { btn.style.background='#fff'; btn.style.transform='translateX(0)'; }
+            btn.className = 'w-full mb-1 sm:mb-2 px-2 sm:px-3 py-1 sm:py-2 rounded bg-white text-left shadow-sm hover:bg-blue-50 hover:translate-x-1 transition';
             btn.addEventListener('click', () => handleClick(item));
             options.appendChild(btn);
         });
@@ -250,17 +177,18 @@
                         display: inline-block;
                         background: #17a2b8;
                         color: #fff;
-                        padding: 8px 12px;
+                        padding: 6px 10px; /* smaller padding for user message */
                         border-radius: 15px 15px 0 15px;
                         max-width: 80%;
                         text-align: left;
                         margin-bottom: 6px;
+                        font-size: 0.875rem; /* scale for smaller screens */
                     ">${node.question}</span>
                 </div>
             `;
             messages.scrollTop = messages.scrollHeight;
 
-            // Bot reply after delay (left side bubble)
+            // Bot reply after delay (left side bubble remains unchanged)
             setTimeout(() => {
                 messages.innerHTML += `
                     <div style="text-align: left;">
@@ -268,11 +196,12 @@
                             display: inline-block;
                             background: #f1f0f0;
                             color: #000;
-                            padding: 8px 12px;
+                            padding: 8px 12px; /* keep original padding */
                             border-radius: 15px 15px 15px 0;
                             max-width: 80%;
                             text-align: left;
                             margin-bottom: 6px;
+                            font-size: 0.875rem;
                         ">${node.answer}</span>
                     </div>
                 `;
@@ -280,9 +209,8 @@
             }, 800);
         }
         if(node.children) renderOptions(node.children);
-    }
+}
 </script>
-
 
 <!-- Chatbot End -->
 

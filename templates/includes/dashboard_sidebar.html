@@ -1,34 +1,53 @@
-<aside class="w-full md:w-1/3 flex-shrink-0">
-  <!-- SIDEBAR -->
-  <ul class="flex flex-col space-y-2">
-    <a href="{% url 'dashboard' %}" 
-       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
-              {% if '/accounts/' == request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
-      Dashboard
-    </a>
-    <a href="{% url 'my_orders' %}" 
-       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
-              {% if '/my_orders/' in request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
-      My Orders
-    </a>
-    <a href="{% url 'edit_profile' %}" 
-       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
-              {% if '/edit_profile/' in request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
-      Edit Profile
-    </a>
-    <a href="{% url 'change_password' %}" 
-       class="block py-2 px-4 rounded-md text-sm sm:text-base md:text-lg
-              {% if '/change_password/' in request.path %} bg-blue-500 text-white {% else %} bg-gray-100 text-gray-800 hover:bg-gray-200 {% endif %}">
-      Change Password
-    </a>
-  </ul>
+<aside class="w-full lg:w-1/3 flex-shrink-0">
+  <div class="bg-white rounded-lg shadow-md p-4 space-y-3">
 
-  <div class="mt-4">
-    <a href="{% url 'logout' %}" 
-       class="block w-full text-center py-2 rounded-md bg-gray-200 text-gray-800 font-medium hover:bg-gray-300 transition-colors duration-200">
-      <i class="fa fa-power-off mr-2"></i> 
-      <span class="align-middle">Log out</span>
-    </a>
+    <!-- Menu -->
+    <ul class="flex flex-col space-y-2">
+
+      <li>
+        <a href="{% url 'dashboard' %}" 
+           class="flex items-center gap-2 py-2 px-3 rounded-md text-xs sm:text-sm md:text-base lg:text-lg font-medium
+                  {% if '/accounts/' == request.path %} bg-blue-500 text-white {% else %} text-gray-700 hover:bg-gray-100 {% endif %} transition-colors duration-200">
+          <i class="fa fa-tachometer-alt"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'my_orders' %}" 
+           class="flex items-center gap-2 py-2 px-3 rounded-md text-xs sm:text-sm md:text-base lg:text-lg font-medium
+                  {% if '/my_orders/' in request.path %} bg-blue-500 text-white {% else %} text-gray-700 hover:bg-gray-100 {% endif %} transition-colors duration-200">
+          <i class="fa fa-box-open"></i> My Orders
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'edit_profile' %}" 
+           class="flex items-center gap-2 py-2 px-3 rounded-md text-xs sm:text-sm md:text-base lg:text-lg font-medium
+                  {% if '/edit_profile/' in request.path %} bg-blue-500 text-white {% else %} text-gray-700 hover:bg-gray-100 {% endif %} transition-colors duration-200">
+          <i class="fa fa-user-edit"></i> Edit Profile
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'change_password' %}" 
+           class="flex items-center gap-2 py-2 px-3 rounded-md text-xs sm:text-sm md:text-base lg:text-lg font-medium
+                  {% if '/change_password/' in request.path %} bg-blue-500 text-white {% else %} text-gray-700 hover:bg-gray-100 {% endif %} transition-colors duration-200">
+          <i class="fa fa-key"></i> Change Password
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-200 mt-4"></div>
+
+    <!-- Logout -->
+    <div class="mt-4">
+      <a href="{% url 'logout' %}" 
+         class="flex items-center justify-center gap-2 py-2 px-3 rounded-md bg-gray-100 text-gray-700 font-medium text-xs sm:text-sm md:text-base lg:text-lg hover:bg-gray-200 transition-colors duration-200">
+        <i class="fa fa-power-off"></i> Log out
+      </a>
+    </div>
+
   </div>
-  <!-- SIDEBAR .//END -->
 </aside>

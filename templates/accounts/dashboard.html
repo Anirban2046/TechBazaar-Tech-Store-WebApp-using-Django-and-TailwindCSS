@@ -6,49 +6,51 @@
 
   {% include 'includes/alerts.html' %}
 
-  <div class="container mx-auto px-2 sm:px-4">
-    <div class="flex flex-col md:flex-row md:gap-6">
+  <div class="container mx-auto px-2 sm:px-4 lg:px-6">
+    <div class="flex flex-col md:flex-col lg:flex-row lg:gap-6"> <!-- stacked for md and below -->
 
       <!-- Sidebar -->
       {% include 'includes/dashboard_sidebar.html' %}
 
       <!-- Main Content -->
-      <main class="flex-1">
+      <main class="flex-1 mt-4 lg:mt-0">
         <article class="bg-white rounded-lg shadow-md mb-6">
-          <header class="bg-gray-100 p-4 rounded-t-lg flex items-center flex-wrap">
-            <strong class="inline-block mr-3 text-sm sm:text-base md:text-lg">Logged in as:</strong>
-            <span class="text-sm sm:text-base md:text-lg">{{ user.full_name }}</span>
+          <!-- Header -->
+          <header class="bg-gray-100 p-3 sm:p-4 rounded-t-lg flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-1 sm:gap-3">
+            <strong class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-semibold inline-block">Logged in as:</strong>
+            <span class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg">{{ user.full_name }}</span>
           </header>
 
-          <div class="p-4">
-            <div class="flex flex-col sm:flex-row sm:gap-4">
+          <!-- Cards -->
+          <div class="p-3 sm:p-4">
+            <div class="flex flex-col md:flex-col lg:flex-row lg:gap-4">
 
               <!-- Total Orders Card -->
-				<div class="flex-1 bg-white rounded-lg shadow-md mb-4 sm:mb-0 text-center p-4">
-				<h5 class="text-sm sm:text-base md:text-lg font-semibold mb-2">Total Orders</h5>
-				<h4 class="text-lg sm:text-xl md:text-2xl font-bold mb-2">{{ orders_count }}</h4>
-				<a href="{% url 'my_orders' %}" 
-					class="text-blue-600 hover:text-blue-800 no-underline text-sm sm:text-base md:text-lg">
-					View Orders
-				</a>
-				</div>
-
-              <!-- User Info Card -->
-              <div class="flex-1 bg-white rounded-lg shadow-md p-4 text-center">
-                {% if userprofile.profile_picture %}
-                  <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture"
-                       class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full mx-auto mb-2">
-                {% endif %}
-                <p class="mb-1 text-sm sm:text-base md:text-lg">{{ user.email }}</p>
-                <p class="text-sm sm:text-base md:text-lg">{{ user.phone_number }}</p>
+              <div class="flex-1 bg-white rounded-lg shadow-md mb-3 lg:mb-0 text-center p-3 sm:p-4">
+                <h5 class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-semibold mb-1 sm:mb-2">Total Orders</h5>
+                <h4 class="text-[12px] xs:text-sm sm:text-base md:text-xl lg:text-3xl font-bold mb-1 sm:mb-2">{{ orders_count }}</h4>
+                <a href="{% url 'my_orders' %}" 
+                   class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-blue-600 hover:text-blue-800">
+                  View Orders
+                </a>
               </div>
 
-            </div> <!-- row -->
-          </div> <!-- card-body -->
+              <!-- User Info Card -->
+              <div class="flex-1 bg-white rounded-lg shadow-md p-3 sm:p-4 text-center">
+                {% if userprofile.profile_picture %}
+                  <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture"
+                       class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full mx-auto mb-2">
+                {% endif %}
+                <p class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg mb-1">{{ user.email }}</p>
+                <p class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg">{{ user.phone_number }}</p>
+              </div>
+
+            </div> <!-- flex row -->
+          </div> <!-- card body -->
         </article>
       </main>
 
-    </div> <!-- flex row -->
+    </div> <!-- flex container -->
   </div> <!-- container -->
 
 </section>

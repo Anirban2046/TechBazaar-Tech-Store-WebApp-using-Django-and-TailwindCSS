@@ -45,7 +45,7 @@
             </div>
 
             <!-- Price -->
-            <div class="mb-4">
+            <div class="mb-6">
               <var class="text-xl font-semibold not-italic">Tk {{ single_product.price|floatformat:2 }}</var>
             </div>
 
@@ -112,78 +112,83 @@
     </div>
     <!-- ============================ PRODUCT CARD END ================================= -->
 
-    <!-- ============================ REVIEW FORM ================================= -->
-    <div class="container mx-auto px-2 sm:px-4 lg:px-6 mt-8">
-      <form action="{% url 'submit_review' single_product.id %}" method="POST">
-        {% csrf_token %}
-        <h5 class="text-xl font-semibold mb-3">Write Your Review</h5>
+    <!-- ============================ REVIEW SECTION ================================= -->
+<div class="container mx-auto px-2 sm:px-4 lg:px-6 mt-8 space-y-8">
 
-        <!-- Rating -->
-        <div class="mb-4">
-          <label class="block font-medium mb-1">How do you rate this product?</label>
-            <!-- Rating stars -->
-              <div class="rating flex flex-row-reverse justify-end space-x-1">
-              {% for i in "54321" %}
-                <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" class="hidden peer" required />
-                <label for="star{{ i }}" class="cursor-pointer text-gray-300 text-2xl peer-checked:text-yellow-400 hover:text-yellow-400">
-                  <i class="fas fa-star"></i>
-                </label>
-              {% endfor %}
-            </div>
-            <br>
+  <!-- Write Your Review -->
+  <div class="bg-white rounded-lg shadow-sm p-6">
+    <form action="{% url 'submit_review' single_product.id %}" method="POST">
+      {% csrf_token %}
+      <h5 class="text-xl font-semibold mb-4">Write Your Review</h5>
 
-        <!-- Review Title -->
-        <div class="mb-4">
-          <label class="block font-medium mb-1">Review Title</label>
-          <input type="text" name="subject" class="w-full border border-gray-300 rounded py-2 px-3">
+      <!-- Rating -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">How do you rate this product?</label>
+        <div class="rating flex flex-row-reverse justify-end space-x-1">
+          {% for i in "54321" %}
+            <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" class="hidden peer" required />
+            <label for="star{{ i }}" class="cursor-pointer text-gray-300 text-2xl peer-checked:text-yellow-400 hover:text-yellow-400">
+              <i class="fas fa-star"></i>
+            </label>
+          {% endfor %}
         </div>
+      </div>
 
-        <!-- Review Content -->
-        <div class="mb-4">
-          <label class="block font-medium mb-1">Review</label>
-          <textarea name="review" rows="4" class="w-full border border-gray-300 rounded py-2 px-3"></textarea>
-        </div>
+      <!-- Review Title -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Review Title</label>
+        <input type="text" name="subject" class="w-full border border-gray-300 rounded py-2 px-3">
+      </div>
 
-        <!-- Submit -->
-        {% if user.is_authenticated %}
-          {% if orderproduct %}
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Submit Review</button>
-          {% else %}
-            <p class="text-red-600">You must purchase this product to post a review.</p>
-          {% endif %}
+      <!-- Review Content -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Review</label>
+        <textarea name="review" rows="4" class="w-full border border-gray-300 rounded py-2 px-3"></textarea>
+      </div>
+
+      <!-- Submit -->
+      {% if user.is_authenticated %}
+        {% if orderproduct %}
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Submit Review</button>
         {% else %}
-          <p class="text-red-600">You must be logged in to post a review. 
-            <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login now</a>
-          </p>
+          <p class="text-red-600">You must purchase this product to post a review.</p>
         {% endif %}
-      </form>
-    </div>
-    <!-- ============================ REVIEW FORM END ================================= -->
+      {% else %}
+        <p class="text-red-600">
+          You must be logged in to post a review. 
+          <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login now</a>
+        </p>
+      {% endif %}
+    </form>
+  </div>
 
-    <!-- ============================ CUSTOMER REVIEWS ================================= -->
-    <div class="container mx-auto px-2 sm:px-4 lg:px-6 mt-8">
-      <h3 class="text-xl font-semibold mb-4">Customer Reviews</h3>
-      {% for review in reviews %}
-        <article class="bg-white rounded-lg shadow-sm p-4 mb-4">
-          <div class="flex justify-between items-center mb-2">
-            <h6 class="font-semibold">{{ review.user.full_name }}</h6>
-            <span class="text-gray-500 text-sm">{{ review.updated_at }}</span>
-          </div>
+  <!-- Customer Reviews -->
+  <div>
+    <h3 class="text-xl font-semibold mb-4">Customer Reviews</h3>
+    {% for review in reviews %}
+      <article class="bg-white rounded-lg shadow-sm p-6 mb-4">
+        <div class="flex justify-between items-center mb-2">
+          <h6 class="font-semibold">{{ review.user.full_name }}</h6>
+          <span class="text-gray-500 text-sm">{{ review.updated_at }}</span>
+        </div>
 
-          <div class="rating-star mb-2">
-            {% for star in review.stars %}
-              <i class="{{ star }} text-yellow-400 mr-1"></i>
-            {% endfor %}
-          </div>
+        <div class="rating-star mb-2">
+          {% for star in review.stars %}
+            <i class="{{ star }} text-yellow-400 mr-1"></i>
+          {% endfor %}
+        </div>
 
-          <h6 class="font-semibold mb-1">{{ review.subject }}</h6>
-          <p>{{ review.review }}</p>
-        </article>
-      {% empty %}
-        <p>No reviews yet for this product.</p>
-      {% endfor %}
-    </div>
-    <!-- ============================ CUSTOMER REVIEWS END ================================= -->
+        <h6 class="font-semibold mb-1">{{ review.subject }}</h6>
+        <p>{{ review.review }}</p>
+      </article>
+    {% empty %}
+      <p>No reviews yet for this product.</p>
+    {% endfor %}
+  </div>
+
+</div>
+<!-- ============================ REVIEW SECTION END ================================= -->
+
 
   </div>
 </section>

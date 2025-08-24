@@ -34,7 +34,6 @@
           <li class="text-sm sm:text-base md:text-lg">{{ order.full_name }}</li>
           <li class="text-sm sm:text-base md:text-lg">{{ order.full_address }}</li>
           <li class="text-sm sm:text-base md:text-lg">District: {{ order.district }}, Division: {{ order.division }}</li>
-          {% comment %} <li class="text-sm sm:text-base md:text-lg">{{ order.country }}</li> {% endcomment %}
         </ul>
       </div>
     </div>
@@ -97,6 +96,12 @@
     <!-- Footer -->
     <div class="text-center mt-6">
       <p class="text-sm sm:text-base md:text-lg">Thank you for shopping with us!</p>
+    </div>
+
+    <div class="mt-6 text-center">
+      <a href="{% url 'invoice_pdf' order.id %}" class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
+        Download PDF
+      </a>
     </div>
 
   </div>

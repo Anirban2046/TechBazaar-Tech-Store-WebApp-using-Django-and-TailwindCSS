@@ -4,11 +4,11 @@
 
 {% block content %}
 
-<div class="bg-gray-100 min-h-screen p-0">
+<div class="bg-gray-100 min-h-[83vh] p-0">
 
   <!-- Main Banner Slider -->
   <section class="relative overflow-hidden mb-6">
-    <div class="w-[90vw] max-w-none mx-auto">
+    <div class="w-[90vw] max-w-none mx-auto mt-2">
 
       <!-- Swiper -->
       <div class="swiper rounded">
@@ -47,94 +47,108 @@
     </div>
   </section>
 
-    <!-- Popular Products -->
-      <div class="container mx-auto w-[90%] px-0 mt-8">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-xs sm:text-sm md:text-lg lg:text-xl font-semibold text-gray-800">Featured Products</h3>
 
-        <!-- Sorting Dropdown -->
-        <form method="GET" class="flex items-center gap-2">
-          <label for="sort" class="text-xs sm:text-sm md:text-base text-gray-700 font-sans font-medium"> Sort by: </label>
-          <select name="sort" id="sort" class="border rounded px-2 py-1 text-xs sm:text-sm md:text-base font-sans font-medium"
-                  onchange="this.form.submit()">
-            <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest</option>
-            <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
-            <option value="price_high" {% if request.GET.sort == 'price_high' %}selected{% endif %}>Price: High → Low</option>
-            <option value="price_low" {% if request.GET.sort == 'price_low' %}selected{% endif %}>Price: Low → High</option>
-            <option value="alpha_az" {% if request.GET.sort == 'alpha_az' %}selected{% endif %}>Alphabetical: A → Z</option>
-            <option value="alpha_za" {% if request.GET.sort == 'alpha_za' %}selected{% endif %}>Alphabetical: Z → A</option>
-          </select>
-        </form>
+    <!-- Popular Products -->
+    <div class="container mx-auto w-[90%] px-0 mt-8">
+      <div class="flex flex-row flex-wrap items-center justify-between mb-4 gap-2">
+          <!-- Title -->
+          <h3 class="text-[10px] sm:text-xs md:text-lg lg:text-xl font-semibold text-gray-800 flex-shrink-0">
+              Featured Products
+          </h3>
+
+          <!-- Right-aligned Sorting + Button -->
+          <div class="flex flex-row flex-wrap items-center gap-1 sm:gap-2">
+              <!-- Sorting Dropdown -->
+              <form method="GET" class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                  <label for="sort" class="text-[8px] sm:text-[9px] md:text-base text-gray-700 font-sans font-medium">
+                      Sort by:
+                  </label>
+                  <select name="sort" id="sort" class="border rounded px-1 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] md:text-base font-sans font-medium w-20 sm:w-32"
+                          onchange="this.form.submit()">
+                      <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest</option>
+                      <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
+                      <option value="price_high" {% if request.GET.sort == 'price_high' %}selected{% endif %}>Price: High → Low</option>
+                      <option value="price_low" {% if request.GET.sort == 'price_low' %}selected{% endif %}>Price: Low → High</option>
+                      <option value="alpha_az" {% if request.GET.sort == 'alpha_az' %}selected{% endif %}>A → Z</option>
+                      <option value="alpha_za" {% if request.GET.sort == 'alpha_za' %}selected{% endif %}>Z → A</option>
+                  </select>
+              </form>
+
+              <!-- See All Button -->
+              <a href="{% url 'store' %}" class="border border-blue-500 text-blue-500 px-2 py-0.5 sm:px-3 sm:py-1 rounded hover:bg-blue-500 hover:text-white text-[8px] sm:text-[9px] md:text-base whitespace-nowrap flex-shrink-0">
+                  See all
+              </a>
+          </div>
       </div>
 
-
+      <!-- Product Grid -->
       <div class="grid gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {% for product in products %}
-        <div class="bg-white rounded shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-md">
-          
-          <!-- Fixed image container -->
-          <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t">
-            <div class="w-full h-60 sm:h-64 md:h-72 lg:h-80 flex items-center justify-center bg-white">
-              <img src="{{ product.images.url }}" 
-                  class="h-full w-full object-contain transition duration-300">
-            </div>
-          </a>
+          {% for product in products %}
+          <div class="bg-white rounded shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-md">
+              <!-- Product image -->
+              <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t">
+                  <div class="w-full h-48 sm:h-56 md:h-64 lg:h-72 flex items-center justify-center bg-white">
+                      <img src="{{ product.images.url }}" class="h-full w-full object-contain transition duration-300">
+                  </div>
+              </a>
 
-          <!-- Product details -->
-          <div class="p-2 sm:p-3 flex flex-col">
-            <!-- Product name with min height -->
-            <a href="{{ product.get_url }}" 
-              class="block text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-800 hover:text-blue-500 transition duration-300 mb-2 min-h-[3rem] sm:min-h-[3.5rem]">
-              {{ product.product_name }}
-            </a>
+              <!-- Product details -->
+              <div class="p-2 sm:p-3 flex flex-col">
+                  <!-- Product name -->
+                  <a href="{{ product.get_url }}" class="block text-[9px] sm:text-xs md:text-base lg:text-lg font-medium text-gray-800 hover:text-blue-500 transition duration-300 mb-1 sm:mb-2 min-h-[3rem] sm:min-h-[3.5rem]">
+                      {{ product.product_name }}
+                  </a>
 
-            <!-- Price -->
-            <div class="text-xs sm:text-sm md:text-base text-gray-700 mt-1 font-sans font-bold"> 
-              Tk {{ product.price |intcomma }}
-            </div>
+                  <!-- Price -->
+                  <div class="text-[9px] sm:text-xs md:text-base text-gray-700 mt-1 font-sans font-bold"> 
+                      Tk {{ product.price |intcomma }}
+                  </div>
 
-            <!-- Ratings -->
-              <div class="flex items-center gap-0.5 mt-1 text-yellow-500">
-                {% for star in product.avg_stars %}
-                  <i class="{{ star }}"></i>
-                {% endfor %}
+                  <!-- Ratings -->
+                  <div class="flex items-center gap-0.5 mt-1 text-yellow-500 text-[9px] sm:text-xs md:text-base">
+                      {% for star in product.avg_stars %}
+                          <i class="{{ star }}"></i>
+                      {% endfor %}
+                  </div>
               </div>
           </div>
-        </div>
-        {% endfor %}
+          {% endfor %}
       </div>
     </div>
+
   </section>
 
   <!-- TechBazaar Description Section -->
-  <section class="mt-12 px-6 py-14 bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-800 border-t border-gray-200">
-    <div class="w-[90%] mx-auto text-left"> <!-- 90% width, left aligned -->
-      
-      <!-- Heading -->
-      <h1 class="text-1xl sm:text-2xl lg:text-3xl font-extrabold mb-8 leading-snug text-gray-900">
-        Trusted Online Shop for <span class="text-blue-600">Computers, Laptops, Smartphones</span>, Gadgets & Accessories Across Bangladesh
-      </h1>
+<section class="mt-12 px-6 py-14 bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-800 border-t border-gray-200">
+  <div class="w-[92.5%] mx-auto text-justify"> <!-- 90% width, justified -->
 
-      <!-- Paragraphs -->
-      <div class="space-y-5">
-        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
-          TechBazaar is your <span class="font-semibold text-gray-900">one-stop online shop</span> for all things technology. We offer a wide range of computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment. Our goal is to make technology accessible and convenient for everyone, providing a seamless online shopping experience.
-        </p>
+    <!-- Heading -->
+    <h1 class="text-base sm:text-xl md:text-2xl lg:text-3xl font-extrabold mb-8 leading-snug text-gray-900">
+      Trusted Online Shop for <span class="text-blue-600">Computers, Laptops, Smartphones</span>, Gadgets & Accessories Across Bangladesh
+    </h1>
 
-        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
-          At TechBazaar, we focus on <span class="font-semibold text-blue-600">quality, reliability, and customer satisfaction</span>. Every product we offer is carefully selected to meet high standards, ensuring that you receive the best technology solutions for work, gaming, or everyday life. Our user-friendly platform makes it easy to find the right products for your needs.
-        </p>
+    <!-- Paragraphs -->
+    <div class="space-y-4">
+      <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed">
+        TechBazaar is your <span class="font-semibold text-gray-900">one-stop online shop</span> for all things technology. We offer a wide range of computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment. Our goal is to make technology accessible and convenient for everyone, providing a seamless online shopping experience.
+      </p>
 
-        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
-          Whether you are building a custom PC, upgrading your office setup, or exploring the latest gadgets, TechBazaar provides <span class="font-semibold text-gray-900">fast and trusted service</span> every time. Our mission is to help you stay connected, productive, and entertained with the right technology at your fingertips.
-        </p>
+      <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed">
+        At TechBazaar, we focus on <span class="font-semibold text-blue-600">quality, reliability, and customer satisfaction</span>. Every product we offer is carefully selected to meet high standards, ensuring that you receive the best technology solutions for work, gaming, or everyday life. Our user-friendly platform makes it easy to find the right products for your needs.
+      </p>
 
-        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
-          We are committed to offering an <span class="font-semibold text-gray-900">exceptional online shopping experience</span>, combining a wide product selection, reliable service, and a secure platform. At TechBazaar, technology meets convenience, helping you get the most out of your digital life.
-        </p>
-      </div>
+      <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed">
+        Whether you are building a custom PC, upgrading your office setup, or exploring the latest gadgets, TechBazaar provides <span class="font-semibold text-gray-900">fast and trusted service</span> every time. Our mission is to help you stay connected, productive, and entertained with the right technology at your fingertips.
+      </p>
+
+      <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed">
+        We are committed to offering an <span class="font-semibold text-gray-900">exceptional online shopping experience</span>, combining a wide product selection, reliable service, and a secure platform. At TechBazaar, technology meets convenience, helping you get the most out of your digital life.
+      </p>
     </div>
-  </section>
+  </div>
+</section>
+
+
 
 
 </div> <!-- End wrapper -->

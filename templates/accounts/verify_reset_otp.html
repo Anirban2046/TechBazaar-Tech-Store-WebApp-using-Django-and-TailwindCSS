@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="min-h-[84vh] flex items-start justify-center bg-gray-50 pt-28">
-  <div class="w-full max-w-sm bg-white rounded-lg shadow-md p-6">
+<section class="min-h-[84vh] flex items-start justify-center bg-gray-50 pt-20 sm:pt-28">
+  <div class="w-11/12 max-w-sm sm:max-w-sm bg-white rounded-lg shadow-md p-4 sm:p-6">
     
     <!-- Title -->
-    <h4 class="text-xl sm:text-2xl font-semibold mb-3 text-center">Verify OTP</h4>
+    <h4 class="text-lg sm:text-2xl font-semibold mb-3 text-center">Verify OTP</h4>
 
     {% include 'includes/alerts.html' %}
 
     <!-- Subtitle -->
-    <p class="text-center text-gray-500 mb-3 text-sm sm:text-base">
+    <p class="text-center text-gray-500 mb-3 text-xs sm:text-sm">
       Enter the OTP sent to your email.
     </p>
 
-    <!-- Form -->
+    <!-- OTP Form -->
     <form method="POST" class="space-y-4">
       {% csrf_token %}
       <div>
         <input type="text" name="otp" placeholder="Enter OTP" required
-          class="w-full text-center px-4 py-2 rounded-md border border-gray-300 
+          class="w-full text-center px-3 py-2 rounded-md border border-gray-300 
                  focus:ring-2 focus:ring-blue-400 focus:border-blue-400 
                  text-sm sm:text-base">
       </div>
@@ -31,11 +31,65 @@
       </button>
     </form>
 
+    <!-- Timer + Resend -->
+    <div class="text-center mt-4">
+      <p id="timer" class="text-gray-600 text-xs sm:text-sm mb-2"></p>
+      <form action="{% url 'resend_reset_otp' %}" method="POST" id="resendForm">
+        {% csrf_token %}
+        <button type="submit" id="resendBtn" disabled
+          class="w-full bg-gray-400 text-white font-medium py-2 rounded-md cursor-not-allowed
+                 disabled:opacity-50 hover:bg-blue-600 transition duration-200 text-sm sm:text-base">
+          Resend OTP
+        </button>
+      </form>
+    </div>
+
     <!-- Extra note -->
     <p class="text-center mt-3 text-gray-500 text-xs sm:text-sm">
       Or, you can also reset your password by clicking the link sent to your email.
     </p>
   </div>
 </section>
+
+<!-- Safer JSON script for expiry -->
+{% if request.session.otp_expiry %}
+  {{ request.session.otp_expiry|json_script:"otp-expiry" }}
+{% else %}
+  <script id="otp-expiry" type="application/json">0</script>
+{% endif %}
+
+<!-- Countdown Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const resendBtn = document.getElementById("resendBtn");
+  const timerElement = document.getElementById("timer");
+
+  // Parse expiry from safe JSON
+  let expiry = JSON.parse(document.getElementById("otp-expiry").textContent);
+
+  function updateTimer() {
+    const now = Math.floor(Date.now() / 1000);
+    let remaining = expiry - now;
+
+    if (remaining <= 0) {
+      resendBtn.disabled = false;
+      resendBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+      resendBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
+      timerElement.textContent = "You can now resend OTP.";
+    } else {
+      let minutes = Math.floor(remaining / 60);
+      let seconds = remaining % 60;
+      timerElement.textContent = `Resend available in ${minutes}:${seconds.toString().padStart(2,'0')}`;
+      setTimeout(updateTimer, 1000);
+    }
+  }
+
+  if (expiry > 0) {
+    updateTimer();
+  } else {
+    resendBtn.disabled = false;
+  }
+});
+</script>
 
 {% endblock %}

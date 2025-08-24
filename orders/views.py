@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from carts.models import CartItem
@@ -8,6 +8,7 @@ from .models import Order, Payment, OrderProduct
 from store.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from weasyprint import HTML
 
 import requests
 from django.conf import settings
@@ -53,8 +54,6 @@ def place_order(request, total=0, quantity=0):
             data.phone = form.cleaned_data['phone']
             data.email = form.cleaned_data['email']
             data.address = form.cleaned_data['address']
-            # data.address_line_2 = form.cleaned_data['address_line_2']
-            # data.country = form.cleaned_data['country']
             data.division = form.cleaned_data['division']
             data.district = form.cleaned_data['district']
             data.order_note = form.cleaned_data['order_note']
@@ -175,6 +174,27 @@ def finalize_order(order, payment):
     })
     send_email = EmailMessage(mail_subject, message, to=[order.user.email])
     send_email.send()
+
+
+def invoice_pdf(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    ordered_products = OrderProduct.objects.filter(order=order)
+    
+    # Render HTML template to string
+    html_string = render_to_string('orders/invoice.html', {
+        'order': order,
+        'ordered_products': ordered_products,
+        'subtotal': sum(item.product_price * item.quantity for item in ordered_products),
+    })
+
+    # Create PDF
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    pdf_file = html.write_pdf()
+
+    # Return response
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="invoice_{order.order_number}.pdf"'
+    return response
 
 
 # Callbacks
