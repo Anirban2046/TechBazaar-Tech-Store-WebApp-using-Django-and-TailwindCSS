@@ -52,11 +52,11 @@ def place_order(request, total=0, quantity=0):
             data.last_name = form.cleaned_data['last_name']
             data.phone = form.cleaned_data['phone']
             data.email = form.cleaned_data['email']
-            data.address_line_1 = form.cleaned_data['address_line_1']
-            data.address_line_2 = form.cleaned_data['address_line_2']
-            data.country = form.cleaned_data['country']
-            data.state = form.cleaned_data['state']
-            data.city = form.cleaned_data['city']
+            data.address = form.cleaned_data['address']
+            # data.address_line_2 = form.cleaned_data['address_line_2']
+            # data.country = form.cleaned_data['country']
+            data.division = form.cleaned_data['division']
+            data.district = form.cleaned_data['district']
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
             data.shipping_charge = shipping_charge
@@ -107,12 +107,12 @@ def sslcommerz_init(request):
             'cancel_url': request.build_absolute_uri(reverse('sslcommerz_cancel')),
             'cus_name': f'{order.first_name} {order.last_name}',
             'cus_email': order.email,
-            'cus_add1': order.address_line_1 or 'N/A',
-            'cus_add2': order.address_line_2 or '',
-            'cus_city': order.city or 'Dhaka',
-            'cus_state': order.state or 'Dhaka',
+            'cus_add1': order.address or 'N/A',
+            'cus_add2': '',
+            'cus_city': order.district or 'Dhaka',
+            'cus_state': order.division or 'Dhaka',
             'cus_postcode': '1234',
-            'cus_country': order.country or 'Bangladesh',
+            'cus_country': 'Bangladesh',
             'cus_phone': order.phone or '01581440841',
             'shipping_method': 'NO',
             'product_name': 'Product',

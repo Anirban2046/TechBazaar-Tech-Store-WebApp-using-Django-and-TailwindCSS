@@ -21,7 +21,7 @@ class UserProfileAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" width="30" style="border-radius:50%;">', object.profile_picture.url)
         return "No profile photo"
     thumbnail.short_description = 'Profile Picture'
-    list_display = ('thumbnail', 'user', 'city', 'state', 'country')
+    list_display = ('thumbnail', 'user', 'district', 'division')
 
 admin.site.register(Account, AccountAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)

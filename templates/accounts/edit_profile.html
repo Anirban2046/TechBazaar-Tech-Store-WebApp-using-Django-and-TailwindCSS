@@ -62,28 +62,24 @@
               <!-- Address Lines -->
               <div class="flex flex-col gap-4">
                 <div class="flex-1 flex flex-col">
-                  <label class="mb-1 text-sm sm:text-base md:text-lg">Address Line 1</label>
-                  {{ profile_form.address_line_1|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+                  <label class="mb-1 text-sm sm:text-base md:text-lg">Address</label>
+                  {{ profile_form.address|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
                 </div>
-                <div class="flex-1 flex flex-col">
+                {% comment %} <div class="flex-1 flex flex-col">
                   <label class="mb-1 text-sm sm:text-base md:text-lg">Address Line 2</label>
                   {{ profile_form.address_line_2|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
+                </div> {% endcomment %}
               </div>
 
               <!-- City, State, Country -->
               <div class="flex flex-col sm:flex-row sm:gap-4">
                 <div class="flex-1 flex flex-col">
-                  <label class="mb-1 text-sm sm:text-base md:text-lg">City</label>
-                  {{ profile_form.city|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+                  <label class="mb-1 text-sm sm:text-base md:text-lg">District</label>
+                  {{ profile_form.district|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
                 </div>
                 <div class="flex-1 flex flex-col mt-2 sm:mt-0">
-                  <label class="mb-1 text-sm sm:text-base md:text-lg">State</label>
-                  {{ profile_form.state|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-                <div class="flex-1 flex flex-col mt-2 sm:mt-0">
-                  <label class="mb-1 text-sm sm:text-base md:text-lg">Country</label>
-                  {{ profile_form.country|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+                  <label class="mb-1 text-sm sm:text-base md:text-lg">Division</label>
+                  {{ profile_form.division|add_class:"border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base md:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
                 </div>
               </div>
 

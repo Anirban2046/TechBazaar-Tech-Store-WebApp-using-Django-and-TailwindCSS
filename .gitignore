@@ -12,6 +12,7 @@ db.sqlite3
 # Ignore PostgreSQL dumps/backups
 *.sql
 *.dump
+*.json
 
 # Ignore media files (optional)
 media/

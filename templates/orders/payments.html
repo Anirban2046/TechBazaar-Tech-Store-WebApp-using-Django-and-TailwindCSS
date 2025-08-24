@@ -23,8 +23,7 @@
           <div class="p-4 sm:p-6 md:p-8 space-y-1">
             <p class="text-sm sm:text-base md:text-lg">{{ order.full_name }}</p>
             <p class="text-sm sm:text-base md:text-lg">{{ order.full_address }}</p>
-            <p class="text-sm sm:text-base md:text-lg">{{ order.city }}, {{ order.state }}</p>
-            <p class="text-sm sm:text-base md:text-lg">{{ order.country }}</p>
+            <p class="text-sm sm:text-base md:text-lg">District: {{ order.district }}, Division: {{ order.division }}</p>
             <p class="text-sm sm:text-base md:text-lg">{{ order.email }}</p>
             <p class="text-sm sm:text-base md:text-lg">{{ order.phone }}</p>
             {% if order.order_note %}
