@@ -31,8 +31,6 @@ class Order(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField(max_length=50)
     address = models.CharField(max_length=50)
-    # address_line_2 = models.CharField(max_length=50, blank=True)
-    # country = models.CharField(max_length=50)
     division = models.CharField(max_length=50)
     district = models.CharField(max_length=50)
     order_note = models.CharField(max_length=100, blank=True)
