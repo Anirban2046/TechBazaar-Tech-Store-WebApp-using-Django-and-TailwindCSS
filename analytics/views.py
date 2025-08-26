@@ -178,23 +178,6 @@ def dashboard(request):
     customer_labels = [c['month'] for c in customer_acquisition]
     customer_data = [c['customers'] for c in customer_acquisition]
 
-    # --- Latest Data ---
-    latest_orders = orders.select_related('user').order_by('-created_at')[:8]
-    latest_reviews = reviews.select_related('user', 'product').order_by('-created_at')[:8]
-    
-    # Top customers by spending
-    top_customers = (
-        orders.values('user__first_name', 'user__last_name', 'user__email')
-        .annotate(total_spent=Sum('order_total'), order_count=Count('id'))
-        .order_by('-total_spent')[:5]
-    )
-
-    # Low stock products
-    low_stock_products = Product.objects.filter(
-        is_available=True,
-        stock__lte=10
-    ).order_by('stock')[:5]
-
     # Recent activity summary
     recent_orders_count = orders.filter(created_at__gte=today - timedelta(days=7)).count()
     recent_reviews_count = reviews.filter(created_at__gte=today - timedelta(days=7)).count()
@@ -233,13 +216,6 @@ def dashboard(request):
         'monthly_data': json.dumps(monthly_data),
         'customer_labels': json.dumps(customer_labels),
         'customer_data': json.dumps(customer_data),
-        
-        # Tables data
-        'latest_orders': latest_orders,
-        'latest_reviews': latest_reviews,
-        'top_customers': top_customers,
-        'low_stock_products': low_stock_products,
-        'categories': categories,
         
         # Activity summary
         'recent_orders_count': recent_orders_count,
