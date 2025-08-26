@@ -3,58 +3,104 @@
 
 {% block content %}
 <!-- ========================= SECTION PAGETOP ========================= -->
-<section class="py-4 bg-gray-100">
+<section class="py-8 bg-gradient-to-r from-gray-50 to-gray-100 border-b">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     {% if 'search' in request.path %}
-      <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold">Search Result</h2>
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Search Results</h2>
+      </div>
     {% else %}
-      <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold">Our Store</h2>
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Our Store</h2>
+      </div>
     {% endif %}
   </div>
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="py-6">
+<section class="py-8 bg-gray-50 min-h-screen">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="flex flex-col md:flex-row gap-6">
+    <div class="flex flex-col lg:flex-row gap-8">
 
       <!-- Sidebar -->
-      <aside class="w-full md:w-1/4">
-        <div class="bg-gray-50 rounded-lg p-4 md:p-6 mb-6 md:mb-0">
+      <aside class="w-full lg:w-1/4">
+        <div class="bg-white rounded-xl shadow-lg p-6 sticky top-4">
           <article>
             <!-- Categories -->
-            <header class="mb-4">
-              <h6 class="text-gray-800 font-semibold text-lg sm:text-xl border-b border-gray-300 pb-2">Categories</h6>
+            <header class="mb-6">
+              <div class="flex items-center space-x-2 mb-4">
+                <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                  </svg>
+                </div>
+                <h6 class="text-gray-800 font-bold text-xl">Categories</h6>
+              </div>
+              <div class="h-px bg-gradient-to-r from-blue-500 to-purple-600"></div>
             </header>
-            <ul class="space-y-2 mb-6">
+            <ul class="space-y-1 mb-8">
               <li>
                 <a href="{% url 'store' %}?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" 
-                   class="block py-1 px-2 rounded transition-colors duration-150 ease-in-out
-                          {% if not category_obj %}text-blue-600 font-semibold{% else %}text-gray-700 hover:text-blue-600{% endif %}">
-                  All Products
+                   class="group flex items-center py-3 px-4 rounded-lg transition-all duration-200 ease-in-out
+                          {% if not category_obj %}bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg{% else %}text-gray-700 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md{% endif %}">
+                  <div class="w-2 h-2 rounded-full mr-3 
+                              {% if not category_obj %}bg-white{% else %}bg-blue-500 opacity-0 group-hover:opacity-100{% endif %} 
+                              transition-opacity duration-200"></div>
+                  <span class="font-medium">All Products</span>
                 </a>
               </li>
               {% for category in links %}
               <li>
                 <a href="{{ category.get_url }}?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort }}{% endif %}" 
-                   class="block py-1 px-2 rounded transition-colors duration-150 ease-in-out
-                          {% if category_obj and category_obj.id == category.id %}text-blue-600 font-semibold{% else %}text-gray-700 hover:text-blue-600{% endif %}">
-                  {{ category.category_name }}
+                   class="group flex items-center py-3 px-4 rounded-lg transition-all duration-200 ease-in-out
+                          {% if category_obj and category_obj.id == category.id %}bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg{% else %}text-gray-700 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md{% endif %}">
+                  <div class="w-2 h-2 rounded-full mr-3 
+                              {% if category_obj and category_obj.id == category.id %}bg-white{% else %}bg-blue-500 opacity-0 group-hover:opacity-100{% endif %} 
+                              transition-opacity duration-200"></div>
+                  <span class="font-medium">{{ category.category_name }}</span>
                 </a>
               </li>
               {% endfor %}
             </ul>
 
             <!-- Price Filter -->
-            <div class="border-t border-gray-300 pt-4">
+            <div class="border-t border-gray-200 pt-6">
               {% include 'includes/alerts.html' %}
-              <h6 class="text-gray-800 font-semibold text-lg sm:text-xl mb-3">Filter by Price</h6>
-              <form method="get" class="space-y-3">
-                <div class="flex items-center space-x-2">
-                  <input type="number" name="min_price" placeholder="Min" value="{{ min_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm">
-                  <input type="number" name="max_price" placeholder="Max" value="{{ max_price }}" class="w-1/2 border rounded-md px-2 py-1 text-sm">
+              <div class="flex items-center space-x-2 mb-4">
+                <div class="w-6 h-6 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                  <p class="text-white text-xl">৳</p>
+                  {% comment %} <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                  </svg> {% endcomment %}
+                </div>
+                <h6 class="text-gray-800 font-bold text-xl">Filter by Price</h6>
+              </div>
+              <form method="get" class="space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="relative">
+                    <input type="number" name="min_price" placeholder="Min Price" value="{{ min_price }}" 
+                           class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    </div>
+                  </div>
+                  <div class="relative">
+                    <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" 
+                           class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    </div>
+                  </div>
                 </div>
                 {% if category_obj %}
                   <input type="hidden" name="category_slug" value="{{ category_obj.slug }}">
@@ -65,8 +111,8 @@
                 {% if request.GET.sort %}
                   <input type="hidden" name="sort" value="{{ request.GET.sort }}">
                 {% endif %}
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition">
-                  Apply
+                <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-teal-600 text-white py-3 rounded-lg text-sm font-bold hover:from-green-600 hover:to-teal-700 transform hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200">
+                  Apply Filter
                 </button>
               </form>
             </div>
@@ -78,122 +124,173 @@
       <main class="flex-1">
 
         <!-- Header: product count + sorting -->
-        <div class="flex items-center justify-between mb-4 border-b pb-3">
-          <span class="font-medium"><b>{{ product_count }}</b> items found</span>
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">{{ product_count }}</span>
+              </div>
+              <div>
+                <span class="text-lg font-bold text-gray-800">Products Found</span>
+                <p class="text-sm text-gray-500">Showing all available items</p>
+              </div>
+            </div>
 
-          <!-- Sorting -->
-          <form method="get" class="flex items-center gap-3">
-            <label for="sort" class="text-sm font-medium text-gray-700">Sort by:</label>
-            <select name="sort" id="sort" class="border rounded px-2 py-1 text-sm font-semibold" onchange="this.form.submit()">
-              <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest</option>
-              <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
-              <option value="price_high" {% if request.GET.sort == 'price_high' %}selected{% endif %}>Price: High → Low</option>
-              <option value="price_low" {% if request.GET.sort == 'price_low' %}selected{% endif %}>Price: Low → High</option>
-              <option value="alpha_az" {% if request.GET.sort == 'alpha_az' %}selected{% endif %}>A → Z</option>
-              <option value="alpha_za" {% if request.GET.sort == 'alpha_za' %}selected{% endif %}>Z → A</option>
-            </select>
+            <!-- Sorting -->
+            <form method="get" class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
+              <label for="sort" class="text-sm font-bold text-gray-700 whitespace-nowrap">Sort by:</label>
+              <select name="sort" id="sort" class="border-2 border-gray-200 rounded-lg px-4 py-2 text-sm font-medium bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 min-w-[150px]" onchange="this.form.submit()">
+                <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest</option>
+                <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
+                <option value="price_high" {% if request.GET.sort == 'price_high' %}selected{% endif %}>Price: High → Low</option>
+                <option value="price_low" {% if request.GET.sort == 'price_low' %}selected{% endif %}>Price: Low → High</option>
+                <option value="alpha_az" {% if request.GET.sort == 'alpha_az' %}selected{% endif %}>A → Z</option>
+                <option value="alpha_za" {% if request.GET.sort == 'alpha_za' %}selected{% endif %}>Z → A</option>
+              </select>
 
-            {% if category_obj %}
-              <input type="hidden" name="category_slug" value="{{ category_obj.slug }}">
-            {% endif %}
-            {% if min_price %}
-              <input type="hidden" name="min_price" value="{{ min_price }}">
-            {% endif %}
-            {% if max_price %}
-              <input type="hidden" name="max_price" value="{{ max_price }}">
-            {% endif %}
-            {% if request.GET.keyword %}
-              <input type="hidden" name="keyword" value="{{ request.GET.keyword }}">
-            {% endif %}
-          </form>
+              {% if category_obj %}
+                <input type="hidden" name="category_slug" value="{{ category_obj.slug }}">
+              {% endif %}
+              {% if min_price %}
+                <input type="hidden" name="min_price" value="{{ min_price }}">
+              {% endif %}
+              {% if max_price %}
+                <input type="hidden" name="max_price" value="{{ max_price }}">
+              {% endif %}
+              {% if request.GET.keyword %}
+                <input type="hidden" name="keyword" value="{{ request.GET.keyword }}">
+              {% endif %}
+            </form>
+          </div>
         </div>
 
         <!-- Products Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {% if products %}
             {% for product in products %}
-            <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+            <div class="group bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
               <figure class="flex flex-col flex-1">
-                <a href="{{ product.get_url }}">
-                  <div class="w-full h-60 sm:h-64 md:h-72 flex items-center justify-center bg-white">
+                <a href="{{ product.get_url }}" class="relative overflow-hidden">
+                  <div class="w-full h-64 sm:h-72 md:h-80 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 relative">
                     <img src="{{ product.images.url }}" 
                         alt="{{ product.product_name }}" 
-                        class="h-full w-full object-contain">
+                        class="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 </a>
-                <figcaption class="p-4 flex flex-col flex-1">
+                <figcaption class="p-6 flex flex-col flex-1">
                   <a href="{{ product.get_url }}" 
-                    class="block font-medium text-gray-900 hover:text-blue-600 mb-1 min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[3.5rem]">
+                    class="block font-bold text-gray-900 hover:text-blue-600 mb-3 text-lg leading-tight min-h-[3.5rem] sm:min-h-[4rem] md:min-h-[4rem] group-hover:text-blue-600 transition-colors duration-200">
                     {{ product.product_name }}
                   </a>
 
-                  <div class="text-gray-800 font-semibold mb-2">
-                    Tk {{ product.price }}
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="text-2xl font-bold bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent">
+                      Tk {{ product.price }}
+                    </div>
                   </div>
 
                   <!-- Push "View Details" to bottom -->
                   <a href="{{ product.get_url }}" 
-                      class="mt-auto block bg-blue-500 hover:bg-blue-600 text-white text-center py-2 rounded-md font-medium transition-colors duration-200">
-                      View Details
+                      class="mt-auto group/btn relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white text-center py-3 rounded-lg font-bold transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg">
+                      <span class="relative z-10 flex items-center justify-center space-x-2">
+                        <span>View Details</span>
+                        <svg class="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                      </span>
+                      <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500"></div>
                   </a>
                 </figcaption>
               </figure>
             </div>
             {% endfor %}
           {% else %}
-            <div class="col-span-full text-center text-gray-700">
-              <h2 class="text-lg sm:text-xl md:text-2xl">No result found. Please try again.</h2>
+            <div class="col-span-full">
+              <div class="bg-white rounded-xl shadow-lg p-12 text-center">
+                <div class="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+                  <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">No Results Found</h2>
+                <p class="text-gray-600 text-lg mb-6">We couldn't find any products matching your criteria. Please try adjusting your filters or search terms.</p>
+                <a href="{% url 'store' %}" class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                  </svg>
+                  <span>Browse All Products</span>
+                </a>
+              </div>
             </div>
           {% endif %}
         </div>
 
         <!-- Pagination -->
         {% if products.has_other_pages %}
-        <nav class="mt-6 flex justify-start" aria-label="Page navigation">
-          <ul class="inline-flex space-x-1 text-sm">
+        <nav class="mt-12" aria-label="Page navigation">
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <ul class="flex flex-wrap justify-center gap-2">
 
-            {% if products.has_previous %}
-            <li>
-              <a href="?page={{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
-                class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-sm hover:bg-gray-100 transition font-semibold">
-                Previous
-              </a>
-            </li>
-            {% else %}
-            <li>
-              <span class="px-3 py-1 bg-gray-100 text-gray-400 border border-gray-200 rounded-sm cursor-not-allowed font-semibold">Previous</span>
-            </li>
-            {% endif %}
-
-            {% for i in products.paginator.page_range %}
-              {% if products.number == i %}
+              {% if products.has_previous %}
               <li>
-                <span class="px-3 py-1 bg-blue-500 text-white border border-blue-500 rounded-sm font-semibold">{{ i }}</span>
+                <a href="?page={{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                  class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all duration-200 font-medium">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                  </svg>
+                  <span>Previous</span>
+                </a>
               </li>
               {% else %}
               <li>
-                <a href="?page={{ i }}{% if query_params %}&{{ query_params }}{% endif %}" 
-                  class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-sm hover:bg-gray-100 transition font-semibold">
-                  {{ i }}
-                </a>
+                <span class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed font-medium">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                  </svg>
+                  <span>Previous</span>
+                </span>
               </li>
               {% endif %}
-            {% endfor %}
 
-            {% if products.has_next %}
-            <li>
-              <a href="?page={{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
-                class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-sm hover:bg-gray-100 transition font-semibold">
-                Next
-              </a>
-            </li>
-            {% else %}
-            <li>
-              <span class="px-3 py-1 bg-gray-100 text-gray-400 border border-gray-200 rounded-sm cursor-not-allowed font-semibold">Next</span>
-            </li>
-            {% endif %}
+              {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                <li>
+                  <span class="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-bold shadow-lg">{{ i }}</span>
+                </li>
+                {% else %}
+                <li>
+                  <a href="?page={{ i }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                    class="flex items-center justify-center w-10 h-10 bg-gray-100 text-gray-700 rounded-lg hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all duration-200 font-medium">
+                    {{ i }}
+                  </a>
+                </li>
+                {% endif %}
+              {% endfor %}
 
-          </ul>
+              {% if products.has_next %}
+              <li>
+                <a href="?page={{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" 
+                  class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all duration-200 font-medium">
+                  <span>Next</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              {% else %}
+              <li>
+                <span class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed font-medium">
+                  <span>Next</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </span>
+              </li>
+              {% endif %}
+
+            </ul>
+          </div>
         </nav>
         {% endif %}
 

@@ -14,7 +14,7 @@ def home(request):
         'alpha_za': '-product_name'
     }.get(sort_option, '-created_date')
 
-    products = Product.objects.filter(is_available=True).order_by(ordering)
+    products = Product.objects.filter(is_available=True).order_by(ordering)[:12]
 
     # Compute avg_stars for each product
     for product in products:

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section class="py-6 bg-gray-50">
+<section class="orders-container py-6">
 
   {% include 'includes/alerts.html' %}
 
@@ -14,49 +14,100 @@
 
       <!-- Main Content -->
       <main class="flex-1">
-        <article class="bg-white rounded-lg shadow-md mb-6">
+        <article class="orders-content-card rounded-2xl mb-6 overflow-hidden">
 
           <!-- Header -->
-          <header class="bg-gray-100 p-3 sm:p-4 rounded-t-lg text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-semibold">
-            <strong>Your order history</strong>
+          <header class="orders-header p-4 sm:p-6 relative z-10">
+            <div class="header-badge inline-flex items-center gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-3 px-6 mb-4 overflow-hidden">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
+                <i class="fa fa-history text-white text-lg"></i>
+              </div>
+              <div class="flex items-center">
+                <strong class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white">Your order history</strong>
+                <span class="stats-badge">{{ orders|length }} orders</span>
+              </div>
+            </div>
+            
+            <div class="text-white opacity-90">
+              <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2">Order Management</h1>
+            </div>
           </header>
 
           <!-- Table -->
-          <div class="p-3 sm:p-4 md:p-6 lg:p-8">
-            <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200 text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg">
-                <thead class="bg-gray-100">
-                  <tr>
-                    <th class="px-3 sm:px-4 py-2 text-left">Order #</th>
-                    <th class="px-3 sm:px-4 py-2 text-left">Billing Name</th>
-                    <th class="px-3 sm:px-4 py-2 text-left">Phone</th>
-                    <th class="px-3 sm:px-4 py-2 text-left">Order Total</th>
-                    <th class="px-3 sm:px-4 py-2 text-left">Date</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  {% for order in orders %}
-                  <tr class="hover:bg-gray-50">
-                    <th class="px-3 sm:px-4 py-2 text-blue-600">
-                      <a href="{% url 'order_detail' order.order_number %}" 
-                         class="no-underline hover:text-blue-800 transition duration-200">
-                        {{ order.order_number }}
-                      </a>
-                    </th>
-                    <td class="px-3 sm:px-4 py-2">{{ order.full_name }}</td>
-                    <td class="px-3 sm:px-4 py-2">{{ order.phone }}</td>
-                    <td class="px-3 sm:px-4 py-2">Tk {{ order.order_total }}</td>
-                    <td class="px-3 sm:px-4 py-2">{{ order.created_at }}</td>
-                  </tr>
-                  {% empty %}
-                  <tr>
-                    <td colspan="5" class="px-3 sm:px-4 py-2 text-center text-gray-500">
-                      No orders found.
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+          <div class="p-4 sm:p-6 md:p-8 lg:p-10">
+            <div class="orders-table-container">
+              <div class="overflow-x-auto">
+                <table class="min-w-full text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg">
+                  <thead class="table-header">
+                    <tr>
+                      <th class="px-4 sm:px-6 py-4 text-left">
+                        <div class="flex items-center gap-2">
+                          <i class="fa fa-hashtag text-blue-600 text-xs"></i>
+                          Order
+                        </div>
+                      </th>
+                      <th class="px-4 sm:px-6 py-4 text-left">
+                        <div class="flex items-center gap-2">
+                          {% comment %} <i class="fa fa-user text-purple-600 text-xs"></i> {% endcomment %}
+                          Billing Name
+                        </div>
+                      </th>
+                      <th class="px-4 sm:px-6 py-4 text-left">
+                        <div class="flex items-center gap-2">
+                          {% comment %} <i class="fa fa-phone text-blue-600 text-xs"></i> {% endcomment %}
+                          Phone
+                        </div>
+                      </th>
+                      <th class="px-4 sm:px-6 py-4 text-left">
+                        <div class="flex items-center gap-2">
+                          {% comment %} <i class="fa fa-dollar-sign text-green-600 text-xs"></i> {% endcomment %}
+                          Order Total
+                        </div>
+                      </th>
+                      <th class="px-4 sm:px-6 py-4 text-left">
+                        <div class="flex items-center gap-2">
+                          {% comment %} <i class="fa fa-calendar text-orange-600 text-xs"></i> {% endcomment %}
+                          Date
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white">
+                    {% for order in orders %}
+                    <tr class="table-row">
+                      <th class="order-number-cell px-4 sm:px-6 py-4">
+                        <a href="{% url 'order_detail' order.order_number %}" 
+                           class="order-link no-underline transition duration-300">
+                          {{ order.order_number }}
+                        </a>
+                      </th>
+                      <td class="px-4 sm:px-6 py-4 font-medium text-gray-800">{{ order.full_name }}</td>
+                      <td class="px-4 sm:px-6 py-4 text-gray-600">{{ order.phone }}</td>
+                      <td class="px-4 sm:px-6 py-4">
+                        <span class="total-amount">Tk {{ order.order_total }}</span>
+                      </td>
+                      <td class="px-4 sm:px-6 py-4 date-cell">{{ order.created_at }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                      <td colspan="5" class="p-0">
+                        <div class="empty-state">
+                          <div class="empty-state-icon">
+                            <i class="fa fa-shopping-cart text-white text-2xl"></i>
+                          </div>
+                          <h3 class="text-lg font-bold text-orange-800 mb-2">No Orders Yet</h3>
+                          <p class="text-orange-600 mb-4">You haven't placed any orders yet. Start shopping to see your order history here!</p>
+                          <a href="/" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 rounded-full transition duration-300">
+                            <i class="fa fa-shopping-bag text-sm"></i>
+                            Start Shopping
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -67,5 +118,191 @@
   </div> <!-- container -->
 
 </section>
+
+<style>
+.orders-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.orders-content-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(10px);
+}
+
+.orders-header {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.orders-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(16, 185, 129, 0.1) 50%, transparent 70%);
+}
+
+.orders-table-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.table-header {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-bottom: 2px solid #cbd5e1;
+}
+
+.table-header th {
+    font-weight: 700;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+}
+
+.table-header th::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.table-header th:hover::after {
+    opacity: 1;
+}
+
+.table-row {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.table-row:hover {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.order-number-cell {
+    position: relative;
+}
+
+.order-link {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.order-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    transition: width 0.3s ease;
+}
+
+.order-link:hover::before {
+    width: 100%;
+}
+
+.order-link:hover {
+    transform: translateX(4px);
+}
+
+.total-amount {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.date-cell {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.empty-state {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px dashed #d97706;
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    margin: 24px;
+}
+
+.empty-state-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.4);
+}
+
+.header-badge {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.header-badge:hover::before {
+    transform: translateX(100%);
+}
+
+.stats-badge {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 12px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+@media (max-width: 640px) {
+    .table-row:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+</style>
 
 {% endblock %}
