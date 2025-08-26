@@ -43,7 +43,8 @@ def dashboard(request):
     average_rating = reviews.aggregate(avg=Avg('rating'))['avg'] or 0
     
     # Additional KPIs
-    total_customers = orders.values('user').distinct().count()
+    real_customers = Account.objects.filter(is_staff=False, is_superadmin=False)
+    total_customers = orders.filter(user__in=real_customers).values('user').distinct().count()
     total_products = Product.objects.filter(is_available=True).count()
     avg_order_value = total_sales / total_orders if total_orders > 0 else 0
     total_reviews = reviews.count()
@@ -164,10 +165,11 @@ def dashboard(request):
         else:
             month_end = (month_start + timedelta(days=32)).replace(day=1) - timedelta(days=1)
         
-        new_customers = Account.objects.filter(
-            date_joined__date__gte=month_start,
-            date_joined__date__lte=month_end
-        ).count()
+        new_customers = orders.filter(
+            user__in=real_customers,
+            created_at__date__gte=month_start,
+            created_at__date__lte=month_end
+        ).values('user').distinct().count()
         
         customer_acquisition.append({
             'month': month_start.strftime('%b %Y'),
@@ -181,7 +183,8 @@ def dashboard(request):
     # Recent activity summary
     recent_orders_count = orders.filter(created_at__gte=today - timedelta(days=7)).count()
     recent_reviews_count = reviews.filter(created_at__gte=today - timedelta(days=7)).count()
-    recent_customers_count = Account.objects.filter(date_joined__gte=today - timedelta(days=7)).count()
+    recent_customers_count = Account.objects.filter(date_joined__gte=today - timedelta(days=7), is_staff=False, is_superadmin=False).count()
+
 
     categories = Category.objects.all()
 

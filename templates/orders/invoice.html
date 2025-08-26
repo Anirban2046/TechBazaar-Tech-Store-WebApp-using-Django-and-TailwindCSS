@@ -5,131 +5,153 @@
     <meta charset="UTF-8">
     <title>Invoice</title>
     <style>
-        /* ---------- Global Styles ---------- */
+        /* ===== Global Styles ===== */
         body {
             font-family: "Segoe UI", Tahoma, sans-serif;
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.5;
             color: #333;
-            margin: 40px;
-            background: #fafafa;
+            background: #fff;
+            margin: 30px;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3, h4 {
             margin: 0;
         }
 
-        /* ---------- Layout ---------- */
+        strong {
+            color: #222;
+        }
+
+        /* ===== Header ===== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #ddd;
             padding-bottom: 15px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .logo img {
-            height: 50px;
+            height: 45px;
         }
 
         .customer-info {
             text-align: right;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .customer-info p {
-            margin: 2px 0;
+            font-size: 13px;
         }
 
         .customer-info .title {
             font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 6px;
-            color: #111;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #1d4ed8;
         }
 
-        /* ---------- Tables ---------- */
-        table {
+        /* ===== Invoice Info ===== */
+        .info-box {
+            margin-bottom: 25px;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .info-table th {
+            width: 35%;
+            text-align: left;
+            padding: 8px 10px;
+            background: #f3f6fa;
+            border: 1px solid #d1d5db;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .info-table td {
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        /* ===== Products Table ===== */
+        table.products {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 25px;
-            background: #fff;
+            font-size: 13px;
         }
 
-        th, td {
-            border: 1px solid #ddd;
+        .products th, .products td {
+            border: 1px solid #d1d5db;
             padding: 10px 12px;
-            vertical-align: top;
         }
 
-        th {
-            background: #f4f6f8;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        td {
-            background: #fff;
-        }
-
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
-
-        /* ---------- Invoice Info Table ---------- */
-        .info-table th {
-            width: 30%;
-            background: #f8f9fa;
-        }
-
-        /* ---------- Products Table ---------- */
         .products th {
+            background: #f9fafb;
+            font-weight: 600;
             text-align: center;
+            color: #374151;
+        }
+
+        .products td {
+            background: #fff;
         }
 
         .products td:first-child {
+            text-align: left;
             font-weight: 500;
+            color: #111827;
         }
 
         .products small {
-            color: #666;
-            font-size: 12px;
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 11px;
+            color: #6b7280;
         }
 
-        tfoot th {
-            background: #f8f9fa;
-            text-align: right;
-            font-weight: 600;
-        }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
 
-        tfoot td {
+        /* ===== Totals ===== */
+        tfoot th, tfoot td {
             font-weight: 600;
-            text-align: right;
+            background: #f3f6fa;
         }
 
         tfoot tr:last-child td {
-            font-size: 15px;
-            color: #111;
+            font-size: 14px;
+            color: #1d4ed8;
         }
 
-        /* ---------- Extras ---------- */
+        /* ===== Footer ===== */
         .note {
-            font-size: 12px;
-            color: #666;
-            margin-top: 30px;
             text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <div class="header">
-        <!-- Logo -->
         <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="Invoice logo">
+            <img src="{% static 'images/logo.png' %}" alt="Invoice Logo">
         </div>
-
-        <!-- Customer Info -->
         <div class="customer-info">
             <p class="title">Invoiced To</p>
             <p>{{ order.full_name }}</p>
@@ -139,7 +161,7 @@
     </div>
 
     <!-- Invoice Info -->
-    <div class="invoice-info">
+    <div class="info-box">
         <table class="info-table">
             <tr>
                 <th>Order</th>
@@ -155,57 +177,56 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ order.payment.status }}</td>
+                <td><span class="status">{{ order.payment.status }}</span></td>
             </tr>
         </table>
     </div>
 
     <!-- Products Table -->
-    <div>
-        <table class="products">
-            <thead>
-                <tr>
-                    <th style="width: 60%; text-align: left;">Product</th>
-                    <th style="width: 15%;">Qty</th>
-                    <th style="width: 25%;">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in ordered_products %}
-                <tr>
-                    <td>
-                        {{ item.product.product_name }}
-                        {% if item.variations.all %}
-                        <br>
-                        <small>
-                            {% for i in item.variations.all %}
-                                {{ i.variation_category|capfirst }}: {{ i.variation_value|capfirst }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </small>
-                        {% endif %}
-                    </td>
-                    <td class="text-center">{{ item.quantity }}</td>
-                    <td class="text-right">Tk {{ item.product_price }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="2">Sub Total:</th>
-                    <td>Tk {{ subtotal }}</td>
-                </tr>
-                <tr>
-                    <th colspan="2">Shipping:</th>
-                    <td>Tk {{ order.shipping_charge }}</td>
-                </tr>
-                <tr>
-                    <th colspan="2">Grand Total:</th>
-                    <td>Tk {{ order.order_total }}</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+    <table class="products">
+        <thead>
+            <tr>
+                <th style="width: 60%; text-align: left;">Products</th>
+                <th style="width: 15%;">Qty</th>
+                <th style="width: 25%;">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in ordered_products %}
+            <tr>
+                <td>
+                    {{ item.product.product_name }}
+                    {% if item.variations.all %}
+                    <br>
+                    <small>
+                        {% for i in item.variations.all %}
+                            {{ i.variation_category|capfirst }}: {{ i.variation_value|capfirst }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </small>
+                    {% endif %}
+                </td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td class="text-right">Tk {{ item.product_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2">Sub Total</th>
+                <td class="text-right">Tk {{ subtotal }}</td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping</th>
+                <td class="text-right">Tk {{ order.shipping_charge }}</td>
+            </tr>
+            <tr>
+                <th colspan="2">Grand Total</th>
+                <td class="text-right">Tk {{ order.order_total }}</td>
+            </tr>
+        </tfoot>
+    </table>
 
+    <!-- Footer Note -->
     <p class="note">Thank you for your purchase! For support, contact us anytime.</p>
 </body>
 </html>

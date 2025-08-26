@@ -1,51 +1,281 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="min-h-[84vh] flex items-start justify-center bg-gray-50 pt-20 sm:pt-28">
-  <div class="w-11/12 max-w-sm sm:max-w-sm bg-white rounded-lg shadow-md p-4 sm:p-6">
-    
-    <!-- Title -->
-    <h4 class="text-lg sm:text-2xl font-semibold mb-3 text-center">Verify OTP</h4>
+<section class="otp-container min-h-[50vh] flex items-start justify-center pt-4 sm:pt-6 md:pt-8">
+  <div class="otp-card w-11/12 mb-8 max-w-md sm:max-w-lg md:max-w-xl lg:max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden">
 
-    {% include 'includes/alerts.html' %}
+    <!-- Header Section -->
+    <div class="otp-header p-2 sm:p-3 relative">
+      <div class="text-center">
+        <div class="otp-icon w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+          <i class="fa fa-envelope-check text-white text-base sm:text-lg"></i>
+        </div>
+        <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-1">Verify OTP</h4>
+        <p class="text-blue-100 text-xs sm:text-sm opacity-90">
+          Email verification code
+        </p>
+      </div>
+    </div>
 
-    <!-- Subtitle -->
-    <p class="text-center text-gray-500 mb-3 text-xs sm:text-sm">
-      Enter the OTP sent to your email.
-    </p>
-
-    <!-- OTP Form -->
-    <form method="POST" class="space-y-4">
-      {% csrf_token %}
-      <div>
-        <input type="text" name="otp" placeholder="Enter OTP" required
-          class="w-full text-center px-3 py-2 rounded-md border border-gray-300 
-                 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 
-                 text-sm sm:text-base">
+    <!-- Content Section -->
+    <div class="otp-content p-4 sm:p-6">
+      <!-- Info Section -->
+      <div class="info-section mb-4">
+        <div class="flex items-center gap-3 bg-blue-50 rounded-xl p-3 border border-blue-200">
+          <div class="info-icon w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <i class="fa fa-envelope text-blue-600 text-sm"></i>
+          </div>
+          <p class="text-blue-800 text-sm sm:text-base flex-1">
+            Enter the verification code sent to your email address.
+          </p>
+        </div>
+        {% include 'includes/alerts.html' %}
       </div>
 
-      <button type="submit"
-        class="w-full bg-blue-600 text-white font-medium py-2 rounded-md 
-               hover:bg-blue-700 transition duration-200 text-sm sm:text-base">
-        Verify OTP
-      </button>
-    </form>
+      <!-- OTP Form -->
+      <div class="form-section mb-4">
+        <form method="POST" class="space-y-4">
+          {% csrf_token %}
+          
+          <!-- OTP Input -->
+          <div class="otp-input-group">
+            <label class="input-label block mb-2">
+              <i class="fa fa-shield-alt text-gray-400 mr-2"></i>
+              One-Time Password
+            </label>
+            <div class="otp-input-wrapper">
+              <input type="text" name="otp" placeholder="Enter 6-digit OTP" required maxlength="6"
+                class="otp-input w-full text-center px-4 py-2 sm:py-3 rounded-xl border-2 border-gray-200 
+                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                       text-lg sm:text-xl md:text-2xl font-mono font-semibold tracking-widest
+                       transition-all duration-300 bg-white shadow-sm hover:shadow-md">
+            </div>
+          </div>
 
-    <!-- Timer + Resend -->
-    <div class="text-center mt-4">
-      <p id="timer" class="text-gray-600 text-xs sm:text-sm mb-2"></p>
-      <form action="{% url 'resend_register_otp' %}" method="POST" id="resendForm">
-        {% csrf_token %}
-        <button type="submit" id="resendBtn" disabled
-          class="w-full bg-gray-400 text-white font-medium py-2 rounded-md cursor-not-allowed
-                 disabled:opacity-50 hover:bg-blue-600 transition duration-200 text-sm sm:text-base">
-          Resend OTP
-        </button>
-      </form>
+          <!-- Submit Button -->
+          <button type="submit" class="verify-btn w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold py-2 sm:py-3 rounded-xl 
+                     hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 transform hover:scale-[1.02] 
+                     active:scale-[0.98] text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+            <i class="fa fa-check-circle"></i>
+            Verify OTP
+          </button>
+        </form>
+      </div>
+        
+      <!-- Timer + Resend Section -->
+      <div class="resend-section bg-gray-50 rounded-xl p-3 border border-gray-200">
+        <div class="text-center">
+          <div class="timer-display mb-2">
+            <div class="timer-icon w-5 h-5 mx-auto mb-1 text-gray-500">
+              <i class="fa fa-clock"></i>
+            </div>
+            <p id="timer" class="text-gray-600 text-xs sm:text-sm font-medium"></p>
+          </div>
+          
+          <form action="{% url 'resend_register_otp' %}" method="POST" id="resendForm">
+            {% csrf_token %}
+            <button type="submit" id="resendBtn" disabled
+              class="resend-btn w-full bg-gray-300 text-gray-500 font-medium py-2 sm:py-2.5 rounded-xl cursor-not-allowed
+                     disabled:opacity-60 transition-all duration-300 text-xs sm:text-sm
+                     flex items-center justify-center gap-2">
+              <i class="fa fa-redo-alt"></i>
+              <span id="resendText">Resend OTP</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <span class="block text-center text-gray-600 text-sm mt-4 italic semi-bold">
+        Complete your email verification to continue.
+      </span>
     </div>
 
   </div>
+
 </section>
+
+<style>
+.otp-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+}
+
+.otp-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.otp-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+}
+
+.otp-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.otp-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+}
+
+.otp-icon {
+    animation: pulse 3s infinite;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.info-section {
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.form-section {
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.bottom-section {
+    animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+.input-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    display: flex;
+    align-items: center;
+}
+
+.otp-input-wrapper {
+    position: relative;
+}
+
+.otp-input {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    letter-spacing: 0.3em;
+}
+
+.otp-input:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+}
+
+.otp-input::placeholder {
+    color: #9ca3af;
+    letter-spacing: normal;
+}
+
+.verify-btn {
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.verify-btn:hover {
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+}
+
+.resend-btn {
+    transition: all 0.3s ease;
+}
+
+.resend-btn:not(:disabled) {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.resend-btn:not(:disabled):hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.timer-display {
+    position: relative;
+}
+
+.timer-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon, .help-icon {
+    flex-shrink: 0;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .otp-content {
+        padding: 16px;
+    }
+    
+    .otp-header {
+        padding: 16px;
+    }
+    
+    .otp-input {
+        font-size: 18px;
+        letter-spacing: 0.2em;
+    }
+    
+    .bottom-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Focus styles for accessibility */
+.otp-input:focus,
+.verify-btn:focus,
+.resend-btn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Loading state */
+.verify-btn:active {
+    background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+}
+
+/* Timer active state */
+.timer-active {
+    color: #dc2626 !important;
+    font-weight: 600;
+}
+</style>
 
 <!-- Safer JSON script for expiry -->
 {% if request.session.otp_expiry %}
@@ -54,10 +284,11 @@
   <script id="otp-expiry" type="application/json">0</script>
 {% endif %}
 
-<!-- Countdown Script -->
+<!-- Enhanced Countdown Script -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const resendBtn = document.getElementById("resendBtn");
+  const resendText = document.getElementById("resendText");
   const timerElement = document.getElementById("timer");
 
   // Parse expiry from safe JSON
@@ -68,14 +299,20 @@ document.addEventListener("DOMContentLoaded", function () {
     let remaining = expiry - now;
 
     if (remaining <= 0) {
+      // Enable resend button
       resendBtn.disabled = false;
-      resendBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
-      resendBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
-      timerElement.textContent = "You can now resend OTP.";
+      resendBtn.classList.remove("bg-gray-300", "text-gray-500", "cursor-not-allowed");
+      timerElement.textContent = "✓ You can now resend OTP";
+      timerElement.classList.add("text-green-600", "font-semibold");
+      resendText.textContent = "Resend OTP";
     } else {
+      // Show countdown
       let minutes = Math.floor(remaining / 60);
       let seconds = remaining % 60;
-      timerElement.textContent = `Resend available in ${minutes}:${seconds.toString().padStart(2,'0')}`;
+      timerElement.textContent = `⏰ Resend available in ${minutes}:${seconds.toString().padStart(2,'0')}`;
+      timerElement.classList.add("timer-active");
+      resendText.textContent = `Wait ${minutes}:${seconds.toString().padStart(2,'0')}`;
+      
       setTimeout(updateTimer, 1000);
     }
   }
@@ -83,8 +320,42 @@ document.addEventListener("DOMContentLoaded", function () {
   if (expiry > 0) {
     updateTimer();
   } else {
+    // Enable resend immediately if no expiry
     resendBtn.disabled = false;
+    resendBtn.classList.remove("bg-gray-300", "text-gray-500", "cursor-not-allowed");
+    timerElement.textContent = "✓ Ready to send OTP";
+    timerElement.classList.add("text-green-600", "font-semibold");
   }
+
+  // Add loading state to verify button
+  const verifyBtn = document.querySelector('.verify-btn');
+  const otpForm = verifyBtn.closest('form');
+  
+  otpForm.addEventListener('submit', function() {
+    verifyBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i>Verifying...';
+    verifyBtn.disabled = true;
+  });
+
+  // Auto-focus OTP input
+  const otpInput = document.querySelector('.otp-input');
+  otpInput.focus();
+
+  // Format OTP input (numbers only, auto-spacing)
+  otpInput.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 6) value = value.slice(0, 6);
+    e.target.value = value;
+  });
+
+  // Auto-submit when OTP is complete
+  otpInput.addEventListener('input', function(e) {
+    if (e.target.value.length === 6) {
+      // Small delay for better UX
+      setTimeout(() => {
+        otpForm.submit();
+      }, 500);
+    }
+  });
 });
 </script>
 

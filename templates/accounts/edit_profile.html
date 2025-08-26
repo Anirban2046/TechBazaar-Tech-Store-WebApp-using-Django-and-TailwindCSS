@@ -4,91 +4,152 @@
 
 {% block content %}
 
-<section class="py-4 sm:py-6 bg-gray-50">
+<section class="profile-container py-6">
 
   {% include 'includes/alerts.html' %}
 
   <div class="container mx-auto px-2 sm:px-4 lg:px-6">
-    <div class="flex flex-col lg:flex-row lg:gap-6">
+    <div class="flex flex-col md:flex-col lg:flex-row lg:gap-6">
 
       <!-- Sidebar -->
       {% include 'includes/dashboard_sidebar.html' %}
 
       <!-- Main Content -->
-      <main class="flex-1">
-        <article class="bg-white rounded-lg shadow-md mb-6">
+      <main class="flex-1 mt-4 lg:mt-0">
+        <article class="profile-content-card rounded-2xl mb-2 overflow-hidden">
 
           <!-- Header -->
-          <header class="bg-gray-100 px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-t-lg text-xs sm:text-sm md:text-base lg:text-lg font-semibold">
-            <strong>Edit your profile</strong>
+          <header class="profile-header p-4 sm:p-6 relative z-10">
+            <div class="header-badge inline-flex items-center gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-3 px-6 mb-4 overflow-hidden hover:bg-gray-700 hover:shadow-lg transition">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
+                <i class="fa fa-user-edit text-white text-lg"></i>
+              </div>
+              <div class="flex items-center">
+                <strong class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white">Edit your profile</strong>
+                <span class="stats-badge">Personal Info</span>
+              </div>
+            </div>
+  
           </header>
 
-          <div class="px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-6">
+          <div class="p-4 sm:p-6 md:p-8 lg:p-10">
 
-            <!-- Profile Picture -->
-            <div class="text-center mb-4 sm:mb-6">
-              {% if userprofile.profile_picture %}
-                <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture"
-                     class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full mx-auto">
-              {% endif %}
+            <!-- Profile Picture Section -->
+            <div class="profile-picture-section text-center mb-2 sm:mb-4">
+              <div class="relative inline-block">
+                {% if userprofile.profile_picture %}
+                  <div class="relative">
+                    <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture"
+                         class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full mx-auto object-cover border-4 border-white shadow-lg ring-4 ring-blue-100">
+                  </div>
+                {% else %}
+                  <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full mx-auto bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center border-4 border-white shadow-lg ring-4 ring-blue-100">
+                    <i class="fa fa-user text-white text-2xl sm:text-3xl md:text-4xl"></i>
+                  </div>
+                {% endif %}
+              </div>
+              <p class="text-gray-600 text-xs sm:text-sm md:text-base mt-3">Update your profile picture below</p>
             </div>
 
-            <!-- Form -->
-            <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data" class="space-y-3 sm:space-y-4 md:space-y-5">
-              {% csrf_token %}
+            <!-- Form Container -->
+            <div class="form-container">
+              <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
-              <!-- First & Last Name -->
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <div class="flex-1 flex flex-col">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">First Name</label>
-                  {{ user_form.first_name|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-                <div class="flex-1 flex flex-col mt-2 sm:mt-0">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">Last Name</label>
-                  {{ user_form.last_name|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-              </div>
+                <!-- Personal Information Section -->
+                <div class="form-section personal-info-section">
+                  <div class="section-header">
+                    <div class="section-icon">
+                      <i class="fa fa-user text-white"></i>
+                    </div>
+                    <h3 class="section-title">Personal Information</h3>
+                  </div>
+                  
+                  <!-- First & Last Name -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div class="input-group">
+                      <label class="input-label">
+                        <i class="fa fa-user-circle text-gray-400 mr-2"></i>
+                        First Name <span class="text-red-500">*</span>
+                      </label>
+                      {{ user_form.first_name|add_class:"form-input" }}
+                    </div>
+                    <div class="input-group">
+                      <label class="input-label">
+                        <i class="fa fa-user-circle text-gray-400 mr-2"></i>
+                        Last Name <span class="text-red-500">*</span>
+                      </label>
+                      {{ user_form.last_name|add_class:"form-input" }}
+                    </div>
+                  </div>
 
-              <!-- Phone & Profile Picture -->
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <div class="flex-1 flex flex-col">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">Phone Number</label>
-                  {{ user_form.phone_number|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
+                  <!-- Phone & Profile Picture -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6">
+                    <div class="input-group">
+                      <label class="input-label">
+                        <i class="fa fa-phone text-gray-400 mr-2"></i>
+                        Phone Number
+                      </label>
+                      {{ user_form.phone_number|add_class:"form-input" }}
+                    </div>
+                    <div class="input-group">
+                      <label class="input-label">
+                        <i class="fa fa-image text-gray-400 mr-2"></i>
+                        Profile Picture
+                      </label>
+                      {{ profile_form.profile_picture|add_class:"form-input file-input" }}
+                    </div>
+                  </div>
                 </div>
-                <div class="flex-1 flex flex-col mt-2 sm:mt-0">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">Profile Picture</label>
-                  {{ profile_form.profile_picture|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-              </div>
 
-              <!-- Address -->
-              <div class="flex flex-col gap-3 sm:gap-4">
-                <div class="flex-1 flex flex-col">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">Address</label>
-                  {{ profile_form.address|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-              </div>
+                <!-- Location Information Section -->
+                <div class="form-section location-info-section mt-2">
+                  <div class="section-header">
+                    <div class="section-icon location-icon">
+                      <i class="fa fa-map-marker-alt text-white"></i>
+                    </div>
+                    <h3 class="section-title">Location Information</h3>
+                  </div>
 
-              <!-- District & Division -->
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <div class="flex-1 flex flex-col">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">District</label>
-                  {{ profile_form.district|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-                <div class="flex-1 flex flex-col mt-2 sm:mt-0">
-                  <label class="mb-1 text-xs sm:text-sm md:text-base lg:text-lg">Division</label>
-                  {{ profile_form.division|add_class:"border border-gray-300 rounded-md px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" }}
-                </div>
-              </div>
+                  <!-- Address -->
+                  <div class="input-group mb-2 sm:mb-4">
+                    <label class="input-label">
+                      <i class="fa fa-home text-gray-400 mr-2"></i>
+                      Address
+                    </label>
+                    {{ profile_form.address|add_class:"form-input textarea-input" }}
+                  </div>
 
-              <!-- Submit Button -->
-              <div class="mt-3 sm:mt-4 md:mt-5">
-                <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-md py-1.5 sm:py-2 md:py-2.5 lg:py-3 text-xs sm:text-sm md:text-base lg:text-lg hover:bg-blue-600 transition-colors duration-300">
-                  Save
-                </button>
-              </div>
+                  <!-- District & Division -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div class="input-group">
+                      <label class="input-label">
+                        <i class="fa fa-city text-gray-400 mr-2"></i>
+                        District
+                      </label>
+                      {{ profile_form.district|add_class:"form-input" }}
+                    </div>
+                    <div class="input-group">
+                      <label class="input-label">
+                        <i class="fa fa-globe text-gray-400 mr-2"></i>
+                        Division
+                      </label>
+                      {{ profile_form.division|add_class:"form-input" }}
+                    </div>
+                  </div>
+                </div>
 
-            </form>
+                <!-- Action Buttons -->
+                <div class="action-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+                  <button type="submit" class="btn-primary">
+                    <i class="fa fa-save mr-2"></i>
+                    Save Changes
+                  </button>
+                </div>
+
+              </form>
+            </div>
+
           </div>
 
         </article>
@@ -97,5 +158,320 @@
   </div>
 
 </section>
+
+<style>
+.profile-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.profile-content-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(10px);
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+}
+
+
+.header-badge {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.header-badge:hover::before {
+    transform: translateX(100%);
+}
+
+
+.stats-badge {
+    background: white; /* lighter background */
+    color: #1e293b; /* dark text */
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* subtle shadow */
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+}
+
+
+.profile-picture-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 5px;
+}
+
+.profile-edit-badge {
+    animation: pulse 2s infinite;
+}
+
+.form-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.form-section {
+    padding: 24px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.personal-info-section {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.location-info-section {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.section-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.location-icon {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input-group {
+    margin-bottom: 5px;
+}
+
+.input-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input:hover {
+    border-color: #9ca3af;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.textarea-input {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.file-input {
+    padding: 8px 12px;
+}
+
+.file-input::-webkit-file-upload-button {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input::-webkit-file-upload-button:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-1px);
+}
+
+.action-buttons {
+    padding: 24px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn-primary {
+    flex: 1;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    color: #374151;
+    font-weight: 600;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    border-color: #9ca3af;
+    transform: translateY(-1px);
+}
+
+.help-section {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: start;
+    gap: 16px;
+}
+
+.help-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.help-icon i {
+    color: white;
+    font-size: 14px;
+}
+
+.help-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 4px;
+}
+
+.help-text {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .form-section {
+        padding: 16px;
+    }
+    
+    .section-title {
+        font-size: 16px;
+    }
+    
+    .action-buttons {
+        padding: 16px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+</style>
 
 {% endblock %}

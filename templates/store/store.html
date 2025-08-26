@@ -131,7 +131,13 @@
                 <span class="text-white font-bold text-lg">{{ product_count }}</span>
               </div>
               <div>
-                <span class="text-lg font-bold text-gray-800">Products Found</span>
+                <span class="text-lg font-bold text-gray-800">
+                  {% if product_count <= 1 %}
+                    Product Found
+                  {% else %}
+                    Products Found
+                  {% endif %}
+                </span>
                 <p class="text-sm text-gray-500">Showing all available items</p>
               </div>
             </div>

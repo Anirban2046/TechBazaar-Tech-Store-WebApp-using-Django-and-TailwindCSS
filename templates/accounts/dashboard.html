@@ -59,7 +59,7 @@
                   {% if userprofile.profile_picture %}
                     <div class="profile-image-container mb-4">
                       <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture"
-                           class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-20 lg:h-20 rounded-full mx-auto shadow-lg">
+                           class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-20 lg:h-20 rounded-full mx-auto shadow-lg object-cover">
                     </div>
                   {% else %}
                     <div class="w-16 h-16 mx-auto bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-lg mb-4">
