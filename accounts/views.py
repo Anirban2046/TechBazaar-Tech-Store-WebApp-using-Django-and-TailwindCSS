@@ -5,6 +5,7 @@ from orders.models import Order, OrderProduct
 from django.contrib import messages, auth
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Email & verification utils
 from django.contrib.sites.shortcuts import get_current_site
@@ -47,18 +48,22 @@ def register(request):
 
             # Generate OTP
             otp = str(random.randint(100000, 999999))
-            cache.set(f"email_otp_{user.id}", otp, timeout=120)  # store OTP
+            cache.set(f"email_otp_{user.id}", otp, timeout=180)  # store OTP
             request.session['temp_user_id'] = user.id
-            request.session['otp_expiry'] = int(time.time()) + 120  # store expiry for timer
+            request.session['otp_expiry'] = int(time.time()) + 180  # store expiry for timer
 
             # Send Email
-            current_site = get_current_site(request)
+            activation_link = request.build_absolute_uri(
+                reverse('activate', kwargs={
+                    'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+            )
+
             mail_subject = 'Please activate your account'
             message = render_to_string('accounts/account_verification_email.html', {
                 'user': user,
-                'domain': current_site,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
+                'activation_link': activation_link,
                 'otp': otp,
             })
             EmailMessage(mail_subject, message, to=[email]).send()
@@ -118,17 +123,21 @@ def resend_register_otp(request):
 
     # Generate new OTP
     otp = str(random.randint(100000, 999999))
-    cache.set(f"email_otp_{user.id}", otp, timeout=120)
-    request.session['otp_expiry'] = int(time.time()) + 120
+    cache.set(f"email_otp_{user.id}", otp, timeout=180)
+    request.session['otp_expiry'] = int(time.time()) + 180
 
     # Send email
-    current_site = get_current_site(request)
+    activation_link = request.build_absolute_uri(
+        reverse('activate', kwargs={
+            'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': default_token_generator.make_token(user),
+        })
+    )
+
     mail_subject = 'Resend Account Verification OTP'
     message = render_to_string('accounts/account_verification_email.html', {
         'user': user,
-        'domain': current_site,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': default_token_generator.make_token(user),
+        'activation_link': activation_link,
         'otp': otp,
     })
     EmailMessage(mail_subject, message, to=[user.email]).send()
@@ -312,18 +321,22 @@ def forgotPassword(request):
 
             # Generate OTP
             otp = str(random.randint(100000, 999999))
-            cache.set(f"reset_otp_{user.id}", otp, timeout=120)
+            cache.set(f"reset_otp_{user.id}", otp, timeout=180)
             request.session['reset_user_id'] = user.id
-            request.session['otp_expiry'] = int(time.time()) + 120
+            request.session['otp_expiry'] = int(time.time()) + 180
 
             # Send reset email
-            current_site = get_current_site(request)
+            reset_link = request.build_absolute_uri(
+                reverse('resetpassword_validate', kwargs={
+                    'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+            )
+
             mail_subject = 'Reset Your Password'
             message = render_to_string('accounts/reset_password_email.html', {
                 'user': user,
-                'domain': current_site,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
+                'reset_link': reset_link,
                 'otp': otp,
             })
             EmailMessage(mail_subject, message, to=[email]).send()
@@ -382,17 +395,21 @@ def resend_reset_otp(request):
 
     # Generate new OTP
     otp = str(random.randint(100000, 999999))
-    cache.set(f"reset_otp_{user.id}", otp, timeout=120)
-    request.session['otp_expiry'] = int(time.time()) + 120
+    cache.set(f"reset_otp_{user.id}", otp, timeout=180)
+    request.session['otp_expiry'] = int(time.time()) + 180
 
     # Send email
-    current_site = get_current_site(request)
+    reset_link = request.build_absolute_uri(
+        reverse('resetpassword_validate', kwargs={
+            'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': default_token_generator.make_token(user),
+        })
+    )
+
     mail_subject = 'Resend Reset Password OTP'
     message = render_to_string('accounts/reset_password_email.html', {
         'user': user,
-        'domain': current_site,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': default_token_generator.make_token(user),
+        'reset_link': reset_link,
         'otp': otp,
     })
     EmailMessage(mail_subject, message, to=[user.email]).send()

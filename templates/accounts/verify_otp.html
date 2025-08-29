@@ -3,9 +3,10 @@
 
 <section class="otp-container min-h-[50vh] flex items-start justify-center pt-4 sm:pt-6 md:pt-8">
   <div class="otp-card w-11/12 mb-8 max-w-md sm:max-w-lg md:max-w-xl lg:max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden">
+    {% include 'includes/alerts.html' %}
 
     <!-- Header Section -->
-    <div class="otp-header p-2 sm:p-3 relative">
+    <div class="otp-header p-2 sm:p-3 relative mt-4">
       <div class="text-center">
         <div class="otp-icon w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
           <i class="fa fa-envelope-circle-check text-white text-base sm:text-lg"></i>
@@ -29,7 +30,6 @@
             Enter the verification code sent to your email address.
           </p>
         </div>
-        {% include 'includes/alerts.html' %}
       </div>
 
       <!-- OTP Form -->

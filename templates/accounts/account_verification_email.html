@@ -6,7 +6,7 @@ Thank you for registering. Please verify your account using the OTP below:
 OTP: {{ otp }}
 
 Or activate your account directly using this link:
-https://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{{ activation_link }}
 
 If you did not register, please ignore this email.
 {% endautoescape %}
