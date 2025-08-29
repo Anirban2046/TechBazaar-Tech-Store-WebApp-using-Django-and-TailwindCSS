@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<section class="orders-container py-6">
+<section class="orders-container py-2 sm:py-4 md:py-6">
 
   {% include 'includes/alerts.html' %}
 
-  <div class="container mx-auto px-2 sm:px-4 lg:px-6">
+  <div class="container mx-auto px-1 xs:px-2 sm:px-3 md:px-4 lg:px-6">
     <div class="flex flex-col lg:flex-row lg:gap-6">
 
       <!-- Sidebar -->
@@ -14,59 +14,59 @@
 
       <!-- Main Content -->
       <main class="flex-1">
-        <article class="orders-content-card rounded-2xl mb-6 overflow-hidden">
+        <article class="orders-content-card rounded-lg sm:rounded-xl md:rounded-2xl mb-3 sm:mb-4 md:mb-6 overflow-hidden">
 
           <!-- Header -->
-          <header class="orders-header p-4 sm:p-6 relative z-10">
-            <div class="header-badge inline-flex items-center gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-3 px-6 mb-4 overflow-hidden">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
-                <i class="fa fa-history text-white text-lg"></i>
+          <header class="orders-header p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 relative z-10">
+            <div class="header-badge inline-flex items-center gap-1 xs:gap-2 sm:gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-2 xs:py-2.5 sm:py-3 px-3 xs:px-4 sm:px-5 md:px-6 mb-2 sm:mb-3 md:mb-4 overflow-hidden">
+              <div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
+                <i class="fa fa-history text-white text-xs sm:text-sm md:text-base lg:text-lg"></i>
               </div>
               <div class="flex items-center">
-                <strong class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white">Your order history</strong>
+                <strong class="text-[8px] xs:text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base font-bold text-white">Your order history</strong>
                 <span class="stats-badge">{{ orders|length }} orders</span>
               </div>
             </div>
             
             <div class="text-white opacity-90">
-              <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2">Order Management</h1>
+              <h1 class="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold mb-1 sm:mb-2">Order Management</h1>
             </div>
           </header>
 
           <!-- Table -->
-          <div class="p-4 sm:p-6 md:p-8 lg:p-10">
+          <div class="p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6">
             <div class="orders-table-container">
               <div class="overflow-x-auto">
-                <table class="min-w-full text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg">
+                <table class="min-w-full text-[8px] xs:text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">
                   <thead class="table-header">
                     <tr>
-                      <th class="px-4 sm:px-6 py-4 text-left">
-                        <div class="flex items-center gap-2">
-                          <i class="fa fa-hashtag text-blue-600 text-xs"></i>
+                      <th class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 text-left">
+                        <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                          <i class="fa fa-hashtag text-blue-600 text-[8px] xs:text-[9px] sm:text-xs"></i>
                           Order
                         </div>
                       </th>
-                      <th class="px-4 sm:px-6 py-4 text-left">
-                        <div class="flex items-center gap-2">
-                          {% comment %} <i class="fa fa-user text-purple-600 text-xs"></i> {% endcomment %}
+                      <th class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 text-left">
+                        <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                          <i class="fa fa-user text-purple-600 text-xs"></i>
                           Billing Name
                         </div>
                       </th>
-                      <th class="px-4 sm:px-6 py-4 text-left">
-                        <div class="flex items-center gap-2">
-                          {% comment %} <i class="fa fa-phone text-blue-600 text-xs"></i> {% endcomment %}
+                      <th class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 text-left">
+                        <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                          <i class="fa fa-phone text-blue-600 text-xs"></i>
                           Phone
                         </div>
                       </th>
-                      <th class="px-4 sm:px-6 py-4 text-left">
-                        <div class="flex items-center gap-2">
-                          {% comment %} <i class="fa fa-dollar-sign text-green-600 text-xs"></i> {% endcomment %}
+                      <th class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 text-left">
+                        <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                          <i class="fa fa-money text-green-600 text-xs"></i>
                           Order Total
                         </div>
                       </th>
-                      <th class="px-4 sm:px-6 py-4 text-left">
-                        <div class="flex items-center gap-2">
-                          {% comment %} <i class="fa fa-calendar text-orange-600 text-xs"></i> {% endcomment %}
+                      <th class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 text-left">
+                        <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                          <i class="fa fa-calendar text-orange-600 text-xs"></i>
                           Date
                         </div>
                       </th>
@@ -75,30 +75,30 @@
                   <tbody class="bg-white">
                     {% for order in orders %}
                     <tr class="table-row">
-                      <th class="order-number-cell px-4 sm:px-6 py-4">
+                      <th class="order-number-cell px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4">
                         <a href="{% url 'order_detail' order.order_number %}" 
                            class="order-link no-underline transition duration-300">
                           {{ order.order_number }}
                         </a>
                       </th>
-                      <td class="px-4 sm:px-6 py-4 font-medium text-gray-800">{{ order.full_name }}</td>
-                      <td class="px-4 sm:px-6 py-4 text-gray-600">{{ order.phone }}</td>
-                      <td class="px-4 sm:px-6 py-4">
+                      <td class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 font-medium text-gray-800">{{ order.full_name }}</td>
+                      <td class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 text-gray-600">{{ order.phone }}</td>
+                      <td class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4">
                         <span class="total-amount">Tk {{ order.order_total }}</span>
                       </td>
-                      <td class="px-4 sm:px-6 py-4 date-cell">{{ order.created_at }}</td>
+                      <td class="px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6 py-2 xs:py-3 sm:py-4 date-cell">{{ order.created_at }}</td>
                     </tr>
                     {% empty %}
                     <tr>
                       <td colspan="5" class="p-0">
                         <div class="empty-state">
                           <div class="empty-state-icon">
-                            <i class="fa fa-shopping-cart text-white text-2xl"></i>
+                            <i class="fa fa-shopping-cart text-white text-lg sm:text-xl md:text-2xl"></i>
                           </div>
-                          <h3 class="text-lg font-bold text-orange-800 mb-2">No Orders Yet</h3>
-                          <p class="text-orange-600 mb-4">You haven't placed any orders yet. Start shopping to see your order history here!</p>
-                          <a href="/" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 rounded-full transition duration-300">
-                            <i class="fa fa-shopping-bag text-sm"></i>
+                          <h3 class="text-sm sm:text-base md:text-lg font-bold text-orange-800 mb-1 sm:mb-2">No Orders Yet</h3>
+                          <p class="text-xs sm:text-sm md:text-base text-orange-600 mb-2 sm:mb-3 md:mb-4">You haven't placed any orders yet. Start shopping to see your order history here!</p>
+                          <a href="/" class="inline-flex items-center gap-1 xs:gap-1.5 sm:gap-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-1.5 xs:py-2 px-3 xs:px-4 sm:px-5 md:px-6 rounded-full transition duration-300 text-[10px] xs:text-xs sm:text-sm md:text-base">
+                            <i class="fa fa-shopping-bag text-[8px] xs:text-[9px] sm:text-xs md:text-sm"></i>
                             Start Shopping
                           </a>
                         </div>
@@ -128,8 +128,20 @@
 .orders-content-card {
     background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
     border: 1px solid #e2e8f0;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     backdrop-filter: blur(10px);
+}
+
+@media (min-width: 640px) {
+    .orders-content-card {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+}
+
+@media (min-width: 1024px) {
+    .orders-content-card {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
 }
 
 .orders-header {
@@ -150,15 +162,34 @@
 
 .orders-table-container {
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border-radius: 16px;
+    border-radius: 8px;
     border: 1px solid #e2e8f0;
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 640px) {
+    .orders-table-container {
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+}
+
+@media (min-width: 1024px) {
+    .orders-table-container {
+        border-radius: 16px;
+    }
 }
 
 .table-header {
     background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    border-bottom: 2px solid #cbd5e1;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+@media (min-width: 640px) {
+    .table-header {
+        border-bottom: 2px solid #cbd5e1;
+    }
 }
 
 .table-header th {
@@ -172,13 +203,20 @@
 .table-header th::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 1px;
     background: linear-gradient(90deg, transparent, #3b82f6, transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .table-header th::after {
+        bottom: -2px;
+        height: 2px;
+    }
 }
 
 .table-header th:hover::after {
@@ -192,8 +230,20 @@
 
 .table-row:hover {
     background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    transform: scale(1.01);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+@media (min-width: 640px) {
+    .table-row:hover {
+        transform: scale(1.005);
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+    }
+}
+
+@media (min-width: 1024px) {
+    .table-row:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
 }
 
 .order-number-cell {
@@ -214,12 +264,19 @@
 .order-link::before {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 1px;
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
     transition: width 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .order-link::before {
+        bottom: -2px;
+        height: 2px;
+    }
 }
 
 .order-link:hover::before {
@@ -227,7 +284,13 @@
 }
 
 .order-link:hover {
-    transform: translateX(4px);
+    transform: translateX(2px);
+}
+
+@media (min-width: 640px) {
+    .order-link:hover {
+        transform: translateX(4px);
+    }
 }
 
 .total-amount {
@@ -245,23 +308,57 @@
 
 .empty-state {
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border: 2px dashed #d97706;
-    border-radius: 16px;
-    padding: 48px 24px;
+    border: 1px dashed #d97706;
+    border-radius: 12px;
+    padding: 24px 12px;
     text-align: center;
-    margin: 24px;
+    margin: 12px;
+}
+
+@media (min-width: 640px) {
+    .empty-state {
+        border: 2px dashed #d97706;
+        border-radius: 16px;
+        padding: 36px 18px;
+        margin: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .empty-state {
+        padding: 48px 24px;
+        margin: 24px;
+    }
 }
 
 .empty-state-icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 16px;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.4);
+    box-shadow: 0 4px 8px -2px rgba(245, 158, 11, 0.4);
+}
+
+@media (min-width: 640px) {
+    .empty-state-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 14px;
+        box-shadow: 0 6px 12px -2px rgba(245, 158, 11, 0.4);
+    }
+}
+
+@media (min-width: 1024px) {
+    .empty-state-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+        box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.4);
+    }
 }
 
 .header-badge {
@@ -290,11 +387,57 @@
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     border-radius: 9999px;
-    padding: 4px 12px;
-    font-size: 12px;
+    padding: 2px 6px;
+    font-size: 8px;
     font-weight: 600;
-    margin-left: 12px;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    margin-left: 6px;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+
+@media (min-width: 375px) {
+    .stats-badge {
+        padding: 3px 8px;
+        font-size: 9px;
+        margin-left: 8px;
+    }
+}
+
+@media (min-width: 640px) {
+    .stats-badge {
+        padding: 4px 10px;
+        font-size: 10px;
+        margin-left: 10px;
+        box-shadow: 0 3px 8px rgba(16, 185, 129, 0.4);
+    }
+}
+
+@media (min-width: 1024px) {
+    .stats-badge {
+        padding: 4px 12px;
+        font-size: 12px;
+        margin-left: 12px;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+}
+
+/* Custom breakpoint for very small screens */
+@media (max-width: 374px) {
+    .text-\[8px\] {
+        font-size: 7px;
+    }
+    
+    .text-\[9px\] {
+        font-size: 8px;
+    }
+    
+    .text-\[10px\] {
+        font-size: 9px;
+    }
+    
+    .table-row:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }
 
 @media (max-width: 640px) {

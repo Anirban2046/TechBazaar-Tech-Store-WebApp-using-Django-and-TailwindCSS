@@ -1,18 +1,18 @@
 <aside class="w-full lg:w-1/3 flex-shrink-0">
-  <div class="sidebar-container rounded-2xl p-6 space-y-6">
+  <div class="sidebar-container rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4 md:space-y-6 sticky top-6">
     
     <!-- Menu -->
-    <ul class="flex flex-col space-y-3">
+    <ul class="flex flex-col space-y-1 sm:space-y-2 md:space-y-3">
 
       <li>
         <a href="{% url 'dashboard' %}" 
-           class="menu-item-enhanced {% if '/accounts/' == request.path %}menu-item-active{% endif %} flex items-center gap-4 py-4 px-6 rounded-xl text-xs sm:text-sm md:text-base lg:text-lg font-semibold
+           class="menu-item-enhanced {% if '/accounts/' == request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/accounts/' == request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
           <div class="menu-icon-container">
-            <i class="fa fa-tachometer-alt {% if '/accounts/' == request.path %}text-white{% else %}text-blue-500{% endif %} text-lg"></i>
+            <i class="fa fa-tachometer-alt {% if '/accounts/' == request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">Dashboard</span>
-          <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
+          <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
             <i class="fa fa-chevron-right text-white text-xs"></i>
           </div>
         </a>
@@ -20,13 +20,13 @@
 
       <li>
         <a href="{% url 'my_orders' %}" 
-           class="menu-item-enhanced {% if '/my_orders/' in request.path %}menu-item-active{% endif %} flex items-center gap-4 py-4 px-6 rounded-xl text-xs sm:text-sm md:text-base lg:text-lg font-semibold
+           class="menu-item-enhanced {% if '/my_orders/' in request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/my_orders/' in request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
           <div class="menu-icon-container">
-            <i class="fa fa-box-open {% if '/my_orders/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-lg"></i>
+            <i class="fa fa-box-open {% if '/my_orders/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">My Orders</span>
-          <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
+          <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
             <i class="fa fa-chevron-right text-white text-xs"></i>
           </div>
         </a>
@@ -34,13 +34,13 @@
 
       <li>
         <a href="{% url 'edit_profile' %}" 
-           class="menu-item-enhanced {% if '/edit_profile/' in request.path %}menu-item-active{% endif %} flex items-center gap-4 py-4 px-6 rounded-xl text-xs sm:text-sm md:text-base lg:text-lg font-semibold
+           class="menu-item-enhanced {% if '/edit_profile/' in request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/edit_profile/' in request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
           <div class="menu-icon-container">
-            <i class="fa fa-user-edit {% if '/edit_profile/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-lg"></i>
+            <i class="fa fa-user-edit {% if '/edit_profile/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">Edit Profile</span>
-          <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
+          <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
             <i class="fa fa-chevron-right text-white text-xs"></i>
           </div>
         </a>
@@ -48,13 +48,13 @@
 
       <li>
         <a href="{% url 'change_password' %}" 
-           class="menu-item-enhanced {% if '/change_password/' in request.path %}menu-item-active{% endif %} flex items-center gap-4 py-4 px-6 rounded-xl text-xs sm:text-sm md:text-base lg:text-lg font-semibold
+           class="menu-item-enhanced {% if '/change_password/' in request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/change_password/' in request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
           <div class="menu-icon-container">
-            <i class="fa fa-key {% if '/change_password/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-lg"></i>
+            <i class="fa fa-key {% if '/change_password/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">Change Password</span>
-          <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
+          <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
             <i class="fa fa-chevron-right text-white text-xs"></i>
           </div>
         </a>
@@ -68,12 +68,12 @@
     <!-- Logout -->
     <div>
       <a href="{% url 'logout' %}" 
-         class="logout-enhanced flex items-center justify-center gap-4 py-4 px-6 rounded-xl text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg transition-all duration-300">
-        <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
-          <i class="fa fa-power-off text-white text-lg"></i>
+         class="logout-enhanced flex items-center justify-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-white font-bold text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg transition-all duration-300">
+        <div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+          <i class="fa fa-power-off text-white text-sm sm:text-base md:text-lg"></i>
         </div>
         <span class="flex-1 text-left">Log out</span>
-        <div class="w-6 h-6 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+        <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
           <i class="fa fa-sign-out-alt text-white text-xs"></i>
         </div>
       </a>
@@ -114,14 +114,30 @@
 }
 
 .menu-icon-container {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
     background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .menu-icon-container {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .menu-icon-container {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+    }
 }
 
 .menu-item-enhanced:hover .menu-icon-container {
@@ -169,6 +185,18 @@
     position: relative;
 }
 
+@media (max-width: 639px) {
+    .divider-enhanced {
+        margin: 12px 0;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+    .divider-enhanced {
+        margin: 18px 0;
+    }
+}
+
 .divider-enhanced::after {
     content: '';
     position: absolute;
@@ -179,5 +207,20 @@
     height: 6px;
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
     border-radius: 50%;
+}
+
+@media (max-width: 639px) {
+    .divider-enhanced::after {
+        width: 4px;
+        height: 4px;
+        top: -1.5px;
+    }
+}
+
+@media (min-width: 1024px) {
+  .sticky {
+    position: sticky;
+    top: 1.5rem;
+  }
 }
 </style>

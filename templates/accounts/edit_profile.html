@@ -16,16 +16,16 @@
 
       <!-- Main Content -->
       <main class="flex-1 mt-4 lg:mt-0">
-        <article class="profile-content-card rounded-2xl mb-2 overflow-hidden">
+        <article class="profile-content-card rounded-lg sm:rounded-xl md:rounded-2xl mb-3 sm:mb-4 md:mb-6 overflow-hidden">
 
           <!-- Header -->
-          <header class="profile-header p-4 sm:p-6 relative z-10">
-            <div class="header-badge inline-flex items-center gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-3 px-6 mb-4 overflow-hidden hover:bg-gray-700 hover:shadow-lg transition">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
-                <i class="fa fa-user-edit text-white text-lg"></i>
+          <header class="profile-header p-2 xs:p-3 sm:p-4 md:p-6 relative z-10">
+            <div class="header-badge inline-flex items-center gap-2 sm:gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-2 px-3 xs:py-2 xs:px-4 sm:py-3 sm:px-6 mb-2 sm:mb-3 md:mb-4 overflow-hidden">
+              <div class="w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
+                <i class="fa fa-user-edit text-white text-xs xs:text-sm sm:text-lg"></i>
               </div>
               <div class="flex items-center">
-                <strong class="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white">Edit your profile</strong>
+                <strong class="text-[8px] xs:text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold text-white">Edit your profile</strong>
                 <span class="stats-badge">Personal Info</span>
               </div>
             </div>
@@ -35,7 +35,7 @@
           <div class="p-4 sm:p-6 md:p-8 lg:p-10">
 
             <!-- Profile Picture Section -->
-            <div class="profile-picture-section text-center mb-2 sm:mb-4">
+            <div class="profile-picture-section text-center">
               <div class="relative inline-block">
                 {% if userprofile.profile_picture %}
                   <div class="relative">
@@ -103,7 +103,7 @@
                 </div>
 
                 <!-- Location Information Section -->
-                <div class="form-section location-info-section mt-2">
+                <div class="form-section location-info-section">
                   <div class="section-header">
                     <div class="section-icon location-icon">
                       <i class="fa fa-map-marker-alt text-white"></i>
@@ -213,26 +213,31 @@
 
 
 .stats-badge {
-    background: white; /* lighter background */
-    color: #1e293b; /* dark text */
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
     border-radius: 9999px;
-    padding: 4px 12px;
-    font-size: 12px;
+    padding: 2px 6px;
+    font-size: 9px;
     font-weight: 600;
-    margin-left: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* subtle shadow */
-    display: inline-block;
-    position: relative;
-    z-index: 10;
+    margin-left: 6px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
+
+@media (max-width: 374px) {
+    .stats-badge {
+        padding: 1px 4px;
+        font-size: 8px;
+        margin-left: 4px;
+    }
+}
 
 .profile-picture-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     border-radius: 16px;
-    padding: 24px;
+    padding: 16px 12px;
     border: 1px solid #e2e8f0;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .profile-edit-badge {
@@ -248,7 +253,7 @@
 }
 
 .form-section {
-    padding: 24px;
+    padding: 16px;
     border-bottom: 1px solid #f1f5f9;
 }
 
@@ -267,13 +272,13 @@
 .section-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
 .section-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     border-radius: 12px;
     display: flex;
@@ -288,7 +293,7 @@
 }
 
 .section-title {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 700;
     color: #1e293b;
     text-transform: uppercase;
@@ -296,24 +301,24 @@
 }
 
 .input-group {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .input-label {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: #374151;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .form-input {
     width: 100%;
     border: 2px solid #d1d5db;
     border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 12px;
     transition: all 0.3s ease;
     background: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -332,12 +337,12 @@
 }
 
 .textarea-input {
-    min-height: 80px;
+    min-height: 60px;
     resize: vertical;
 }
 
 .file-input {
-    padding: 8px 12px;
+    padding: 6px 10px;
 }
 
 .file-input::-webkit-file-upload-button {
@@ -345,10 +350,10 @@
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 10px;
     font-weight: 600;
-    margin-right: 12px;
+    margin-right: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -359,7 +364,7 @@
 }
 
 .action-buttons {
-    padding: 24px;
+    padding: 16px;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     border-top: 1px solid #e2e8f0;
 }
@@ -371,8 +376,8 @@
     font-weight: 600;
     border: none;
     border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 16px;
+    font-size: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -393,8 +398,8 @@
     font-weight: 600;
     border: 2px solid #d1d5db;
     border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 16px;
+    font-size: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -412,15 +417,15 @@
     background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
     border: 1px solid #93c5fd;
     border-radius: 16px;
-    padding: 20px;
+    padding: 16px;
     display: flex;
     align-items: start;
-    gap: 16px;
+    gap: 12px;
 }
 
 .help-icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     border-radius: 50%;
     display: flex;
@@ -431,18 +436,18 @@
 
 .help-icon i {
     color: white;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .help-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #1e40af;
     margin-bottom: 4px;
 }
 
 .help-text {
-    font-size: 14px;
+    font-size: 12px;
     color: #1e40af;
     line-height: 1.5;
     opacity: 0.9;
@@ -453,23 +458,189 @@
     50% { transform: scale(1.05); }
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
+/* Small screens (480px and up) */
+@media (min-width: 480px) {
+    .profile-picture-section {
+        padding: 20px 16px;
+    }
+    
     .form-section {
-        padding: 16px;
+        padding: 20px;
+    }
+    
+    .section-header {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+    
+    .section-icon {
+        width: 36px;
+        height: 36px;
     }
     
     .section-title {
         font-size: 16px;
     }
-    
-    .action-buttons {
-        padding: 16px;
+
+    .stats-badge {
+        padding: 3px 8px;
+        font-size: 10px;
+        margin-left: 8px;
     }
     
-    .btn-primary, .btn-secondary {
-        padding: 10px 20px;
+    .input-label {
         font-size: 13px;
+        margin-bottom: 7px;
+    }
+    
+    .form-input {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .textarea-input {
+        min-height: 70px;
+    }
+    
+    .file-input {
+        padding: 7px 11px;
+    }
+    
+    .file-input::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 11px;
+        margin-right: 10px;
+    }
+    
+    .action-buttons {
+        padding: 18px;
+    }
+    
+    .btn-primary {
+        padding: 11px 18px;
+        font-size: 13px;
+    }
+    
+    .btn-secondary {
+        padding: 11px 18px;
+        font-size: 13px;
+    }
+    
+    .help-section {
+        padding: 18px;
+        gap: 14px;
+    }
+    
+    .help-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .help-icon i {
+        font-size: 13px;
+    }
+    
+    .help-title {
+        font-size: 15px;
+    }
+    
+    .help-text {
+        font-size: 13px;
+    }
+}
+
+/* Medium screens (640px and up) - sm breakpoint */
+@media (min-width: 640px) {
+    .profile-picture-section {
+        padding: 24px;
+    }
+    
+    .form-section {
+        padding: 24px;
+    }
+    
+    .section-header {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    
+    .section-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .section-title {
+        font-size: 18px;
+    }
+
+    .stats-badge {
+        padding: 4px 12px;
+        font-size: 12px;
+        margin-left: 12px;
+    }
+    
+    .input-group {
+        margin-bottom: 5px;
+    }
+    
+    .input-label {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .form-input {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .textarea-input {
+        min-height: 80px;
+    }
+    
+    .file-input {
+        padding: 8px 12px;
+    }
+    
+    .file-input::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-right: 12px;
+    }
+    
+    .action-buttons {
+        padding: 24px;
+    }
+    
+    .btn-primary {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+    
+    .btn-secondary {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+    
+    .help-section {
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .help-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .help-icon i {
+        font-size: 14px;
+    }
+    
+    .help-title {
+        font-size: 16px;
+    }
+    
+    .help-text {
+        font-size: 14px;
     }
 }
 </style>
