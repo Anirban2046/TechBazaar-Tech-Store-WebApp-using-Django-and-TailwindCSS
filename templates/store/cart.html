@@ -76,6 +76,7 @@
                       
                       <!-- Minus button -->
                       <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" 
+                         {% if cart_item.quantity == 1 %} onclick="return confirm('This will remove the item from cart. Are you sure?')"{% endif %}
                          class="inline-flex items-center justify-center w-6 h-6 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-white text-gray-600 rounded-md sm:rounded-lg shadow-sm hover:bg-red-50 hover:text-red-600 transition-all duration-200 border border-gray-200">
                         <svg class="w-3 h-3 sm:w-3 sm:h-3 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
