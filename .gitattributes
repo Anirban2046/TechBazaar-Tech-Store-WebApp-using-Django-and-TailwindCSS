@@ -1,0 +1,21 @@
+# Ignore templates, static assets, and frontend libraries for language stats
+**/templates/** linguist-vendored
+**/static/** linguist-vendored
+**/node_modules/** linguist-vendored
+**/venv/** linguist-vendored
+**/*.html linguist-vendored
+**/*.css linguist-vendored
+**/*.js linguist-vendored
+**/*.scss linguist-vendored
+**/*.json linguist-vendored
+**/*.png linguist-vendored
+**/*.jpg linguist-vendored
+**/*.jpeg linguist-vendored
+**/*.svg linguist-vendored
+**/*.ico linguist-vendored
+
+# Optional: ignore migrations if you don’t want them to count
+**/migrations/** linguist-vendored
+
+# Keep Python files counted
+*.py linguist-language=Python
