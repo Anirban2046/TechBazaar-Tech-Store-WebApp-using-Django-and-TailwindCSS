@@ -8,37 +8,37 @@
 
   <!-- Main Banner Slider with Enhanced Design -->
   <section class="relative overflow-hidden">
-    <div class="w-[90vw] max-w-none mx-auto mt-4">
+    <div class="w-[95vw] sm:w-[92vw] md:w-[90vw] max-w-none mx-auto mt-2 sm:mt-3 md:mt-4">
       <!-- Decorative background elements -->
-      <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-2xl -z-10"></div>
-      <div class="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-indigo-400/20 to-pink-400/20 rounded-full blur-2xl -z-10"></div>
+      <div class="absolute top-0 left-0 w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl sm:blur-2xl -z-10"></div>
+      <div class="absolute bottom-0 right-0 w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-tl from-indigo-400/20 to-pink-400/20 rounded-full blur-xl sm:blur-2xl -z-10"></div>
 
       <!-- Swiper with enhanced styling -->
-      <div class="swiper rounded-2xl shadow-2xl border border-white/50 backdrop-blur-sm overflow-hidden">
+      <div class="swiper rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl border border-white/50 backdrop-blur-sm overflow-hidden">
         <div class="swiper-wrapper">
           <!-- Slide 1 -->
           <div class="swiper-slide relative">
             <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10"></div>
             <img src="{% static 'images/banners/banner_1.jpg' %}" 
-                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded-2xl">
+                 class="w-full h-auto max-h-32 sm:max-h-48 md:max-h-60 lg:max-h-72 xl:max-h-[500px] object-contain rounded-lg sm:rounded-xl md:rounded-2xl">
           </div>
           <!-- Slide 2 -->
           <div class="swiper-slide relative">
             <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10"></div>
             <img src="{% static 'images/banners/banner_2.jpg' %}" 
-                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded-2xl">
+                 class="w-full h-auto max-h-32 sm:max-h-48 md:max-h-60 lg:max-h-72 xl:max-h-[500px] object-contain rounded-lg sm:rounded-xl md:rounded-2xl">
           </div>
           <!-- Slide 3 -->
           <div class="swiper-slide relative">
             <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10"></div>
             <img src="{% static 'images/banners/banner_3.jpg' %}" 
-                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded-2xl">
+                 class="w-full h-auto max-h-32 sm:max-h-48 md:max-h-60 lg:max-h-72 xl:max-h-[500px] object-contain rounded-lg sm:rounded-xl md:rounded-2xl">
           </div>
           <!-- Slide 4 -->
           <div class="swiper-slide relative">
             <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10"></div>
             <img src="{% static 'images/banners/banner_4.jpg' %}" 
-                 class="w-full h-auto sm:max-h-60 md:max-h-72 lg:max-h-80 xl:max-h-[500px] object-contain rounded-2xl">
+                 class="w-full h-auto max-h-32 sm:max-h-48 md:max-h-60 lg:max-h-72 xl:max-h-[500px] object-contain rounded-lg sm:rounded-xl md:rounded-2xl">
           </div>
         </div>
         <!-- Add subtle pagination dots -->
@@ -48,34 +48,34 @@
   </section>
 
   <!-- Enhanced Marquee Text -->
-  <section class="overflow-hidden my-6 flex justify-center">
-    <div class="relative w-[90%] bg-gradient-to-r from-white/90 via-blue-50/90 to-white/90 backdrop-blur-sm rounded-full-container px-6 py-3 border border-blue-100/50 shadow-lg">
+  <section class="overflow-hidden my-3 sm:my-4 md:my-6 flex justify-center">
+    <div class="relative w-[95%] sm:w-[92%] md:w-[90%] bg-gradient-to-r from-white/90 via-blue-50/90 to-white/90 backdrop-blur-sm rounded-full-container px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 border border-blue-100/50 shadow-md sm:shadow-lg">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-500/5 rounded-full-container"></div>
-      <div class="marquee text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-blue-600 to-slate-800 text-sm sm:text-base md:text-lg whitespace-nowrap font-poppins font-medium">
+      <div class="marquee text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-blue-600 to-slate-800 text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap font-poppins font-medium">
         Discover computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment at TechBazaar with fast and dependable delivery throughout Bangladesh.
       </div>
     </div>
   </section>
 
   <!-- Popular Products with Enhanced Design -->
-  <div class="container mx-auto w-[90%] px-0">
+  <div class="container mx-auto w-[95%] sm:w-[92%] md:w-[90%] px-0">
     <!-- Enhanced Header Section -->
-    <div class="flex flex-row flex-wrap items-center justify-between mb-6 gap-2 p-4 bg-gradient-to-r from-white/80 to-blue-50/80 rounded-2xl border border-blue-100/50 backdrop-blur-sm shadow-lg">
+    <div class="flex flex-row flex-wrap items-center justify-between mb-3 sm:mb-4 md:mb-6 gap-2 p-2 sm:p-3 md:p-4 bg-gradient-to-r from-white/80 to-blue-50/80 rounded-lg sm:rounded-xl md:rounded-2xl border border-blue-100/50 backdrop-blur-sm shadow-md sm:shadow-lg">
       <!-- Title with icon -->
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <h3 class="text-[10px] sm:text-xs md:text-lg lg:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-blue-600 flex-shrink-0">
+      <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+        <h3 class="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-blue-600 flex-shrink-0">
           Featured Products
         </h3>
       </div>
 
       <!-- Right-aligned Sorting + Button -->
-      <div class="flex flex-row flex-wrap items-center gap-2 sm:gap-3">
+      <div class="flex flex-row flex-wrap items-center gap-1 sm:gap-2 md:gap-3">
         <!-- Enhanced Sorting Dropdown -->
         <form method="GET" class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-          <label for="sort" class="text-[8px] sm:text-[9px] md:text-base text-slate-700 font-sans font-medium">
+          <label for="sort" class="text-[8px] sm:text-xs md:text-base text-slate-700 font-sans font-medium">
             Sort by:
           </label>
-          <select name="sort" id="sort" class="border-2 border-blue-200/50 rounded-xl px-1 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] md:text-base font-sans font-medium w-24 sm:w-44 bg-white/80 backdrop-blur-sm shadow-sm focus:border-blue-400 focus:outline-none transition-all duration-300"
+          <select name="sort" id="sort" class="border-2 border-blue-200/50 rounded-lg sm:rounded-xl px-1 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-xs md:text-base font-sans font-medium w-20 sm:w-32 md:w-44 bg-white/80 backdrop-blur-sm shadow-sm focus:border-blue-400 focus:outline-none transition-all duration-300"
                   onchange="this.form.submit()">
             <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest</option>
             <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
@@ -87,7 +87,7 @@
         </form>
 
         <!-- Enhanced See All Button -->
-        <a href="{% url 'store' %}" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-xl text-[8px] sm:text-[9px] md:text-base whitespace-nowrap flex-shrink-0 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 font-medium">
+        <a href="{% url 'store' %}" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl text-[8px] sm:text-xs md:text-base whitespace-nowrap flex-shrink-0 shadow-md sm:shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 font-medium">
           <i class="fas fa-arrow-right mr-1"></i>
           See all
         </a>
@@ -95,27 +95,27 @@
     </div>
 
     <!-- Enhanced Product Grid -->
-    <div class="grid gap-4 md:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div class="grid gap-2 sm:gap-3 md:gap-4 lg:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {% for product in products %}
-      <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:border-blue-200/50 group">
+      <div class="bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-white/50 transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-lg sm:hover:shadow-2xl hover:border-blue-200/50 group">
         <!-- Product image with enhanced styling -->
-        <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t-2xl relative">
-          <div class="w-full h-48 sm:h-56 md:h-64 lg:h-72 bg-white relative overflow-hidden">
+        <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t-lg sm:rounded-t-xl md:rounded-t-2xl relative">
+          <div class="w-full h-32 sm:h-40 md:h-48 lg:h-56 xl:h-72 bg-white relative overflow-hidden">
             <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <img src="{{ product.images.url }}"  loading="lazy" class="h-full w-full object-contain transition-all duration-500 group-hover:scale-105">
           </div>
         </a>
 
         <!-- Enhanced Product details -->
-        <div class="p-3 sm:p-4 flex flex-col">
+        <div class="p-2 sm:p-3 md:p-4 flex flex-col">
           <!-- Product name -->
-          <a href="{{ product.get_url }}" class="block text-[9px] sm:text-xs md:text-base lg:text-lg font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-300 mb-2 sm:mb-3 min-h-[3rem] sm:min-h-[3.5rem] line-clamp-3">
+          <a href="{{ product.get_url }}" class="block text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-300 mb-1 sm:mb-2 md:mb-3 min-h-[2rem] sm:min-h-[2.5rem] md:min-h-[3rem] lg:min-h-[3.5rem] line-clamp-3">
             {{ product.product_name }}
           </a>
 
           <!-- Enhanced Price -->
-          <div class="flex items-center justify-between mb-2">
-            <div class="text-[9px] sm:text-xs md:text-base text-gray-700 mt-1 font-sans font-bold">
+          <div class="flex items-center justify-between mb-1 sm:mb-2">
+            <div class="text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg text-gray-700 mt-1 font-sans font-bold">
               <span class="text-black">
                 Tk {{ product.price|intcomma }}
               </span>
@@ -124,7 +124,7 @@
 
           <!-- Enhanced Ratings -->
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-0.5 mt-1 text-amber-400 text-[9px] sm:text-xs md:text-base">
+            <div class="flex items-center gap-0.5 mt-0.5 sm:mt-1 text-amber-400 text-[8px] sm:text-xs md:text-sm lg:text-base">
               {% for star in product.avg_stars %}
                 <i class="{{ star }}"></i>
               {% endfor %}
@@ -137,65 +137,65 @@
   </div>
 
   <!-- Enhanced TechBazaar Description Section -->
-  <section class="mt-16 px-6 pt-8 pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white border-t border-gray-200 relative overflow-hidden">
+  <section class="mt-8 sm:mt-12 md:mt-16 px-3 sm:px-4 md:px-6 pt-4 sm:pt-6 md:pt-8 pb-8 sm:pb-12 md:pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white border-t border-gray-200 relative overflow-hidden">
     <!-- Background decorative elements -->
-    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl -translate-x-48 -translate-y-48"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-indigo-500/10 to-pink-500/10 rounded-full blur-3xl translate-x-48 translate-y-48"></div>
+    <div class="absolute top-0 left-0 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-2xl sm:blur-3xl -translate-x-24 sm:translate-x-36 md:-translate-x-48 -translate-y-24 sm:-translate-y-36 md:-translate-y-48"></div>
+    <div class="absolute bottom-0 right-0 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-gradient-to-tl from-indigo-500/10 to-pink-500/10 rounded-full blur-2xl sm:blur-3xl translate-x-24 sm:translate-x-36 md:translate-x-48 translate-y-24 sm:translate-y-36 md:translate-y-48"></div>
     
-    <div class="w-[92.5%] mx-auto text-justify relative z-10">
+    <div class="w-[95%] sm:w-[94%] md:w-[92.5%] mx-auto text-justify relative z-10">
       <!-- Enhanced Heading -->
-      <div class="text-center mb-4">
-        <div class="inline-flex items-center gap-3 mb-4">
-          <h1 class="text-base sm:text-xl md:text-2xl lg:text-3xl font-extrabold leading-snug text-gray-100">
+      <div class="text-center mb-3 sm:mb-4">
+        <div class="inline-flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
+          <h1 class="text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold leading-snug text-gray-100">
             Trusted Online Shop for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400">Computers, Laptops, Smartphones</span>, Gadgets & Accessories Across Bangladesh
           </h1>
         </div>
       </div>
 
       <!-- Enhanced Content Grid -->
-      <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-        <div class="space-y-6 flex flex-col">
-          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
-            <div class="flex items-start gap-4 h-full">
-              <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-shopping-cart text-white"></i>
+      <div class="grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12">
+        <div class="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 flex flex-col">
+          <div class="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 lg:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
+            <div class="flex items-start gap-2 sm:gap-3 lg:gap-4 h-full">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-md sm:rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                <i class="fas fa-shopping-cart text-white text-[8px] sm:text-xs md:text-sm lg:text-base"></i>
               </div>
-              <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed">
+              <p class="text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-200 leading-relaxed">
                 TechBazaar is your <span class="font-semibold text-white">one-stop online shop</span> for all things technology. We offer a wide range of computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment. Our goal is to make technology accessible and convenient for everyone, providing a seamless online shopping experience.
               </p>
             </div>
           </div>
 
-          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
-            <div class="flex items-start gap-4 h-full">
-              <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-award text-white"></i>
+          <div class="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 lg:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
+            <div class="flex items-start gap-2 sm:gap-3 lg:gap-4 h-full">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md sm:rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                <i class="fas fa-award text-white text-[8px] sm:text-xs md:text-sm lg:text-base"></i>
               </div>
-              <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed">
+              <p class="text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-200 leading-relaxed">
                 At TechBazaar, we focus on <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">quality, reliability, and customer satisfaction</span>. Every product we offer is carefully selected to meet high standards, ensuring that you receive the best technology solutions for work, gaming, or everyday life. Our user-friendly platform makes it easy to find the right products for your needs.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="space-y-6 flex flex-col">
-          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
-            <div class="flex items-start gap-4 h-full">
-              <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-shipping-fast text-white"></i>
+        <div class="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 flex flex-col">
+          <div class="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 lg:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
+            <div class="flex items-start gap-2 sm:gap-3 lg:gap-4 h-full">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md sm:rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                <i class="fas fa-shipping-fast text-white text-[8px] sm:text-xs md:text-sm lg:text-base"></i>
               </div>
-              <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed">
+              <p class="text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-200 leading-relaxed">
                 Whether you are building a custom PC, upgrading your office setup, or exploring the latest gadgets, TechBazaar provides <span class="font-semibold text-white">fast and trusted service</span> every time. Our mission is to help you stay connected, productive, and entertained with the right technology at your fingertips.
               </p>
             </div>
           </div>
 
-          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
-            <div class="flex items-start gap-4 h-full">
-              <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-shield-alt text-white"></i>
+          <div class="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 lg:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 flex-1 flex flex-col">
+            <div class="flex items-start gap-2 sm:gap-3 lg:gap-4 h-full">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-md sm:rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                <i class="fas fa-shield-alt text-white text-[8px] sm:text-xs md:text-sm lg:text-base"></i>
               </div>
-              <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed">
+              <p class="text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-200 leading-relaxed">
                 We are committed to offering an <span class="font-semibold text-white">exceptional online shopping experience</span>, combining a wide product selection, reliable service, and a secure platform. At TechBazaar, technology meets convenience, helping you get the most out of your digital life.
               </p>
             </div>
@@ -246,28 +246,23 @@
   }
 
   @keyframes marquee {
-  0% {
-    transform: translateX(100%);
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
-  100% {
-    transform: translateX(-100%);
-  }
-}
 
-/* Ensure marquee stays within container bounds */
-.rounded-full-container {
-  border-radius: 50px / 25px;
-  position: relative;
-  overflow: hidden;
-}
+  /* Ensure marquee stays within container bounds */
+  .rounded-full-container {
+    border-radius: 50px / 25px;
+    position: relative;
+    overflow: hidden;
+  }
 
   .font-poppins {
     font-family: 'Roboto Condensed', sans-serif;
-  }
-
-  /* Ensure container hides overflow */
-  .overflow-hidden {
-    overflow: hidden;
   }
 
   /* Line clamp utility */
@@ -288,33 +283,6 @@
   .swiper-pagination-bullet-active {
     background: linear-gradient(45deg, #3b82f6, #8b5cf6);
     transform: scale(1.2);
-  }
-
-  /* Responsive font improvements */
-  @media (max-width: 640px) {
-    .marquee {
-      font-size: 0.875rem;
-    }
-    
-    .grid {
-      gap: 0.75rem;
-    }
-  }
-
-  /* Enhanced hover effects */
-  .group:hover .group-hover\:scale-105 {
-    transform: scale(1.05);
-  }
-
-  .group:hover .group-hover\:opacity-100 {
-    opacity: 1;
-  }
-
-  /* Smooth transitions for all interactive elements */
-  * {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
   }
 
   /* Enhanced focus styles for accessibility */

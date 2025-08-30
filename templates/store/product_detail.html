@@ -4,40 +4,40 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
-<section class="section-content bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-8">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 w-[90%]">
+<section class="section-content bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-2 sm:py-4 md:py-6 lg:py-8">
+  <div class="container mx-auto px-2 sm:px-4 lg:px-6 xl:px-8 w-[95%] sm:w-[92%] lg:w-[90%]">
     {% include 'includes/alerts.html' %}
     
     <!-- ============================ PRODUCT CARD ================================= -->
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+    <div class="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg sm:shadow-xl overflow-hidden border border-gray-100">
       <div class="flex flex-col xl:flex-row">
 
         <!-- LEFT: Product Images -->
-        <aside class="w-full xl:w-1/2 p-6 lg:p-8 bg-gray-50">
+        <aside class="w-full xl:w-1/2 p-3 sm:p-4 md:p-6 lg:p-8 bg-gray-50">
           <div class="gallery-wrap">
             <!-- Main Image Display -->
-            <div class="img-big-wrap bg-white rounded-xl shadow-sm p-4 mb-6">
+            <div class="img-big-wrap bg-white rounded-lg sm:rounded-xl shadow-sm p-2 sm:p-3 md:p-4 mb-3 sm:mb-4 md:mb-6">
               <div class="text-center">
                 <img id="mainImage" 
                      src="{{ single_product.images.url }}" 
                      alt="{{ single_product.product_name }}" 
-                     class="inline-block object-contain max-h-80 md:max-h-96 w-auto mx-auto rounded-lg">
+                     class="inline-block object-contain max-h-48 sm:max-h-64 md:max-h-80 lg:max-h-96 w-auto mx-auto rounded-md sm:rounded-lg transition-transform duration-300 hover:scale-105">
               </div>
             </div>
             
             <!-- Thumbnail Gallery -->
-            <ul class="thumb flex flex-wrap justify-center gap-2">
+            <ul class="thumb flex flex-wrap justify-center gap-1 sm:gap-2">
               <li>
                 <img src="{{ single_product.images.url }}" 
                      alt="Product Image" 
-                     class="h-16 w-16 object-contain cursor-pointer border-2 border-blue-500 rounded-lg hover:shadow-md transition-all duration-200" 
+                     class="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 object-contain cursor-pointer border-2 border-blue-500 rounded-md sm:rounded-lg hover:shadow-md transition-all duration-200" 
                      onclick="changeImage(this)">
               </li>
               {% for img in product_gallery %}
               <li>
                 <img src="{{ img.image.url }}" 
                      alt="Product Image" 
-                     class="h-16 w-16 object-contain cursor-pointer border-2 border-gray-300 hover:border-blue-500 rounded-lg hover:shadow-md transition-all duration-200" 
+                     class="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 object-contain cursor-pointer border-2 border-gray-300 hover:border-blue-500 rounded-md sm:rounded-lg hover:shadow-md transition-all duration-200" 
                      onclick="changeImage(this)">
               </li>
               {% endfor %}
@@ -46,33 +46,33 @@
         </aside>
 
         <!-- RIGHT: Product Details -->
-        <main class="w-full xl:w-1/2 p-6 lg:p-8">
-          <article class="content-body space-y-6">
+        <main class="w-full xl:w-1/2 p-3 sm:p-4 md:p-6 lg:p-8">
+          <article class="content-body space-y-3 sm:space-y-4 md:space-y-6">
             
             <!-- Product Title -->
-            <div class="border-b border-gray-100 pb-4">
-              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+            <div class="border-b border-gray-100 pb-2 sm:pb-3 md:pb-4">
+              <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 leading-tight">
                 {{ single_product.product_name }}
               </h1>
             </div>
 
             <!-- Rating Section -->
-            <div class="flex flex-wrap items-center gap-3 py-2">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3 py-1 sm:py-2">
               <div class="rating-star flex items-center">
                 {% for star in avg_stars %}
-                  <i class="{{ star }} text-yellow-400 text-base mr-1"></i>
+                  <i class="{{ star }} text-yellow-400 text-sm sm:text-base mr-1"></i>
                 {% endfor %}
               </div>
-              <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm font-medium">
+              <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium">
                 {{ single_product.countReview }} review{{ single_product.countReview|pluralize }}
               </span>
             </div>
 
             <!-- Price Section -->
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 sm:p-4 border border-green-200">
               <div class="flex items-baseline gap-2">
-                <span class="text-gray-600 font-medium text-sm">Price:</span>
-                <var class="text-xl font-bold text-gray-900 not-italic">
+                <span class="text-gray-600 font-medium text-xs sm:text-sm">Price:</span>
+                <var class="text-lg sm:text-xl font-bold text-gray-900 not-italic">
                   Tk {{ single_product.price|floatformat:2 }}
                 </var>
               </div>
@@ -82,29 +82,29 @@
             {% if single_product.stock > 0 %}
               
               <!-- Stock Status Badge -->
-              <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="bg-green-100 text-green-800 px-3 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2">
-                  <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <span class="bg-green-100 text-green-800 px-2 sm:px-3 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium inline-flex items-center gap-1 sm:gap-2">
+                  <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
                   In Stock
                 </span>
-                <span class="text-gray-600 text-sm">{{ single_product.stock }} items available</span>
+                <span class="text-gray-600 text-xs sm:text-sm">{{ single_product.stock }} items available</span>
               </div>
 
               {% regroup single_product.variation_set.all|dictsort:"variation_category" by variation_category as variation_groups %}
 
               <!-- Variation Selection -->
               {% if variation_groups %}
-              <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-4">
-                <h4 class="text-base font-semibold text-gray-900 mb-3">Product Options</h4>
-                <div class="space-y-3">
+              <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200 mb-3 sm:mb-4">
+                <h4 class="text-sm sm:text-base font-semibold text-gray-900 mb-2 sm:mb-3">Product Options</h4>
+                <div class="space-y-2 sm:space-y-3">
                   {% for group in variation_groups %}
                     <div class="relative">
-                      <label class="block text-sm font-medium text-gray-700 mb-1">
+                      <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         {{ group.grouper|capfirst }}:
                       </label>
                       <select name="{{ group.grouper|lower }}" 
                               id="select-{{ group.grouper|lower }}" 
-                              class="w-full sm:w-2/3 border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white" 
+                              class="w-full sm:w-2/3 border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-sm sm:text-base text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white" 
                               required>
                         <option value="" disabled selected>Choose {{ group.grouper|capfirst }}</option>
                         {% for item in group.list %}
@@ -120,12 +120,12 @@
               {% endif %}
 
               <!-- Action Buttons -->
-              <div class="flex flex-col sm:flex-row gap-3 pt-2">
+              <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-1 sm:pt-2">
                 <!-- Add to Cart Form -->
                 <form id="cartForm" action="{% url 'add_cart' single_product.id %}" method="POST" class="flex-1">
                   {% csrf_token %}
-                  <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
-                    <i class="fa fa-shopping-cart"></i>
+                  <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 sm:py-2.5 md:py-3 px-4 sm:px-5 md:px-6 text-sm sm:text-base rounded-lg transition-colors duration-200 flex items-center justify-center gap-1 sm:gap-2">
+                    <i class="fa fa-shopping-cart text-sm sm:text-base"></i>
                     <span>Add to Cart</span>
                   </button>
                 </form>
@@ -133,8 +133,8 @@
                 <!-- Add to Wishlist Form -->
                 <form id="wishlistForm" action="{% url 'add_to_wishlist' single_product.id %}" method="POST" class="flex-1">
                   {% csrf_token %}
-                  <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
-                    <i class="fa fa-heart"></i>
+                  <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 sm:py-2.5 md:py-3 px-4 sm:px-5 md:px-6 text-sm sm:text-base rounded-lg transition-colors duration-200 flex items-center justify-center gap-1 sm:gap-2">
+                    <i class="fa fa-heart text-sm sm:text-base"></i>
                     <span>Add to Wishlist</span>
                   </button>
                 </form>
@@ -142,19 +142,19 @@
 
             {% else %}
               <!-- Out of Stock -->
-              <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span class="text-red-700 font-bold text-2xl">Out of Stock</span>
+              <div class="bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-4 sm:p-6 text-center">
+                <div class="flex items-center justify-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+                  <div class="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                  <span class="text-red-700 font-bold text-lg sm:text-xl md:text-2xl">Out of Stock</span>
                 </div>
-                <p class="text-red-600 text-sm">This product is currently unavailable</p>
+                <p class="text-red-600 text-xs sm:text-sm">This product is currently unavailable</p>
               </div>
             {% endif %}
 
             <!-- Description -->
             <div class="prose prose-gray max-w-none">
-              <h3 class="text-lg font-semibold text-gray-900 mb-3 mt-12">Product Description</h3>
-              <div class="text-gray-700 leading-relaxed bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2 sm:mb-3 mt-6 sm:mt-8 md:mt-10 lg:mt-12">Product Description</h3>
+              <div class="text-sm sm:text-base text-gray-700 leading-relaxed bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
                 {{ single_product.description|safe }}
               </div>
             </div>
@@ -166,25 +166,25 @@
     <!-- ============================ PRODUCT CARD END ================================= -->
 
     <!-- ============================ REVIEW SECTION ================================= -->
-    <div class="mt-12 space-y-8">
+    <div class="mt-6 sm:mt-8 md:mt-10 lg:mt-12 space-y-4 sm:space-y-6 md:space-y-8">
 
       <!-- Write Your Review -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-gray-100">
-        <div class="border-b border-gray-200 pb-4 mb-6">
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Write Your Review</h2>
-          <p class="text-gray-600 mt-1">Share your experience with other customers</p>
+      <div class="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 border border-gray-100">
+        <div class="border-b border-gray-200 pb-3 sm:pb-4 mb-4 sm:mb-6">
+          <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Write Your Review</h2>
+          <p class="text-gray-600 mt-1 text-sm sm:text-base">Share your experience with other customers</p>
         </div>
 
-        <form action="{% url 'submit_review' single_product.id %}" method="POST" class="space-y-6">
+        <form action="{% url 'submit_review' single_product.id %}" method="POST" class="space-y-4 sm:space-y-6">
           {% csrf_token %}
 
           <!-- Rating -->
-          <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
-            <label class="block text-lg font-semibold text-gray-900 mb-3">How do you rate this product?</label>
+          <div class="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-gray-200">
+            <label class="block text-base sm:text-lg font-semibold text-gray-900 mb-2 sm:mb-3">How do you rate this product?</label>
             <div class="rating flex flex-row-reverse justify-end space-x-1">
               {% for i in "54321" %}
                 <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" class="hidden peer" required />
-                <label for="star{{ i }}" class="cursor-pointer text-gray-300 text-3xl peer-checked:text-yellow-400 hover:text-yellow-400 transition-colors duration-200 mr-1">
+                <label for="star{{ i }}" class="cursor-pointer text-gray-300 text-2xl sm:text-3xl peer-checked:text-yellow-400 hover:text-yellow-400 transition-colors duration-200 mr-1">
                   <i class="fas fa-star"></i>
                 </label>
               {% endfor %}
@@ -193,37 +193,37 @@
 
           <!-- Review Title -->
           <div>
-            <label class="block text-lg font-semibold text-gray-900 mb-2">Review Title</label>
+            <label class="block text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">Review Title</label>
             <input type="text" name="subject" 
-                   class="w-full border border-gray-300 rounded-xl py-3 px-4 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                   class="w-full border border-gray-300 rounded-lg sm:rounded-xl py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                    placeholder="Summarize your review in a few words">
           </div>
 
           <!-- Review Content -->
           <div>
-            <label class="block text-lg font-semibold text-gray-900 mb-2">Your Review</label>
-            <textarea name="review" rows="5" 
-                      class="w-full border border-gray-300 rounded-xl py-3 px-4 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+            <label class="block text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">Your Review</label>
+            <textarea name="review" rows="4" 
+                      class="w-full border border-gray-300 rounded-lg sm:rounded-xl py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
                       placeholder="Tell us about your experience with this product..."></textarea>
           </div>
 
           <!-- Submit Section -->
-          <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+          <div class="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-gray-200">
             {% if user.is_authenticated %}
               {% if orderproduct %}
-                <button type="submit" class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                <button type="submit" class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 md:px-8 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
                   Submit Review
                 </button>
               {% else %}
-                <div class="flex items-center gap-3 text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-4">
-                  <i class="fa fa-exclamation-triangle text-xl"></i>
-                  <p class="font-medium">You must purchase this product to post a review.</p>
+                <div class="flex items-center gap-2 sm:gap-3 text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
+                  <i class="fa fa-exclamation-triangle text-lg sm:text-xl"></i>
+                  <p class="font-medium text-sm sm:text-base">You must purchase this product to post a review.</p>
                 </div>
               {% endif %}
             {% else %}
-              <div class="flex items-center gap-3 text-blue-700 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <i class="fa fa-info-circle text-xl"></i>
-                <p class="font-medium">
+              <div class="flex items-center gap-2 sm:gap-3 text-blue-700 bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
+                <i class="fa fa-info-circle text-lg sm:text-xl"></i>
+                <p class="font-medium text-sm sm:text-base">
                   You must be logged in to post a review. 
                   <a href="{% url 'login' %}" class="text-blue-600 hover:text-blue-900 font-semibold">Login now</a>
                 </p>
@@ -234,45 +234,45 @@
       </div>
 
       <!-- Customer Reviews -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-gray-100">
-        <div class="border-b border-gray-200 pb-4 mb-8">
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Customer Reviews</h2>
-          <p class="text-gray-600 mt-1">What our customers are saying</p>
+      <div class="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 border border-gray-100">
+        <div class="border-b border-gray-200 pb-3 sm:pb-4 mb-4 sm:mb-6 md:mb-8">
+          <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Customer Reviews</h2>
+          <p class="text-gray-600 mt-1 text-sm sm:text-base">What our customers are saying</p>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-4 sm:space-y-6">
           {% for review in reviews %}
-            <article class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200">
-              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+            <article class="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-md transition-shadow duration-200">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div class="flex items-center gap-2 sm:gap-3">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-xs sm:text-sm">
                     {{ review.user.full_name|first|upper }}
                   </div>
                   <div>
-                    <h6 class="font-semibold text-gray-900">{{ review.user.full_name }}</h6>
-                    <span class="text-gray-500 text-sm">{{ review.updated_at }}</span>
+                    <h6 class="font-semibold text-gray-900 text-sm sm:text-base">{{ review.user.full_name }}</h6>
+                    <span class="text-gray-500 text-xs sm:text-sm">{{ review.updated_at }}</span>
                   </div>
                 </div>
 
-                <div class="rating-star flex items-center gap-1 bg-white rounded-lg px-3 py-1 border border-gray-300">
+                <div class="rating-star flex items-center gap-1 bg-white rounded-lg px-2 sm:px-3 py-1 border border-gray-300">
                   {% for star in review.stars %}
-                    <i class="{{ star }} text-yellow-400"></i>
+                    <i class="{{ star }} text-yellow-400 text-xs sm:text-sm"></i>
                   {% endfor %}
                 </div>
               </div>
 
-              <div class="space-y-3">
-                <h6 class="font-semibold text-gray-900 text-lg">{{ review.subject }}</h6>
-                <p class="text-gray-700 leading-relaxed">{{ review.review }}</p>
+              <div class="space-y-2 sm:space-y-3">
+                <h6 class="font-semibold text-gray-900 text-base sm:text-lg">{{ review.subject }}</h6>
+                <p class="text-gray-700 leading-relaxed text-sm sm:text-base">{{ review.review }}</p>
               </div>
             </article>
           {% empty %}
-            <div class="text-center py-12">
-              <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa fa-comments text-2xl text-gray-400"></i>
+            <div class="text-center py-8 sm:py-12">
+              <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <i class="fa fa-comments text-lg sm:text-2xl text-gray-400"></i>
               </div>
-              <p class="text-gray-500 text-lg">No reviews yet for this product.</p>
-              <p class="text-gray-400 text-sm mt-1">Be the first to share your experience!</p>
+              <p class="text-gray-500 text-base sm:text-lg">No reviews yet for this product.</p>
+              <p class="text-gray-400 text-xs sm:text-sm mt-1">Be the first to share your experience!</p>
             </div>
           {% endfor %}
         </div>
@@ -284,56 +284,15 @@
   </div>
 </section>
 
-<!-- Enhanced Styles -->
+<!-- Minimal Custom CSS for star rating interaction -->
 <style>
-  /* Review Stars Enhanced */
+  /* Review Stars Enhanced - keeping cursor interaction that Tailwind can't handle */
   .rating label:hover,
   .rating label:hover ~ label,
   .rating input:checked ~ label {
     color: #fbbf24;
     transform: scale(1.1);
     transition: all 0.2s ease;
-  }
-
-  /* Smooth transitions for interactive elements */
-  .gallery-wrap img:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  /* Custom scrollbar for better UX */
-  .content-body::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .content-body::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 3px;
-  }
-
-  .content-body::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-  }
-
-  .content-body::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-
-  /* Subtle animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .content-body > * {
-    animation: fadeInUp 0.6s ease-out;
   }
 </style>
 

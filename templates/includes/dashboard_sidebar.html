@@ -1,14 +1,14 @@
 <aside class="w-full lg:w-1/3 flex-shrink-0">
-  <div class="sidebar-container rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4 md:space-y-6 sticky top-6">
+  <div class="bg-gradient-to-br from-white via-slate-50 to-white border border-slate-200 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4 md:space-y-6 sticky top-6">
     
     <!-- Menu -->
     <ul class="flex flex-col space-y-1 sm:space-y-2 md:space-y-3">
 
       <li>
         <a href="{% url 'dashboard' %}" 
-           class="menu-item-enhanced {% if '/accounts/' == request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
+           class="relative bg-gradient-to-br from-transparent to-blue-50 border border-transparent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:border-blue-300 hover:translate-x-2 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.1),0_4px_6px_-2px_rgba(59,130,246,0.05)] {% if '/accounts/' == request.path %}!bg-gradient-to-br !from-blue-500 !to-blue-700 !border-blue-800 !shadow-[0_10px_15px_-3px_rgba(59,130,246,0.4),0_4px_6px_-2px_rgba(59,130,246,0.2)] translate-x-1{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/accounts/' == request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
-          <div class="menu-icon-container">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg sm:rounded-[10px] md:rounded-xl bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:scale-110 {% if '/accounts/' == request.path %}!bg-white/20 backdrop-blur-sm{% endif %}">
             <i class="fa fa-tachometer-alt {% if '/accounts/' == request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">Dashboard</span>
@@ -20,9 +20,9 @@
 
       <li>
         <a href="{% url 'my_orders' %}" 
-           class="menu-item-enhanced {% if '/my_orders/' in request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
+           class="relative bg-gradient-to-br from-transparent to-blue-50 border border-transparent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:border-blue-300 hover:translate-x-2 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.1),0_4px_6px_-2px_rgba(59,130,246,0.05)] {% if '/my_orders/' in request.path %}!bg-gradient-to-br !from-blue-500 !to-blue-700 !border-blue-800 !shadow-[0_10px_15px_-3px_rgba(59,130,246,0.4),0_4px_6px_-2px_rgba(59,130,246,0.2)] translate-x-1{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/my_orders/' in request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
-          <div class="menu-icon-container">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg sm:rounded-[10px] md:rounded-xl bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:scale-110 {% if '/my_orders/' in request.path %}!bg-white/20 backdrop-blur-sm{% endif %}">
             <i class="fa fa-box-open {% if '/my_orders/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">My Orders</span>
@@ -34,9 +34,9 @@
 
       <li>
         <a href="{% url 'edit_profile' %}" 
-           class="menu-item-enhanced {% if '/edit_profile/' in request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
+           class="relative bg-gradient-to-br from-transparent to-blue-50 border border-transparent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:border-blue-300 hover:translate-x-2 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.1),0_4px_6px_-2px_rgba(59,130,246,0.05)] {% if '/edit_profile/' in request.path %}!bg-gradient-to-br !from-blue-500 !to-blue-700 !border-blue-800 !shadow-[0_10px_15px_-3px_rgba(59,130,246,0.4),0_4px_6px_-2px_rgba(59,130,246,0.2)] translate-x-1{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/edit_profile/' in request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
-          <div class="menu-icon-container">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg sm:rounded-[10px] md:rounded-xl bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:scale-110 {% if '/edit_profile/' in request.path %}!bg-white/20 backdrop-blur-sm{% endif %}">
             <i class="fa fa-user-edit {% if '/edit_profile/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">Edit Profile</span>
@@ -48,9 +48,9 @@
 
       <li>
         <a href="{% url 'change_password' %}" 
-           class="menu-item-enhanced {% if '/change_password/' in request.path %}menu-item-active{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
+           class="relative bg-gradient-to-br from-transparent to-blue-50 border border-transparent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:border-blue-300 hover:translate-x-2 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.1),0_4px_6px_-2px_rgba(59,130,246,0.05)] {% if '/change_password/' in request.path %}!bg-gradient-to-br !from-blue-500 !to-blue-700 !border-blue-800 !shadow-[0_10px_15px_-3px_rgba(59,130,246,0.4),0_4px_6px_-2px_rgba(59,130,246,0.2)] translate-x-1{% endif %} flex items-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold
                   {% if '/change_password/' in request.path %} text-white {% else %} text-gray-700 hover:text-blue-700 {% endif %}">
-          <div class="menu-icon-container">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg sm:rounded-[10px] md:rounded-xl bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:bg-gradient-to-br hover:from-blue-100 hover:to-blue-200 hover:scale-110 {% if '/change_password/' in request.path %}!bg-white/20 backdrop-blur-sm{% endif %}">
             <i class="fa fa-key {% if '/change_password/' in request.path %}text-white{% else %}text-blue-500{% endif %} text-sm sm:text-base md:text-lg"></i>
           </div>
           <span class="flex-1">Change Password</span>
@@ -63,12 +63,12 @@
     </ul>
 
     <!-- Divider -->
-    <div class="divider-enhanced"></div>
+    <div class="relative h-px bg-gradient-to-r from-transparent via-slate-400 to-transparent my-3 sm:my-[18px] md:my-6 after:content-[''] after:absolute after:left-1/2 after:-top-0.5 sm:after:-top-[1.5px] after:-translate-x-1/2 after:w-1.5 after:h-1.5 sm:after:w-[6px] sm:after:h-[6px] after:bg-gradient-to-br after:from-blue-500 after:to-blue-700 after:rounded-full"></div>
 
     <!-- Logout -->
     <div>
       <a href="{% url 'logout' %}" 
-         class="logout-enhanced flex items-center justify-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-white font-bold text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg transition-all duration-300">
+         class="relative overflow-hidden bg-gradient-to-br from-red-500 to-red-600 border border-red-700 shadow-[0_10px_15px_-3px_rgba(239,68,68,0.4),0_4px_6px_-2px_rgba(239,68,68,0.2)] before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:transition-[left] before:duration-500 hover:before:left-full hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-[0_20px_25px_-5px_rgba(239,68,68,0.4),0_10px_10px_-5px_rgba(239,68,68,0.2)] flex items-center justify-center gap-2 sm:gap-3 md:gap-4 py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-white font-bold text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg transition-all duration-300">
         <div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
           <i class="fa fa-power-off text-white text-sm sm:text-base md:text-lg"></i>
         </div>
@@ -81,146 +81,3 @@
 
   </div>
 </aside>
-
-
-<style>
-.sidebar-container {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    backdrop-filter: blur(10px);
-}
-
-.menu-item-enhanced {
-    position: relative;
-    background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.05) 100%);
-    border: 1px solid transparent;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateZ(0);
-}
-
-.menu-item-enhanced:hover {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    border-color: #93c5fd;
-    transform: translateX(8px) translateZ(0);
-    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
-}
-
-.menu-item-active {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-    border-color: #1e40af !important;
-    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.2);
-    transform: translateX(4px);
-}
-
-.menu-icon-container {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-@media (min-width: 640px) {
-    .menu-icon-container {
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
-    }
-}
-
-@media (min-width: 768px) {
-    .menu-icon-container {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-    }
-}
-
-.menu-item-enhanced:hover .menu-icon-container {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    transform: scale(1.1);
-}
-
-.menu-item-active .menu-icon-container {
-    background: rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(10px);
-}
-
-.logout-enhanced {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    border: 1px solid #b91c1c;
-    box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.4), 0 4px 6px -2px rgba(239, 68, 68, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.logout-enhanced::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.logout-enhanced:hover::before {
-    left: 100%;
-}
-
-.logout-enhanced:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.4), 0 10px 10px -5px rgba(239, 68, 68, 0.2);
-}
-
-.divider-enhanced {
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #cbd5e1 50%, transparent 100%);
-    margin: 24px 0;
-    position: relative;
-}
-
-@media (max-width: 639px) {
-    .divider-enhanced {
-        margin: 12px 0;
-    }
-}
-
-@media (min-width: 640px) and (max-width: 767px) {
-    .divider-enhanced {
-        margin: 18px 0;
-    }
-}
-
-.divider-enhanced::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -2px;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    border-radius: 50%;
-}
-
-@media (max-width: 639px) {
-    .divider-enhanced::after {
-        width: 4px;
-        height: 4px;
-        top: -1.5px;
-    }
-}
-
-@media (min-width: 1024px) {
-  .sticky {
-    position: sticky;
-    top: 1.5rem;
-  }
-}
-</style>

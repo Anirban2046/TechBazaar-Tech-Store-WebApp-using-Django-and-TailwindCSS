@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section class="dashboard-container py-2 sm:py-4 md:py-6">
+<section class="py-2 sm:py-4 md:py-6 bg-gradient-to-br from-gray-50 to-slate-200 min-h-screen">
 
   {% include 'includes/alerts.html' %}
 
@@ -14,10 +14,10 @@
 
       <!-- Main Content -->
       <main class="flex-1 mt-2 sm:mt-3 md:mt-4 lg:mt-0">
-        <article class="main-content-card rounded-lg sm:rounded-xl md:rounded-2xl mb-3 sm:mb-4 md:mb-6 overflow-hidden">
+        <article class="bg-gradient-to-br from-white via-gray-50 to-white border border-slate-200 shadow-lg sm:shadow-xl lg:shadow-2xl backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl mb-3 sm:mb-4 md:mb-6 overflow-hidden">
           <!-- Header -->
-          <header class="header-section p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 relative z-10">
-            <div class="welcome-badge inline-flex items-center gap-1 xs:gap-2 sm:gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-1 xs:py-2 px-2 xs:px-3 sm:px-4 md:px-6 mb-2 sm:mb-3 md:mb-4 overflow-hidden">
+          <header class="bg-gradient-to-br from-slate-800 to-slate-600 p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 relative z-10 overflow-hidden dashboard-header">
+            <div class="welcome-badge inline-flex items-center gap-1 xs:gap-2 sm:gap-3 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-full py-1 xs:py-2 px-2 xs:px-3 sm:px-4 md:px-6 mb-2 sm:mb-3 md:mb-4 overflow-hidden relative">
               <div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
                 <i class="fa fa-user text-white text-xs sm:text-sm md:text-base"></i>
               </div>
@@ -37,27 +37,27 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6">
 
               <!-- Total Orders Card -->
-              <div class="stats-card orders-card rounded-lg sm:rounded-xl md:rounded-2xl p-3 xs:p-4 sm:p-5 md:p-6 text-center">
+              <div class="stats-card bg-gradient-to-br from-white to-gray-50 border border-slate-200 shadow-lg sm:shadow-xl rounded-lg sm:rounded-xl md:rounded-2xl p-3 xs:p-4 sm:p-5 md:p-6 text-center relative overflow-hidden transform transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-200/50 sm:hover:shadow-2xl sm:hover:shadow-blue-200/50 lg:hover:shadow-2xl lg:hover:shadow-blue-200/50 orders-card">
                 <div class="mb-2 xs:mb-3 sm:mb-4">
                   <div class="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg mb-2 xs:mb-3 sm:mb-4">
                     <i class="fa fa-box-open text-white text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl"></i>
                   </div>
                   <h5 class="text-[8px] xs:text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-600 mb-2 xs:mb-3 uppercase tracking-wide">Total Orders</h5>
-                  <h4 class="stats-number text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-4xl mb-2 xs:mb-3 sm:mb-4">{{ orders_count }}</h4>
+                  <h4 class="stats-number text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-4xl mb-2 xs:mb-3 sm:mb-4 bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent font-black">{{ orders_count }}</h4>
                 </div>
                 
                 <a href="{% url 'my_orders' %}" 
-                   class="view-orders-btn inline-flex items-center gap-1 xs:gap-2 text-[8px] xs:text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base text-white font-semibold py-2 xs:py-2.5 sm:py-3 px-3 xs:px-4 sm:px-5 md:px-6 rounded-full transition-all duration-300">
+                   class="view-orders-btn inline-flex items-center gap-1 xs:gap-2 text-[8px] xs:text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base text-white font-semibold py-2 xs:py-2.5 sm:py-3 px-3 xs:px-4 sm:px-5 md:px-6 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 relative overflow-hidden hover:-translate-y-0.5 sm:hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 sm:hover:shadow-xl sm:hover:shadow-blue-500/40">
                   <span>View All Orders</span>
                   <i class="fa fa-arrow-right text-[8px] xs:text-[9px] sm:text-xs"></i>
                 </a>
               </div>
 
               <!-- User Info Card -->
-              <div class="stats-card profile-card rounded-lg sm:rounded-xl md:rounded-2xl p-3 xs:p-4 sm:p-5 md:p-6 text-center">
+              <div class="stats-card bg-gradient-to-br from-white to-gray-50 border border-slate-200 shadow-lg sm:shadow-xl rounded-lg sm:rounded-xl md:rounded-2xl p-3 xs:p-4 sm:p-5 md:p-6 text-center relative overflow-hidden transform transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-200/50 sm:hover:shadow-2xl sm:hover:shadow-blue-200/50 lg:hover:shadow-2xl lg:hover:shadow-blue-200/50 profile-card">
                 <div class="mb-2 xs:mb-3 sm:mb-4">
                   {% if userprofile.profile_picture %}
-                    <div class="profile-image-container mb-2 xs:mb-3 sm:mb-4">
+                    <div class="profile-image-container mb-2 xs:mb-3 sm:mb-4 relative inline-block">
                       <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture"
                            class="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-full mx-auto shadow-lg object-cover">
                     </div>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="space-y-2 xs:space-y-2.5 sm:space-y-3">
-                  <div class="info-item rounded-md sm:rounded-lg p-2 xs:p-2.5 sm:p-3 text-left">
+                  <div class="info-item bg-gradient-to-r from-slate-100 to-slate-200 border-l-2 sm:border-l-4 border-purple-500 rounded-md sm:rounded-lg p-2 xs:p-2.5 sm:p-3 text-left transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:border-blue-500 hover:translate-x-1 sm:hover:translate-x-1">
                     <div class="flex items-center gap-2 xs:gap-2.5 sm:gap-3">
                       <div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-blue-100 rounded-md sm:rounded-lg flex items-center justify-center">
                         <i class="fa fa-envelope text-blue-600 text-[10px] xs:text-xs sm:text-sm"></i>
@@ -80,7 +80,7 @@
                     </div>
                   </div>
                   
-                  <div class="info-item rounded-md sm:rounded-lg p-2 xs:p-2.5 sm:p-3 text-left">
+                  <div class="info-item bg-gradient-to-r from-slate-100 to-slate-200 border-l-2 sm:border-l-4 border-purple-500 rounded-md sm:rounded-lg p-2 xs:p-2.5 sm:p-3 text-left transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:border-blue-500 hover:translate-x-1 sm:hover:translate-x-1">
                     <div class="flex items-center gap-2 xs:gap-2.5 sm:gap-3">
                       <div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-purple-100 rounded-md sm:rounded-lg flex items-center justify-center">
                         <i class="fa fa-phone text-purple-600 text-[10px] xs:text-xs sm:text-sm"></i>
@@ -102,37 +102,8 @@
 </section>
 
 <style>
-.dashboard-container {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    min-height: 100vh;
-}
-
-.main-content-card {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    backdrop-filter: blur(10px);
-}
-
-@media (min-width: 640px) {
-    .main-content-card {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-}
-
-@media (min-width: 1024px) {
-    .main-content-card {
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-}
-
-.header-section {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.header-section::before {
+/* Header decorative overlay effect */
+.dashboard-header::before {
     content: '';
     position: absolute;
     top: 0;
@@ -142,21 +113,7 @@
     background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
 }
 
-.stats-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-@media (min-width: 640px) {
-    .stats-card {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-}
-
+/* Top border accent animations for cards */
 .stats-card::before {
     content: '';
     position: absolute;
@@ -179,28 +136,7 @@
     transform: scaleX(1);
 }
 
-.stats-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2), 0 4px 6px -2px rgba(59, 130, 246, 0.1);
-}
-
-@media (min-width: 640px) {
-    .stats-card:hover {
-        transform: translateY(-4px);
-    }
-}
-
-@media (min-width: 1024px) {
-    .stats-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
-    }
-}
-
-.orders-card {
-    position: relative;
-}
-
+/* Orders card specific accent */
 .orders-card::after {
     content: '';
     position: absolute;
@@ -217,10 +153,7 @@
     }
 }
 
-.profile-card {
-    position: relative;
-}
-
+/* Profile card specific accent */
 .profile-card::after {
     content: '';
     position: absolute;
@@ -237,21 +170,7 @@
     }
 }
 
-.stats-number {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 900;
-}
-
-.view-orders-btn {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
+/* Button shimmer effect */
 .view-orders-btn::before {
     content: '';
     position: absolute;
@@ -267,23 +186,7 @@
     left: 100%;
 }
 
-.view-orders-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
-}
-
-@media (min-width: 640px) {
-    .view-orders-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
-    }
-}
-
-.profile-image-container {
-    position: relative;
-    display: inline-block;
-}
-
+/* Profile image border animation */
 .profile-image-container::before {
     content: '';
     position: absolute;
@@ -311,35 +214,7 @@
     opacity: 1;
 }
 
-.info-item {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    border-left: 2px solid #8b5cf6;
-    transition: all 0.3s ease;
-}
-
-@media (min-width: 640px) {
-    .info-item {
-        border-left: 4px solid #8b5cf6;
-    }
-}
-
-.info-item:hover {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    border-left-color: #3b82f6;
-    transform: translateX(2px);
-}
-
-@media (min-width: 640px) {
-    .info-item:hover {
-        transform: translateX(4px);
-    }
-}
-
-.welcome-badge {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    position: relative;
-}
-
+/* Welcome badge shimmer effect */
 .welcome-badge::before {
     content: '';
     position: absolute;

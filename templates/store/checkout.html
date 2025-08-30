@@ -3,112 +3,112 @@
 
 {% block content %}
 
-<section class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-8 sm:py-12">
+<section class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-4 sm:py-6 md:py-8 lg:py-12">
   {% include 'includes/alerts.html' %}
-  <div class="w-[90%] mx-auto px-2 sm:px-4 lg:px-6">
+  <div class="w-[95%] sm:w-[92%] md:w-[90%] mx-auto px-1 sm:px-2 md:px-4 lg:px-6">
 
     <!-- ============================ CHECKOUT COMPONENT ================================= -->
     <div class="mx-auto">
-      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <div class="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6 lg:gap-8">
 
         <!-- Billing Address Form -->
         <div class="flex-1 lg:w-3/5 order-1">
-          <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+          <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl overflow-hidden border border-gray-100">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-blue-50 to-blue-100 px-6 py-4 border-b border-blue-200">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 border-b border-blue-200">
+              <div class="flex items-center gap-2 sm:gap-3">
+                <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
                 </div>
-                <h4 class="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold text-gray-900">Billing Address</h4>
+                <h4 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">Billing Address</h4>
               </div>
             </div>
 
             <!-- Form -->
-            <div class="p-6 sm:p-8">
-              <form action="{% url 'place_order' %}" method="POST" class="space-y-4 sm:space-y-6">
+            <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+              <form action="{% url 'place_order' %}" method="POST" class="space-y-3 sm:space-y-4 md:space-y-6">
                 {% csrf_token %}
 
                 <!-- First & Last Name -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                  <div class="space-y-1 sm:space-y-2">
+                    <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                       First Name <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="first_name" 
-                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                           class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                            placeholder="Enter your first name" required>
                   </div>
-                  <div class="space-y-2">
-                    <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                  <div class="space-y-1 sm:space-y-2">
+                    <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                       Last Name <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="last_name" 
-                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                           class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                            placeholder="Enter your last name" required>
                   </div>
                 </div>
 
                 <!-- Email & Phone -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                  <div class="space-y-1 sm:space-y-2">
+                    <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                       Email Address <span class="text-red-500">*</span>
                     </label>
                     <input type="email" name="email" 
-                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                           class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                            placeholder="your@email.com" required>
                   </div>
-                  <div class="space-y-2">
-                    <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                  <div class="space-y-1 sm:space-y-2">
+                    <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                       Phone Number <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="phone" 
-                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                           class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                            placeholder="01XXX XXXXXX" required>
                   </div>
                 </div>
 
                 <!-- Address -->
-                <div class="space-y-2">
-                  <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                <div class="space-y-1 sm:space-y-2">
+                  <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                     Street Address <span class="text-red-500">*</span>
                   </label>
                   <input type="text" name="address" 
-                         class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                         class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                          placeholder="House/Building, Street, Area" required>
                 </div>
 
                 <!-- District & Division -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                  <div class="space-y-1 sm:space-y-2">
+                    <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                       District <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="district" 
-                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                           class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                            placeholder="e.g. Dhaka" required>
                   </div>
-                  <div class="space-y-2">
-                    <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                  <div class="space-y-1 sm:space-y-2">
+                    <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
                       Division <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="division" 
-                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
+                           class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white" 
                            placeholder="e.g. Dhaka Division" required>
                   </div>
                 </div>
 
                 <!-- Order Note -->
-                <div class="space-y-2">
-                  <label class="block text-sm sm:text-base md:text-lg font-semibold text-gray-700">
-                    Order Notes <span class="text-gray-500 text-sm font-normal">(Optional)</span>
+                <div class="space-y-1 sm:space-y-2">
+                  <label class="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700">
+                    Order Notes <span class="text-gray-500 text-xs sm:text-sm font-normal">(Optional)</span>
                   </label>
                   <textarea name="order_note" rows="3" 
-                            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white resize-none" 
+                            class="w-full border-2 border-gray-200 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm md:text-base lg:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200 bg-gray-50 hover:bg-white resize-none" 
                             placeholder="Special instructions for your order..."></textarea>
                 </div>
 
@@ -118,44 +118,44 @@
 
         <!-- Order Summary -->
         <div class="lg:w-2/5 order-2">
-          <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 sticky top-6">
+          <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl overflow-hidden border border-gray-100 lg:sticky lg:top-6">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-green-50 to-green-100 px-6 py-4 border-b border-green-200">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-gradient-to-r from-green-50 to-green-100 px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 border-b border-green-200">
+              <div class="flex items-center gap-2 sm:gap-3">
+                <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                   </svg>
                 </div>
-                <h4 class="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold text-gray-900">Order Summary</h4>
+                <h4 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">Order Summary</h4>
               </div>
             </div>
 
             <!-- Products List -->
-            <div class="p-6">
-              <div class="space-y-4">
+            <div class="p-3 sm:p-4 md:p-6">
+              <div class="space-y-3 sm:space-y-4">
                 {% for cart_item in cart_items %}
-                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+                <div class="flex items-start gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 bg-gray-50 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-colors duration-200">
                   <img src="{{ cart_item.product.images.url }}" 
-                       class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl shadow-md flex-shrink-0" 
+                       class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-cover rounded-lg sm:rounded-xl shadow-md flex-shrink-0" 
                        alt="{{ cart_item.product.product_name }}">
                   <div class="flex-1 min-w-0">
-                    <h5 class="font-semibold text-gray-900 text-sm sm:text-base md:text-lg truncate">
+                    <h5 class="font-semibold text-gray-900 text-xs sm:text-sm md:text-base lg:text-lg truncate">
                       {{ cart_item.product.product_name }}
                     </h5>
                     {% if cart_item.variations.all %}
-                    <div class="text-gray-600 text-xs sm:text-sm mt-1">
+                    <div class="text-gray-600 text-xs mt-1">
                       {% for item in cart_item.variations.all %}
-                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs mr-1 mb-1">
+                        <span class="inline-block bg-blue-100 text-blue-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs mr-1 mb-1">
                           {{ item.variation_category|capfirst }}: {{ item.variation_value|capfirst }}
                         </span>
                       {% endfor %}
                     </div>
                     {% endif %}
-                    <div class="flex justify-between items-center mt-2">
-                      <span class="text-gray-600 text-sm">Qty: {{ cart_item.quantity }}</span>
+                    <div class="flex justify-between items-center mt-1 sm:mt-2">
+                      <span class="text-gray-600 text-xs sm:text-sm">Qty: {{ cart_item.quantity }}</span>
                       <div class="text-right">
-                        <div class="font-bold text-gray-900 text-sm sm:text-base">Tk {{ cart_item.sub_total }}</div>
+                        <div class="font-bold text-gray-900 text-xs sm:text-sm md:text-base">Tk {{ cart_item.sub_total }}</div>
                         <div class="text-gray-500 text-xs">Tk {{ cart_item.product.price }} each</div>
                       </div>
                     </div>
@@ -165,34 +165,34 @@
               </div>
 
               <!-- Order Total -->
-              <div class="border-t border-gray-200 mt-6 pt-6 space-y-3">
-                <div class="flex justify-between text-sm sm:text-base">
+              <div class="border-t border-gray-200 mt-4 sm:mt-5 md:mt-6 pt-4 sm:pt-5 md:pt-6 space-y-2 sm:space-y-3">
+                <div class="flex justify-between text-xs sm:text-sm md:text-base">
                   <span class="text-gray-600">Subtotal:</span>
                   <span class="font-medium">Tk {{ total }}</span>
                 </div>
-                <div class="flex justify-between text-sm sm:text-base">
+                <div class="flex justify-between text-xs sm:text-sm md:text-base">
                   <span class="text-gray-600">Shipping:</span>
                   <span class="font-medium">Tk {{ shipping_charge }}</span>
                 </div>
-                <div class="flex justify-between font-bold text-lg sm:text-xl text-gray-900 pt-3 border-t border-gray-200">
+                <div class="flex justify-between font-bold text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 pt-2 sm:pt-3 border-t border-gray-200">
                   <span>Total:</span>
                   <span class="text-green-600">Tk {{ grand_total }}</span>
                 </div>
               </div>
 
               <!-- Action Buttons -->
-              <div class="space-y-3 mt-6">
+              <div class="space-y-2 sm:space-y-3 mt-4 sm:mt-5 md:mt-6">
                 <button type="submit" name="submit" 
-                        class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-3 sm:py-4 px-6 rounded-xl text-sm sm:text-base md:text-lg hover:from-green-700 hover:to-green-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-                  <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base lg:text-lg hover:from-green-700 hover:to-green-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                  <svg class="inline-block w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                   Place Order
                 </button>
                 
                 <a href="{% url 'store' %}" 
-                   class="block w-full bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-xl text-center text-sm sm:text-base hover:from-gray-200 hover:to-gray-300 transition-all duration-300 border border-gray-300">
-                  <svg class="inline-block w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="block w-full bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl text-center text-xs sm:text-sm md:text-base hover:from-gray-200 hover:to-gray-300 transition-all duration-300 border border-gray-300">
+                  <svg class="inline-block w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                   </svg>
                   Continue Shopping
@@ -211,28 +211,6 @@
 input:focus, textarea:focus, button:focus, a:focus {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
-}
-
-/* Form field animations */
-input, textarea {
-  transition: all 0.3s ease;
-}
-
-input:hover, textarea:hover {
-  border-color: #9ca3af;
-}
-
-/* Button animations */
-button, a {
-  transition: all 0.3s ease;
-}
-
-/* Sticky sidebar on larger screens */
-@media (min-width: 1024px) {
-  .sticky {
-    position: sticky;
-    top: 1.5rem;
-  }
 }
 
 /* Custom scrollbar for better UX */

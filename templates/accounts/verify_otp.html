@@ -1,91 +1,91 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="otp-container min-h-[50vh] flex items-start justify-center pt-4 sm:pt-6 md:pt-8">
-  <div class="otp-card w-11/12 mb-8 max-w-md sm:max-w-lg md:max-w-xl lg:max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden">
+<section class="min-h-[83vh] otp-container flex items-start justify-center pt-2 xs:pt-3 sm:pt-4 md:pt-6 lg:pt-8">
+  <div class="otp-card w-full xs:w-11/12 mb-4 xs:mb-6 sm:mb-8 max-w-xs xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg xs:rounded-xl sm:rounded-2xl shadow-lg xs:shadow-xl overflow-hidden">
     {% include 'includes/alerts.html' %}
 
     <!-- Header Section -->
-    <div class="otp-header p-2 sm:p-3 relative mt-4">
+    <div class="otp-header p-1.5 xs:p-2 sm:p-3 relative mt-2 xs:mt-3 sm:mt-4">
       <div class="text-center">
-        <div class="otp-icon w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
-          <i class="fa fa-envelope-circle-check text-white text-base sm:text-lg"></i>
+        <div class="otp-icon w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 xs:mb-1.5 sm:mb-2 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md xs:shadow-lg">
+          <i class="fa fa-envelope-circle-check text-white text-xs xs:text-sm sm:text-base md:text-lg"></i>
         </div>
-        <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-1">Verify OTP</h4>
-        <p class="text-blue-100 text-xs sm:text-sm opacity-90">
+        <h4 class="text-sm xs:text-base sm:text-lg md:text-xl font-bold text-white mb-0.5 xs:mb-1">Verify OTP</h4>
+        <p class="text-blue-100 text-xs xs:text-xs sm:text-sm opacity-90">
           Email verification code
         </p>
       </div>
     </div>
 
     <!-- Content Section -->
-    <div class="otp-content p-4 sm:p-6">
+    <div class="otp-content p-3 xs:p-4 sm:p-6">
       <!-- Info Section -->
-      <div class="info-section mb-4">
-        <div class="flex items-center gap-3 bg-blue-50 rounded-xl p-3 border border-blue-200">
-          <div class="info-icon w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-            <i class="fa fa-envelope text-blue-600 text-sm"></i>
+      <div class="info-section mb-3 xs:mb-4">
+        <div class="flex items-center gap-2 xs:gap-3 bg-blue-50 rounded-lg xs:rounded-xl p-2 xs:p-3 border border-blue-200">
+          <div class="info-icon w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-blue-100 rounded-md xs:rounded-lg flex items-center justify-center flex-shrink-0">
+            <i class="fa fa-envelope text-blue-600 text-xs xs:text-sm"></i>
           </div>
-          <p class="text-blue-800 text-sm sm:text-base flex-1">
+          <p class="text-blue-800 text-xs xs:text-sm sm:text-base flex-1">
             Enter the verification code sent to your email address.
           </p>
         </div>
       </div>
 
       <!-- OTP Form -->
-      <div class="form-section mb-4">
-        <form method="POST" class="space-y-4">
+      <div class="form-section mb-3 xs:mb-4">
+        <form method="POST" class="space-y-3 xs:space-y-4">
           {% csrf_token %}
           
           <!-- OTP Input -->
           <div class="otp-input-group">
-            <label class="input-label block mb-2">
-              <i class="fa fa-shield-alt text-gray-400 mr-2"></i>
+            <label class="input-label block mb-1.5 xs:mb-2 text-xs xs:text-sm font-semibold text-gray-700 flex items-center">
+              <i class="fa fa-shield-alt text-gray-400 mr-1.5 xs:mr-2 text-xs xs:text-sm"></i>
               One-Time Password
             </label>
             <div class="otp-input-wrapper">
               <input type="text" name="otp" placeholder="Enter 6-digit OTP" required maxlength="6"
-                class="otp-input w-full text-center px-4 py-2 sm:py-3 rounded-xl border-2 border-gray-200 
+                class="otp-input w-full text-center px-3 xs:px-4 py-2 xs:py-2.5 sm:py-3 rounded-lg xs:rounded-xl border-2 border-gray-200 
                        focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                       text-lg sm:text-xl md:text-2xl font-mono font-semibold tracking-widest
+                       text-lg xs:text-xl sm:text-xl md:text-2xl font-mono font-semibold tracking-wider xs:tracking-widest
                        transition-all duration-300 bg-white shadow-sm hover:shadow-md">
             </div>
           </div>
 
           <!-- Submit Button -->
-          <button type="submit" class="verify-btn w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold py-2 sm:py-3 rounded-xl 
+          <button type="submit" class="verify-btn w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold py-2 xs:py-2.5 sm:py-3 rounded-lg xs:rounded-xl 
                      hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 transform hover:scale-[1.02] 
-                     active:scale-[0.98] text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-            <i class="fa fa-check-circle"></i>
+                     active:scale-[0.98] text-xs xs:text-sm sm:text-base md:text-lg shadow-md xs:shadow-lg hover:shadow-xl flex items-center justify-center gap-1.5 xs:gap-2">
+            <i class="fa fa-check-circle text-xs xs:text-sm sm:text-base"></i>
             Verify OTP
           </button>
         </form>
       </div>
         
       <!-- Timer + Resend Section -->
-      <div class="resend-section bg-gray-50 rounded-xl p-3 border border-gray-200">
+      <div class="resend-section bg-gray-50 rounded-lg xs:rounded-xl p-2.5 xs:p-3 border border-gray-200">
         <div class="text-center">
-          <div class="timer-display mb-2">
-            <div class="timer-icon w-5 h-5 mx-auto mb-1 text-gray-500">
-              <i class="fa fa-clock"></i>
+          <div class="timer-display mb-1.5 xs:mb-2">
+            <div class="timer-icon w-4 h-4 xs:w-5 xs:h-5 mx-auto mb-0.5 xs:mb-1 text-gray-500 flex items-center justify-center">
+              <i class="fa fa-clock text-xs xs:text-sm"></i>
             </div>
-            <p id="timer" class="text-gray-600 text-xs sm:text-sm font-medium"></p>
+            <p id="timer" class="text-gray-600 text-xs xs:text-xs sm:text-sm font-medium"></p>
           </div>
           
           <form action="{% url 'resend_register_otp' %}" method="POST" id="resendForm">
             {% csrf_token %}
             <button type="submit" id="resendBtn" disabled
-              class="resend-btn w-full bg-gray-300 text-gray-500 font-medium py-2 sm:py-2.5 rounded-xl cursor-not-allowed
-                     disabled:opacity-60 transition-all duration-300 text-xs sm:text-sm
-                     flex items-center justify-center gap-2">
-              <i class="fa fa-redo-alt"></i>
+              class="resend-btn w-full bg-gray-300 text-gray-500 font-medium py-1.5 xs:py-2 sm:py-2.5 rounded-lg xs:rounded-xl cursor-not-allowed
+                     disabled:opacity-60 transition-all duration-300 text-xs xs:text-xs sm:text-sm
+                     flex items-center justify-center gap-1.5 xs:gap-2">
+              <i class="fa fa-redo-alt text-xs xs:text-sm"></i>
               <span id="resendText">Resend OTP</span>
             </button>
           </form>
         </div>
 
       </div>
-        <span class="block text-center text-gray-600 text-sm mt-4 italic font-semibold">
+        <span class="block text-center text-gray-600 text-xs xs:text-sm mt-3 xs:mt-4 italic font-semibold">
           Or, you can also activate your account by clicking the link sent to your email.
         </span>
     </div>
@@ -154,21 +154,8 @@
     animation: fadeInUp 0.6s ease-out 0.6s both;
 }
 
-.input-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #374151;
-    display: flex;
-    align-items: center;
-}
-
-.otp-input-wrapper {
-    position: relative;
-}
-
 .otp-input {
     background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-    letter-spacing: 0.3em;
 }
 
 .otp-input:focus {
@@ -206,20 +193,6 @@
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
-.timer-display {
-    position: relative;
-}
-
-.timer-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.info-icon, .help-icon {
-    flex-shrink: 0;
-}
-
 /* Animations */
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
@@ -234,26 +207,6 @@
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-    .otp-content {
-        padding: 16px;
-    }
-    
-    .otp-header {
-        padding: 16px;
-    }
-    
-    .otp-input {
-        font-size: 18px;
-        letter-spacing: 0.2em;
-    }
-    
-    .bottom-section {
-        grid-template-columns: 1fr;
     }
 }
 
@@ -274,6 +227,13 @@
 .timer-active {
     color: #dc2626 !important;
     font-weight: 600;
+}
+
+/* Custom breakpoint for extra small screens */
+@media (max-width: 475px) {
+    .otp-card {
+        margin: 0 8px;
+    }
 }
 </style>
 
