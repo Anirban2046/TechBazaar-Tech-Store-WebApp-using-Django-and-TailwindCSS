@@ -303,4 +303,91 @@
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
+
+<!-- Scroll preservation -->
+<script>
+(function() {
+    'use strict';
+    
+    const SCROLL_KEY = 'storePageScrollPosition';
+    
+    // IMMEDIATELY check if we need to prevent initial scroll-to-top
+    const savedPosition = sessionStorage.getItem(SCROLL_KEY);
+    if (savedPosition && savedPosition !== '0') {
+        // Prevent the default scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        // Set initial scroll position BEFORE page renders completely
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, parseInt(savedPosition));
+        
+        // Clean up after restoration
+        setTimeout(function() {
+            document.documentElement.style.scrollBehavior = '';
+            sessionStorage.removeItem(SCROLL_KEY);
+        }, 100);
+    }
+    
+    // Function to save current scroll position
+    function saveScrollPosition() {
+        const scrollY = window.pageYOffset;
+        if (scrollY > 0) {
+            sessionStorage.setItem(SCROLL_KEY, scrollY.toString());
+        }
+    }
+    
+    // Save scroll position before any navigation
+    window.addEventListener('beforeunload', saveScrollPosition);
+    
+    // Handle all interactive elements when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Handle all forms (price filter, sorting)
+        const forms = document.querySelectorAll('form');
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                saveScrollPosition();
+            });
+        });
+        
+        // Handle sorting dropdown change specifically
+        const sortSelect = document.querySelector('select[name="sort"]');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                saveScrollPosition();
+            });
+        }
+        
+        // Handle all navigation links
+        const navigationLinks = document.querySelectorAll('a[href*="?"], a[href*="page="], aside a, nav a');
+        navigationLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Only save if it's not opening in new tab/window
+                if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !link.target) {
+                    saveScrollPosition();
+                }
+            });
+        });
+        
+        // Handle any store-related links
+        const allStoreLinks = document.querySelectorAll('a[href*="store"]');
+        allStoreLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !link.target) {
+                    saveScrollPosition();
+                }
+            });
+        });
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            sessionStorage.removeItem(SCROLL_KEY);
+        });
+    });
+    
+})();
+</script>
+
 {% endblock %}
