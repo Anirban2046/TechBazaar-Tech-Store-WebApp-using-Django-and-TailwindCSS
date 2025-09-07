@@ -6,7 +6,7 @@
 
       <!-- Logo & Category -->
       <div class="flex items-center">
-        <a href="{% url 'home' %}" class="inline-flex items-center">
+        <a href="{% url 'home' %}" class="inline-flex items-center focus:outline-none rounded">
           <img src="{% static 'images/logo.png' %}" alt="Logo" 
                class="h-4 xs:h-5 sm:h-7 md:h-9 lg:h-10 object-contain">
         </a>
@@ -18,7 +18,7 @@
                   px-2 md:px-4 py-1 md:py-2 
                   rounded-lg shadow-md hover:shadow-lg 
                   hover:from-blue-700 hover:to-blue-800 
-                  focus:outline-none focus:ring-2 focus:ring-blue-300
+                  focus:outline-none
                   text-[7px] xs:text-[8px] sm:text-[9px] md:text-sm lg:text-base
                   transition-all duration-300">
             <i data-feather="menu" class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"></i>
@@ -27,12 +27,23 @@
             </span>
           </button>
 
-          <div id="catMenu" class="absolute mt-2 w-48 bg-white rounded-lg shadow-lg hidden z-50">
-            <a href="{% url 'store' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-xs sm:text-sm md:text-base lg:text-base {% if not category_obj %}font-semibold text-blue-600{% endif %}">
+          <!-- Fixed dropdown container with proper overflow handling -->
+          <div id="catMenu" class="absolute mt-2 w-48 bg-white rounded-lg shadow-lg hidden z-50 overflow-hidden border border-gray-200">
+            <a href="{% url 'store' %}" 
+               class="block px-4 py-2 text-gray-700 hover:bg-gray-100 
+                      text-xs sm:text-sm md:text-base lg:text-base 
+                      focus:outline-none focus:bg-blue-50 focus:text-blue-600
+                      transition-colors duration-200
+                      {% if not category_obj %}font-semibold text-blue-600 bg-blue-50{% endif %}">
               All Products
             </a>
             {% for category in links %}
-            <a href="{{ category.get_url }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-xs sm:text-sm md:text-base lg:text-base {% if category_obj and category_obj.id == category.id %}font-semibold text-blue-600{% endif %}">
+            <a href="{{ category.get_url }}" 
+               class="block px-4 py-2 text-gray-700 hover:bg-gray-100 
+                      text-xs sm:text-sm md:text-base lg:text-base 
+                      focus:outline-none focus:bg-blue-50 focus:text-blue-600
+                      transition-colors duration-200
+                      {% if category_obj and category_obj.id == category.id %}font-semibold text-blue-600 bg-blue-50{% endif %}">
               {{ category.category_name }}
             </a>
             {% endfor %}
@@ -71,7 +82,7 @@
             <button type="submit" 
                     class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2
                           hover:from-blue-700 hover:to-blue-800 transition-all duration-300 
-                          focus:outline-none focus:ring-2 focus:ring-blue-300 group">
+                          focus:outline-none group">
               <i data-feather="search" class="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6 group-hover:scale-110 transition-transform duration-200"></i>
             </button>
 
@@ -83,17 +94,17 @@
       <div class="flex items-center text-[6px] xs:text-[7px] sm:text-[9px] md:text-sm mr-2">
         {% if user.id is None %}
           <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600">
-            <a href="{% url 'login' %}" class="hover:text-blue-900">Login</a>
+            <a href="{% url 'login' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Login</a>
             <span>|</span>
-            <a href="{% url 'register' %}" class="hover:text-blue-900">Register</a>
+            <a href="{% url 'register' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Register</a>
           </div>
         {% else %}
           <div class="text-[8px] xs:text-[9px] sm:text-[10px] md:text-sm">
             <p class="text-gray-500">Welcome {{ user.first_name }}!</p>
             <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600">
-              <a href="{% url 'dashboard' %}" class="hover:text-blue-900">Dashboard</a>
+              <a href="{% url 'dashboard' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Dashboard</a>
               <span>|</span>
-              <a href="{% url 'logout' %}" class="hover:text-blue-900">Logout</a>
+              <a href="{% url 'logout' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Logout</a>
             </div>
           </div>
         {% endif %}
@@ -102,7 +113,7 @@
       </div><!-- Action Buttons (Wishlist + Cart) -->
       <div class="flex items-center gap-1.5 ml-1 sm:ml-2 md:ml-4 lg:ml-5">
         <!-- Wishlist -->
-        <a href="{% url 'wishlist' %}" class="relative group inline-flex items-center">
+        <a href="{% url 'wishlist' %}" class="relative group inline-flex items-center focus:outline-none rounded-full">
           <div class="w-5 sm:w-6 md:w-8 lg:w-10 h-5 sm:h-6 md:h-8 lg:h-10 
                       flex items-center justify-center rounded-full 
                       bg-gradient-to-r from-red-100 to-red-200 text-gray-600
@@ -120,7 +131,7 @@
         </a>
 
         <!-- Cart -->
-        <a href="{% url 'cart' %}" class="relative group inline-flex items-center">
+        <a href="{% url 'cart' %}" class="relative group inline-flex items-center focus:outline-none rounded-full">
           <div class="w-5 sm:w-6 md:w-8 lg:w-10 h-5 sm:h-6 md:h-8 lg:h-10 
                       flex items-center justify-center rounded-full 
                       bg-gradient-to-r from-blue-100 to-blue-200 text-gray-600
@@ -176,6 +187,20 @@
     }
   });
 
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!catToggle.contains(e.target) && !catMenu.contains(e.target)) {
+      if (!catMenu.classList.contains('hidden')) {
+        catMenu.style.opacity = '0';
+        catMenu.style.transform = 'scaleY(0)';
+        catMenu.addEventListener('transitionend', function hideMenu() {
+          catMenu.classList.add('hidden');
+          catMenu.removeEventListener('transitionend', hideMenu);
+        });
+      }
+    }
+  });
+
   // Replace feather icons
   feather.replace();
 
@@ -188,4 +213,294 @@
       searchInput.focus();
     }
   });
+
+  // ...existing code...
+
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  function updateNavbarCartCount(newCount) {
+    // Try multiple selectors to find the cart count element
+    const possibleSelectors = [
+        'a[href="{% url "cart" %}"] span',  // Cart link with span
+        '.cart-count',                      // Class-based selector
+        '#cart-count',                      // ID-based selector
+        '[data-cart-count]',               // Data attribute selector
+        'a[href*="cart"] span',            // Partial href match
+        '.navbar .cart span',              // Navbar cart span
+        '.cart-badge',                     // Badge class
+    ];
+    
+    let cartCountElement = null;
+    
+    // Try each selector until we find the element
+    for (const selector of possibleSelectors) {
+        cartCountElement = document.querySelector(selector);
+        if (cartCountElement) {
+            console.log(`Found cart count element with selector: ${selector}`);
+            break;
+        }
+    }
+    
+    // If still not found, try to find any element that contains the current cart count
+    if (!cartCountElement) {
+        const allSpans = document.querySelectorAll('span');
+        for (const span of allSpans) {
+            if (span.textContent.trim() === '{{ cart_count }}' || 
+                span.textContent.trim().match(/^\d+$/) && 
+                span.closest('a[href*="cart"]')) {
+                cartCountElement = span;
+                console.log('Found cart count element by content matching');
+                break;
+            }
+        }
+    }
+    
+    if (cartCountElement) {
+        cartCountElement.textContent = newCount;
+        
+        // Add a subtle animation to draw attention
+        cartCountElement.style.transform = 'scale(1.3)';
+        cartCountElement.style.transition = 'transform 0.3s ease';
+        cartCountElement.style.color = '#10b981'; // Green color
+        
+        setTimeout(() => {
+            cartCountElement.style.transform = 'scale(1)';
+            cartCountElement.style.color = ''; // Reset to original color
+        }, 300);
+        
+        console.log(`Updated cart count to: ${newCount}`);
+    } else {
+        console.log('Cart count element not found in navbar');
+        console.log('Available cart-related elements:', document.querySelectorAll('a[href*="cart"]'));
+    }
+}
+
+// Rest of your existing functions remain the same...
+function updateQuantity(productId, cartItemId, action) {
+    const quantityInput = document.getElementById(`quantity-input-${cartItemId}`);
+    const currentQuantity = parseInt(quantityInput.value);
+    
+    // Show confirmation when decreasing from 1 (will remove item)
+    if (action === 'decrease' && currentQuantity === 1) {
+        if (!confirm('This will remove the item from your cart. Are you sure?')) {
+            return;
+        }
+    }
+    
+    const csrftoken = getCookie('csrftoken');
+    const subtotalDisplay = document.getElementById(`subtotal-${cartItemId}`);
+    const decreaseBtn = document.getElementById(`decrease-btn-${cartItemId}`);
+    const increaseBtn = document.getElementById(`increase-btn-${cartItemId}`);
+    
+    // Disable buttons temporarily
+    decreaseBtn.disabled = true;
+    increaseBtn.disabled = true;
+    quantityInput.disabled = true;
+    
+    fetch(`/cart/update_quantity_ajax/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+            'product_id': productId,
+            'cart_item_id': cartItemId,
+            'action': action
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Update quantity response:', data); // Debug log
+        
+        if (data.success) {
+            if (data.item_removed) {
+                // Remove the item from DOM with animation
+                const itemElement = document.getElementById(`cart-item-${cartItemId}`);
+                itemElement.style.transition = 'opacity 0.3s ease-out';
+                itemElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    itemElement.remove();
+                    
+                    // Check if cart is empty
+                    if (data.cart_items_count === 0) {
+                        location.reload(); // Reload to show empty cart state
+                        return;
+                    }
+                }, 300);
+            } else {
+                // Update quantity and subtotal
+                quantityInput.value = data.new_quantity;
+                subtotalDisplay.textContent = `Tk ${data.new_subtotal}`;
+            }
+            
+            // Update cart summary
+            document.getElementById('cart-subtotal').textContent = `Tk ${data.cart_total}`;
+            document.getElementById('cart-shipping').textContent = `Tk ${data.shipping_charge}`;
+            document.getElementById('cart-grand-total').textContent = `Tk ${data.grand_total}`;
+            
+            // Update navbar cart count
+            if (data.cart_count !== undefined) {
+                updateNavbarCartCount(data.cart_count);
+            }
+            
+        } else {
+            alert(data.message || 'Error updating quantity');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error updating quantity');
+    })
+    .finally(() => {
+        // Re-enable buttons
+        decreaseBtn.disabled = false;
+        increaseBtn.disabled = false;
+        quantityInput.disabled = false;
+    });
+}
+
+function updateQuantityManual(productId, cartItemId) {
+    const quantityInput = document.getElementById(`quantity-input-${cartItemId}`);
+    const newQuantity = parseInt(quantityInput.value);
+    
+    // Validate input
+    if (isNaN(newQuantity) || newQuantity < 1) {
+        alert('Please enter a valid quantity (minimum 1)');
+        quantityInput.focus();
+        return;
+    }
+    
+    const csrftoken = getCookie('csrftoken');
+    const subtotalDisplay = document.getElementById(`subtotal-${cartItemId}`);
+    const decreaseBtn = document.getElementById(`decrease-btn-${cartItemId}`);
+    const increaseBtn = document.getElementById(`increase-btn-${cartItemId}`);
+    
+    // Disable controls temporarily
+    decreaseBtn.disabled = true;
+    increaseBtn.disabled = true;
+    quantityInput.disabled = true;
+    
+    fetch(`/cart/update_quantity_ajax/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+            'product_id': productId,
+            'cart_item_id': cartItemId,
+            'action': 'set',
+            'quantity': newQuantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Manual quantity update response:', data); // Debug log
+        
+        if (data.success) {
+            // Update quantity and subtotal
+            quantityInput.value = data.new_quantity;
+            subtotalDisplay.textContent = `Tk ${data.new_subtotal}`;
+            
+            // Update cart summary
+            document.getElementById('cart-subtotal').textContent = `Tk ${data.cart_total}`;
+            document.getElementById('cart-shipping').textContent = `Tk ${data.shipping_charge}`;
+            document.getElementById('cart-grand-total').textContent = `Tk ${data.grand_total}`;
+            
+            // Update navbar cart count
+            if (data.cart_count !== undefined) {
+                updateNavbarCartCount(data.cart_count);
+            }
+            
+        } else {
+            alert(data.message || 'Error updating quantity');
+            // Reset to previous value if error
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error updating quantity');
+        location.reload();
+    })
+    .finally(() => {
+        // Re-enable controls
+        decreaseBtn.disabled = false;
+        increaseBtn.disabled = false;
+        quantityInput.disabled = false;
+    });
+}
+
+function removeCartItem(productId, cartItemId) {
+    if (!confirm('Are you sure you want to remove this item from your cart?')) {
+        return;
+    }
+    
+    const csrftoken = getCookie('csrftoken');
+    
+    fetch(`/cart/remove_item_ajax/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+            'product_id': productId,
+            'cart_item_id': cartItemId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Remove item response:', data); // Debug log
+        
+        if (data.success) {
+            // Remove the item from DOM with animation
+            const itemElement = document.getElementById(`cart-item-${cartItemId}`);
+            itemElement.style.transition = 'opacity 0.3s ease-out';
+            itemElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                itemElement.remove();
+                
+                // Check if cart is empty
+                if (data.cart_items_count === 0) {
+                    location.reload(); // Reload to show empty cart state
+                    return;
+                }
+            }, 300);
+            
+            // Update cart summary
+            document.getElementById('cart-subtotal').textContent = `Tk ${data.cart_total}`;
+            document.getElementById('cart-shipping').textContent = `Tk ${data.shipping_charge}`;
+            document.getElementById('cart-grand-total').textContent = `Tk ${data.grand_total}`;
+            
+            // Update navbar cart count
+            if (data.cart_count !== undefined) {
+                updateNavbarCartCount(data.cart_count);
+            }
+            
+        } else {
+            alert(data.message || 'Error removing item');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error removing item');
+    });
+}
 </script>
