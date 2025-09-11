@@ -86,13 +86,13 @@
               <form method="get" class="space-y-3 sm:space-y-4">
                 <div class="grid grid-cols-2 gap-2 sm:gap-3">
                   <div class="relative">
-                    <input type="number" name="min_price" placeholder="Min Price" value="{{ min_price }}" 
+                    <input type="number" name="min_price" placeholder="Min Price" value="{{ min_price }}" min="0"
                            class="w-full border-2 border-gray-200 rounded-lg px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     </div>
                   </div>
                   <div class="relative">
-                    <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" 
+                    <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" min="0"
                            class="w-full border-2 border-gray-200 rounded-lg px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     </div>

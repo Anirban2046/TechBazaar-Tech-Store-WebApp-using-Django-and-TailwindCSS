@@ -1,4 +1,3 @@
-# utils.py (optional helper)
 import random
 from django.core.cache import cache
 

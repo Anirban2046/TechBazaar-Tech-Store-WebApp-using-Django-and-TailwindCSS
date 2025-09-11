@@ -49,11 +49,6 @@ def store(request, category_slug=None):
         min_price_val = int(min_price) if min_price != '' else None
         max_price_val = int(max_price) if max_price != '' else None
         
-        # Ensure non-negative values
-        if (min_price_val is not None and min_price_val < 0) or (max_price_val is not None and max_price_val < 0):
-            messages.error(request, "Price values cannot be negative!")
-            return redirect(request.path)  # strip invalid query
-
         if max_price_val is not None and max_price_val > max_product_price:
             max_price_val = max_product_price
 
