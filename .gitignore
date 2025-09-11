@@ -6,6 +6,9 @@ __pycache__/
 *.pyc
 *.pyo
 
+# tailwind file
+tailwind.config.js
+
 # Ignore SQLite database (if used)
 db.sqlite3
 
