@@ -1,6 +1,6 @@
 {% load static %}
 
-<section class="border-b bg-white shadow-sm">
+<section class="border-b bg-white dark:bg-gray-800 shadow-sm dark:border-gray-700">
   <div class="mx-auto px-4" style="width:95%; max-width:95%;">
     <div class="flex items-center justify-between py-2 md:py-4">
 
@@ -8,7 +8,7 @@
       <div class="flex items-center">
         <a href="{% url 'home' %}" class="inline-flex items-center focus:outline-none rounded">
           <img src="{% static 'images/logo.png' %}" alt="Logo" 
-               class="h-4 xs:h-5 sm:h-7 md:h-9 lg:h-10 object-contain">
+               class="h-4 xs:h-5 sm:h-7 md:h-9 lg:h-10 object-contain dark:filter dark:invert dark:sepia-100 dark:hue-rotate-180 dark:saturate-150 dark:brightness-125">
         </a>
 
         <div class="relative ml-1 sm:ml-3">
@@ -28,22 +28,24 @@
           </button>
 
           <!-- Fixed dropdown container with proper overflow handling -->
-          <div id="catMenu" class="absolute mt-2 w-48 bg-white rounded-lg shadow-lg hidden z-50 overflow-hidden border border-gray-200">
+          <div id="catMenu" class="absolute mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg hidden z-50 overflow-hidden border border-gray-200 dark:border-gray-600">
             <a href="{% url 'store' %}" 
-               class="block px-4 py-2 text-gray-700 hover:bg-gray-100 
+               class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700
                       text-xs sm:text-sm md:text-base lg:text-base 
                       focus:outline-none focus:bg-blue-50 focus:text-blue-600
+                      dark:focus:bg-blue-900 dark:focus:text-blue-300
                       transition-colors duration-200
-                      {% if not category_obj %}font-semibold text-blue-600 bg-blue-50{% endif %}">
+                      {% if not category_obj %}font-semibold text-blue-600 dark:text-blue-300 bg-blue-50 dark:bg-blue-900{% endif %}">
               All Products
             </a>
             {% for category in links %}
             <a href="{{ category.get_url }}" 
-               class="block px-4 py-2 text-gray-700 hover:bg-gray-100 
+               class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700
                       text-xs sm:text-sm md:text-base lg:text-base 
                       focus:outline-none focus:bg-blue-50 focus:text-blue-600
+                      dark:focus:bg-blue-900 dark:focus:text-blue-300
                       transition-colors duration-200
-                      {% if category_obj and category_obj.id == category.id %}font-semibold text-blue-600 bg-blue-50{% endif %}">
+                      {% if category_obj and category_obj.id == category.id %}font-semibold text-blue-600 dark:text-blue-300 bg-blue-50 dark:bg-blue-900{% endif %}">
               {{ category.category_name }}
             </a>
             {% endfor %}
@@ -54,15 +56,16 @@
       <!-- Search -->
       <div class="flex-1 mx-2 sm:mx-6 md:mx-8 w-full">
         <form action="{% url 'search' %}" method="GET" class="relative group">
-          <div class="flex bg-white rounded-lg shadow-md group-focus-within:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-300 group-focus-within:border-blue-500">
+          <div class="flex bg-white dark:bg-gray-700 rounded-lg shadow-md group-focus-within:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-300 dark:border-gray-600 group-focus-within:border-blue-500 dark:group-focus-within:border-blue-400">
             
             <!-- Input -->
             <div class="flex-1 relative">
               <input type="text" name="keyword" placeholder="Search" 
                     value="{{ request.GET.keyword|default_if_none:'' }}"
                     class="w-full bg-transparent text-[9px] sm:text-[10px] md:text-sm lg:text-base
+                            text-gray-900 dark:text-gray-100
                             pl-3 sm:pl-4 md:pl-5 pr-2 sm:pr-3 md:pr-4 py-1 sm:py-1.5 md:py-2
-                            focus:outline-none placeholder-gray-400">
+                            focus:outline-none placeholder-gray-400 dark:placeholder-gray-500">
               <div class="absolute inset-y-0 left-2 sm:left-3 flex items-center pointer-events-none">
               </div>
             </div>
@@ -93,18 +96,18 @@
       <!-- Auth + Dashboard -->
       <div class="flex items-center text-[6px] xs:text-[7px] sm:text-[9px] md:text-sm mr-2">
         {% if user.id is None %}
-          <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600">
-            <a href="{% url 'login' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Login</a>
-            <span>|</span>
-            <a href="{% url 'register' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Register</a>
+          <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600 dark:text-blue-400">
+            <a href="{% url 'login' %}" class="hover:text-blue-900 dark:hover:text-blue-300 focus:outline-none focus:text-blue-900 dark:focus:text-blue-300 focus:underline rounded">Login</a>
+            <span class="dark:text-gray-400">|</span>
+            <a href="{% url 'register' %}" class="hover:text-blue-900 dark:hover:text-blue-300 focus:outline-none focus:text-blue-900 dark:focus:text-blue-300 focus:underline rounded">Register</a>
           </div>
         {% else %}
           <div class="text-[8px] xs:text-[9px] sm:text-[10px] md:text-sm">
-            <p class="text-gray-500">Welcome {{ user.first_name }}!</p>
-            <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600">
-              <a href="{% url 'dashboard' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Dashboard</a>
+            <p class="text-gray-500 dark:text-gray-400">Welcome {{ user.first_name }}!</p>
+            <div class="flex gap-1 xs:gap-2 sm:gap-3 text-blue-600 dark:text-blue-400">
+              <a href="{% url 'dashboard' %}" class="hover:text-blue-900 dark:hover:text-blue-300 focus:outline-none focus:text-blue-900 dark:focus:text-blue-300 focus:underline rounded">Dashboard</a>
               <span>|</span>
-              <a href="{% url 'logout' %}" class="hover:text-blue-900 focus:outline-none focus:text-blue-900 focus:underline rounded">Logout</a>
+              <a href="{% url 'logout' %}" class="hover:text-blue-900 dark:hover:text-blue-300 focus:outline-none focus:text-blue-900 dark:focus:text-blue-300 focus:underline rounded">Logout</a>
             </div>
           </div>
         {% endif %}
@@ -117,8 +120,10 @@
           <div class="w-5 sm:w-6 md:w-8 lg:w-10 h-5 sm:h-6 md:h-8 lg:h-10 
                       flex items-center justify-center rounded-full 
                       bg-gradient-to-r from-red-100 to-red-200 text-gray-600
-                      border border-gray-200 shadow-sm
+                      dark:from-red-800 dark:to-red-900 dark:text-gray-300
+                      border border-gray-200 dark:border-gray-600 shadow-sm
                       hover:text-red-600 hover:from-red-200 hover:to-red-300
+                      dark:hover:text-red-300 dark:hover:from-red-700 dark:hover:to-red-800
                       transition-all duration-300">
             <i data-feather="heart" class="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6"></i>
           </div>
@@ -135,8 +140,10 @@
           <div class="w-5 sm:w-6 md:w-8 lg:w-10 h-5 sm:h-6 md:h-8 lg:h-10 
                       flex items-center justify-center rounded-full 
                       bg-gradient-to-r from-blue-100 to-blue-200 text-gray-600
-                      border border-gray-200 shadow-sm
+                      dark:from-blue-800 dark:to-blue-900 dark:text-gray-300
+                      border border-gray-200 dark:border-gray-600 shadow-sm
                       hover:text-blue-700 hover:from-blue-200 hover:to-blue-300
+                      dark:hover:text-blue-300 dark:hover:from-blue-700 dark:hover:to-blue-800
                       transition-all duration-300">
             <i data-feather="shopping-cart" class="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6"></i>
           </div>
@@ -147,6 +154,20 @@
             {{ cart_count }}
           </span>
         </a>
+
+        <!-- Dark Mode Toggle -->
+        <button id="darkModeToggle" class="relative group inline-flex items-center focus:outline-none rounded-full ml-0.5 sm:ml-1 md:ml-1.5 lg:ml-2">
+          <div class="w-5 sm:w-6 md:w-8 lg:w-10 h-5 sm:h-6 md:h-8 lg:h-10 
+                      flex items-center justify-center rounded-full 
+                      bg-gradient-to-r from-yellow-100 to-yellow-200 text-gray-600
+                      dark:from-gray-700 dark:to-gray-800 dark:text-yellow-300
+                      border border-gray-200 dark:border-gray-600 shadow-sm
+                      hover:text-yellow-600 hover:from-yellow-200 hover:to-yellow-300
+                      dark:hover:text-yellow-200 dark:hover:from-gray-600 dark:hover:to-gray-700
+                      transition-all duration-300">
+            <i id="darkModeIcon" data-feather="sun" class="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6"></i>
+          </div>
+        </button>
       </div>
 
   </div>
@@ -212,5 +233,66 @@
       e.preventDefault();
       searchInput.focus();
     }
+  });
+
+  // Dark Mode Toggle Script
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const darkModeIcon = document.getElementById('darkModeIcon');
+  const html = document.documentElement;
+
+  // Function to update icon directly
+  function updateDarkModeIcon(isDark) {
+    if (isDark) {
+      darkModeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+      darkModeIcon.setAttribute('data-feather', 'moon');
+    } else {
+      darkModeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+      darkModeIcon.setAttribute('data-feather', 'sun');
+    }
+  }
+
+  // Function to apply theme
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      html.classList.add('dark');
+      updateDarkModeIcon(true);
+    } else {
+      html.classList.remove('dark');
+      updateDarkModeIcon(false);
+    }
+  }
+
+  // Check for saved dark mode preference or default to light mode
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  
+  // Set initial theme immediately
+  applyTheme(savedTheme);
+
+  // Toggle dark mode
+  darkModeToggle.addEventListener('click', () => {
+    const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
+    
+    // Trigger storage event for other pages/windows
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'theme',
+      newValue: newTheme,
+      oldValue: currentTheme
+    }));
+  });
+
+  // Listen for theme changes from other tabs/windows
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      applyTheme(e.newValue || 'light');
+    }
+  });
+
+  // Listen for custom theme change events
+  window.addEventListener('themeChange', (e) => {
+    applyTheme(e.detail.theme);
   });
 </script>

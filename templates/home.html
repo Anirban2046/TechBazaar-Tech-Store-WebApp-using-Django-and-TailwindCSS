@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="bg-gradient-to-br from-slate-50 via-white to-blue-50 min-h-[83vh] p-0">
+<div class="bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-[83vh] p-0">
 
   <!-- Main Banner Slider with Enhanced Design -->
   <section class="relative overflow-hidden">
@@ -14,7 +14,7 @@
       <div class="absolute bottom-0 right-0 w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-tl from-indigo-400/20 to-pink-400/20 rounded-full blur-xl sm:blur-2xl -z-10"></div>
 
       <!-- Swiper with enhanced styling -->
-      <div class="swiper rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl border border-white/50 backdrop-blur-sm overflow-hidden">
+      <div class="swiper rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl border border-white/50 dark:border-gray-600/50 backdrop-blur-sm overflow-hidden">
         <div class="swiper-wrapper">
           <!-- Slide 1 -->
           <div class="swiper-slide relative">
@@ -49,9 +49,9 @@
 
   <!-- Enhanced Marquee Text -->
   <section class="overflow-hidden my-3 sm:my-4 md:my-6 flex justify-center">
-    <div class="relative w-[95%] sm:w-[92%] md:w-[90%] bg-gradient-to-r from-white/90 via-blue-50/90 to-white/90 backdrop-blur-sm rounded-full-container px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 border border-blue-100/50 shadow-md sm:shadow-lg">
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-500/5 rounded-full-container"></div>
-      <div class="marquee text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-blue-600 to-slate-800 text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap font-poppins font-medium">
+    <div class="relative w-[95%] sm:w-[92%] md:w-[90%] bg-gradient-to-r from-white/90 via-blue-50/90 to-white/90 dark:from-gray-800/90 dark:via-gray-700/90 dark:to-gray-800/90 backdrop-blur-sm rounded-full-container px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 border border-blue-100/50 dark:border-gray-600/50 shadow-md sm:shadow-lg">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-500/5 dark:from-blue-400/10 dark:via-purple-400/10 dark:to-blue-400/10 rounded-full-container"></div>
+      <div class="marquee text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-blue-600 to-slate-800 dark:from-gray-200 dark:via-blue-400 dark:to-gray-200 text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap font-poppins font-medium">
         Discover computers, laptops, PC components, smartphones, gadgets, accessories, and office equipment at TechBazaar with fast and dependable delivery throughout Bangladesh.
       </div>
     </div>
@@ -60,10 +60,10 @@
   <!-- Popular Products with Enhanced Design -->
   <div class="container mx-auto w-[95%] sm:w-[92%] md:w-[90%] px-0">
     <!-- Enhanced Header Section -->
-    <div class="flex flex-row flex-wrap items-center justify-between mb-3 sm:mb-4 md:mb-6 gap-2 p-2 sm:p-3 md:p-4 bg-gradient-to-r from-white/80 to-blue-50/80 rounded-lg sm:rounded-xl md:rounded-2xl border border-blue-100/50 backdrop-blur-sm shadow-md sm:shadow-lg">
+    <div class="flex flex-row flex-wrap items-center justify-between mb-3 sm:mb-4 md:mb-6 gap-2 p-2 sm:p-3 md:p-4 bg-gradient-to-r from-white/80 to-blue-50/80 dark:from-gray-800/80 dark:to-gray-700/80 rounded-lg sm:rounded-xl md:rounded-2xl border border-blue-100/50 dark:border-gray-600/50 backdrop-blur-sm shadow-md sm:shadow-lg">
       <!-- Title with icon -->
       <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-        <h3 class="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-blue-600 flex-shrink-0">
+        <h3 class="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-blue-600 dark:from-gray-200 dark:to-blue-400 flex-shrink-0">
           Featured Products
         </h3>
       </div>
@@ -72,10 +72,10 @@
       <div class="flex flex-row flex-wrap items-center gap-1 sm:gap-2 md:gap-3">
         <!-- Enhanced Sorting Dropdown -->
         <form method="GET" class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-          <label for="sort" class="text-[8px] sm:text-xs md:text-base text-slate-700 font-sans font-medium">
+          <label for="sort" class="text-[8px] sm:text-xs md:text-base text-slate-700 dark:text-gray-300 font-sans font-medium">
             Sort by:
           </label>
-          <select name="sort" id="sort" class="border-2 border-blue-200/50 rounded-lg sm:rounded-xl px-1 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-xs md:text-base font-sans font-medium w-20 sm:w-32 md:w-44 bg-white/80 backdrop-blur-sm shadow-sm focus:border-blue-400 focus:outline-none transition-all duration-300"
+          <select name="sort" id="sort" class="border-2 border-blue-200/50 dark:border-gray-600/50 rounded-lg sm:rounded-xl px-1 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-xs md:text-base font-sans font-medium w-20 sm:w-32 md:w-44 bg-white/80 dark:bg-gray-700/80 dark:text-gray-100 backdrop-blur-sm shadow-sm focus:border-blue-400 dark:focus:border-blue-500 focus:outline-none transition-all duration-300"
                   onchange="this.form.submit()">
             <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest</option>
             <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
@@ -97,7 +97,7 @@
     <!-- Enhanced Product Grid -->
     <div class="grid gap-2 sm:gap-3 md:gap-4 lg:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {% for product in products %}
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-white/50 transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-lg sm:hover:shadow-2xl hover:border-blue-200/50 group">
+      <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-white/50 dark:border-gray-600/50 transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-lg sm:hover:shadow-2xl hover:border-blue-200/50 dark:hover:border-blue-400/50 group">
         <!-- Product image with enhanced styling -->
         <a href="{{ product.get_url }}" class="block overflow-hidden rounded-t-lg sm:rounded-t-xl md:rounded-t-2xl relative focus:outline-none">
           <div class="w-full h-32 sm:h-40 md:h-48 lg:h-56 xl:h-72 bg-white relative overflow-hidden">
@@ -109,14 +109,14 @@
         <!-- Enhanced Product details -->
         <div class="p-2 sm:p-3 md:p-4 flex flex-col">
           <!-- Product name -->
-          <a href="{{ product.get_url }}" class="block text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-300 mb-1 sm:mb-2 md:mb-3 min-h-[2rem] sm:min-h-[2.5rem] md:min-h-[3rem] lg:min-h-[3.5rem] line-clamp-3 focus:outline-none">
+          <a href="{{ product.get_url }}" class="block text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold text-slate-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 mb-1 sm:mb-2 md:mb-3 min-h-[2rem] sm:min-h-[2.5rem] md:min-h-[3rem] lg:min-h-[3.5rem] line-clamp-3 focus:outline-none">
             {{ product.product_name }}
           </a>
 
           <!-- Enhanced Price -->
           <div class="flex items-center justify-between mb-1 sm:mb-2">
-            <div class="text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg text-gray-700 mt-1 font-sans font-bold">
-              <span class="text-black">
+            <div class="text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg text-gray-700 dark:text-gray-300 mt-1 font-sans font-bold">
+              <span class="text-black dark:text-white">
                 Tk {{ product.price|intcomma }}
               </span>
             </div>

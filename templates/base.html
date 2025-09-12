@@ -14,6 +14,11 @@
 
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
 
   <!-- Feather icons CDN -->
   <script src="https://unpkg.com/feather-icons"></script>
@@ -25,6 +30,121 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
+  <!-- Fix for autofill/autocomplete styling in both light and dark modes -->
+  <style>
+    /* Light mode autofill styling - only for actually autofilled inputs */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    textarea:-webkit-autofill:active,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus,
+    select:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(255 255 255) inset !important;
+      -webkit-text-fill-color: rgb(17 24 39) !important;
+      caret-color: black !important;
+    }
+
+    /* Light mode autofill for gray backgrounds */
+    input[class*="bg-gray-50"]:-webkit-autofill,
+    input[class*="bg-gray-50"]:-webkit-autofill:hover,
+    input[class*="bg-gray-50"]:-webkit-autofill:focus,
+    input[class*="bg-gray-50"]:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(249 250 251) inset !important;
+      -webkit-text-fill-color: rgb(17 24 39) !important;
+      caret-color: black !important;
+    }
+
+    /* Dark mode autofill styling - only for actually autofilled inputs */
+    .dark input:-webkit-autofill,
+    .dark input:-webkit-autofill:hover,
+    .dark input:-webkit-autofill:focus,
+    .dark input:-webkit-autofill:active,
+    .dark textarea:-webkit-autofill,
+    .dark textarea:-webkit-autofill:hover,
+    .dark textarea:-webkit-autofill:focus,
+    .dark textarea:-webkit-autofill:active,
+    .dark select:-webkit-autofill,
+    .dark select:-webkit-autofill:hover,
+    .dark select:-webkit-autofill:focus,
+    .dark select:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(55 65 81) inset !important;
+      -webkit-text-fill-color: rgb(243 244 246) !important;
+      caret-color: white !important;
+    }
+    
+    /* Dark mode autofill for specific gray-800 backgrounds */
+    .dark input[class*="dark:bg-gray-800"]:-webkit-autofill,
+    .dark input[class*="dark:bg-gray-800"]:-webkit-autofill:hover,
+    .dark input[class*="dark:bg-gray-800"]:-webkit-autofill:focus,
+    .dark input[class*="dark:bg-gray-800"]:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(31 41 55) inset !important;
+      -webkit-text-fill-color: rgb(243 244 246) !important;
+      caret-color: white !important;
+    }
+
+    /* Dark mode autofill for specific gray-700 backgrounds */
+    .dark input[class*="dark:bg-gray-700"]:-webkit-autofill,
+    .dark input[class*="dark:bg-gray-700"]:-webkit-autofill:hover,
+    .dark input[class*="dark:bg-gray-700"]:-webkit-autofill:focus,
+    .dark input[class*="dark:bg-gray-700"]:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(55 65 81) inset !important;
+      -webkit-text-fill-color: rgb(243 244 246) !important;
+      caret-color: white !important;
+    }
+    
+    /* General cursor color fixes */
+    .dark input,
+    .dark textarea {
+      caret-color: white;
+    }
+
+    /* Additional form-specific autofill overrides */
+    form input:-webkit-autofill,
+    form input:-webkit-autofill:hover,
+    form input:-webkit-autofill:focus,
+    form input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(255 255 255) inset !important;
+      -webkit-text-fill-color: rgb(17 24 39) !important;
+      caret-color: black !important;
+    }
+
+    .dark form input:-webkit-autofill,
+    .dark form input:-webkit-autofill:hover,
+    .dark form input:-webkit-autofill:focus,
+    .dark form input:-webkit-autofill:active,
+    .dark form textarea:-webkit-autofill,
+    .dark form textarea:-webkit-autofill:hover,
+    .dark form textarea:-webkit-autofill:focus,
+    .dark form textarea:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px rgb(55 65 81) inset !important;
+      -webkit-text-fill-color: rgb(243 244 246) !important;
+      caret-color: white !important;
+    }
+  </style>
+
+  <script>
+    // Initialize theme to light mode by default, ignore browser preferences
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      // Only apply dark mode if explicitly saved as 'dark' by user
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        // Ensure light mode is default, remove any dark class
+        document.documentElement.classList.remove('dark');
+        // Set light theme in localStorage if no theme is saved
+        if (!savedTheme) {
+          localStorage.setItem('theme', 'light');
+        }
+      }
+    })();
+  </script>
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -49,10 +169,44 @@
     }, { once: true, passive: true });
     </script>
 </head>
-<body>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
   <!-- navbar -->
   {% include 'includes/navbar.html' %}
+
+  <script>
+    // Ensure dark mode toggle icon is properly updated on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const darkModeIcon = document.getElementById('darkModeIcon');
+      if (darkModeIcon) {
+        const isDark = document.documentElement.classList.contains('dark');
+        
+        function updateDarkModeIcon(isDark) {
+          if (isDark) {
+            darkModeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            darkModeIcon.setAttribute('data-feather', 'moon');
+          } else {
+            darkModeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+            darkModeIcon.setAttribute('data-feather', 'sun');
+          }
+        }
+        
+        // Update icon on page load
+        updateDarkModeIcon(isDark);
+        
+        // Listen for theme changes and update icon
+        const themeObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              const isDark = document.documentElement.classList.contains('dark');
+              updateDarkModeIcon(isDark);
+            }
+          });
+        });
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
+    });
+  </script>
 
   {% block content %}
   <!-- page content -->
@@ -85,7 +239,7 @@
 
 
 <!-- Chatbot Panel -->
-<div id="chatbot-panel" class="fixed bottom-20 right-5 w-72 sm:w-80 max-h-[400px] sm:max-h-[500px] rounded-xl bg-white shadow-lg flex-col overflow-hidden font-sans text-sm sm:text-base hidden z-50">
+<div id="chatbot-panel" class="fixed bottom-20 right-5 w-72 sm:w-80 max-h-[400px] sm:max-h-[500px] rounded-xl bg-white dark:bg-gray-800 shadow-lg flex-col overflow-hidden font-sans text-sm sm:text-base hidden z-50">
     <!-- Header -->
         <div style="
         background: linear-gradient(135deg, #17a2b8, #138496);
@@ -108,10 +262,10 @@
     </div>
 
     <!-- Options -->
-    <div id="chatbot-options" class="flex-1 overflow-y-auto p-2 sm:p-3 bg-gray-50 text-xs sm:text-sm"></div>
+    <div id="chatbot-options" class="flex-1 overflow-y-auto p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 text-xs sm:text-sm"></div>
 
     <!-- Messages -->
-    <div id="chatbot-messages" class="flex flex-col gap-1 sm:gap-2 p-2 sm:p-3 overflow-y-auto max-h-[140px] sm:max-h-[180px] border-t border-gray-200 bg-white text-xs sm:text-sm"></div>
+    <div id="chatbot-messages" class="flex flex-col gap-1 sm:gap-2 p-2 sm:p-3 overflow-y-auto max-h-[140px] sm:max-h-[180px] border-t border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs sm:text-sm"></div>
 </div>
 
 <!-- Chatbot Script -->
@@ -138,6 +292,38 @@
 
     // Back to root
     backBtn.addEventListener('click', () => renderOptions(faqTree));
+
+    // Listen for theme changes to update chatbot styling
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // Refresh button styles when theme changes
+                const buttons = options.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    btn.className = 'w-full mb-1 sm:mb-2 px-2 sm:px-3 py-1 sm:py-2 rounded bg-white dark:bg-gray-600 text-left shadow-sm hover:bg-blue-50 dark:hover:bg-gray-500 hover:translate-x-1 transition text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-500';
+                });
+                
+                // Update existing bot message colors when theme changes
+                updateExistingBotMessages();
+            }
+        });
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    // Function to update existing bot message colors
+    function updateExistingBotMessages() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const botMessages = messages.querySelectorAll('.bot-message');
+        
+        botMessages.forEach(span => {
+            const currentStyle = span.getAttribute('style');
+            // Replace background and color values
+            let newStyle = currentStyle
+                .replace(/background:\s*[^;]+;/, `background: ${isDark ? '#374151' : '#f1f0f0'};`)
+                .replace(/color:\s*[^;]+;/, `color: ${isDark ? '#f9fafb' : '#000'};`);
+            span.setAttribute('style', newStyle);
+        });
+    }
 
     const faqTree = [
         { question: "Shipping & Delivery", children: [
@@ -174,7 +360,7 @@
         tree.forEach(item => {
             const btn = document.createElement('button');
             btn.textContent = item.question;
-            btn.className = 'w-full mb-1 sm:mb-2 px-2 sm:px-3 py-1 sm:py-2 rounded bg-white text-left shadow-sm hover:bg-blue-50 hover:translate-x-1 transition';
+            btn.className = 'w-full mb-1 sm:mb-2 px-2 sm:px-3 py-1 sm:py-2 rounded bg-white dark:bg-gray-600 text-left shadow-sm hover:bg-blue-50 dark:hover:bg-gray-500 hover:translate-x-1 transition text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-500';
             btn.addEventListener('click', () => handleClick(item));
             options.appendChild(btn);
         });
@@ -201,23 +387,25 @@
             `;
             messages.scrollTop = messages.scrollHeight;
 
-            // Bot reply after delay (left side bubble remains unchanged)
+            // Bot reply after delay (left side bubble with dark mode support)
             setTimeout(() => {
-                messages.innerHTML += `
-                    <div style="text-align: left;">
-                        <span style="
-                            display: inline-block;
-                            background: #f1f0f0;
-                            color: #000;
-                            padding: 8px 12px; /* keep original padding */
-                            border-radius: 15px 15px 15px 0;
-                            max-width: 80%;
-                            text-align: left;
-                            margin-bottom: 6px;
-                            font-size: 0.875rem;
-                        ">${node.answer}</span>
-                    </div>
+                const isDark = document.documentElement.classList.contains('dark');
+                const botDiv = document.createElement('div');
+                botDiv.style.textAlign = 'left';
+                botDiv.innerHTML = `
+                    <span class="bot-message" style="
+                        display: inline-block;
+                        background: ${isDark ? '#374151' : '#f1f0f0'};
+                        color: ${isDark ? '#f9fafb' : '#000'};
+                        padding: 8px 12px;
+                        border-radius: 15px 15px 15px 0;
+                        max-width: 80%;
+                        text-align: left;
+                        margin-bottom: 6px;
+                        font-size: 0.875rem;
+                    ">${node.answer}</span>
                 `;
+                messages.appendChild(botDiv);
                 messages.scrollTop = messages.scrollHeight;
             }, 800);
         }
