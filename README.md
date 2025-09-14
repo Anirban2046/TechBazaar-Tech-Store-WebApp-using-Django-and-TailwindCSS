@@ -366,21 +366,21 @@ TechBazaar features a comprehensive dark mode implementation that significantly 
 
 #### **Technical Implementation**
 ```javascript
-// Advanced theme detection and switching
-const themeManager = {
-    init() {
-        const savedTheme = localStorage.getItem('theme');
-        const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const currentTheme = savedTheme || (systemPreference ? 'dark' : 'light');
-        this.applyTheme(currentTheme);
-    },
-    
-    toggle() {
-        const currentTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-        this.applyTheme(currentTheme);
-        localStorage.setItem('theme', currentTheme);
+// Manual theme switching with light mode default
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    // Only apply dark mode if explicitly saved as 'dark' by user
+    if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+    } else {
+        // Ensure light mode is default, remove any dark class
+        document.documentElement.classList.remove('dark');
+        // Set light theme in localStorage if no theme is saved
+        if (!savedTheme) {
+            localStorage.setItem('theme', 'light');
+        }
     }
-};
+})();
 ```
 
 #### **User Benefits**
