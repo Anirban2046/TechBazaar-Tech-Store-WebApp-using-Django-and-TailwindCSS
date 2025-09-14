@@ -28,10 +28,10 @@
           </button>
 
           <!-- Fixed dropdown container with proper overflow handling -->
-          <div id="catMenu" class="absolute mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg hidden z-50 overflow-hidden border border-gray-200 dark:border-gray-600">
+          <div id="catMenu" class="absolute mt-1 sm:mt-2 w-36 xs:w-40 sm:w-44 md:w-48 lg:w-52 xl:w-56 bg-white dark:bg-gray-800 rounded-md sm:rounded-lg shadow-lg hidden z-50 overflow-hidden border border-gray-200 dark:border-gray-600">
             <a href="{% url 'store' %}" 
-               class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700
-                      text-xs sm:text-sm md:text-base lg:text-base 
+               class="block px-2 xs:px-2.5 sm:px-3 md:px-4 py-1 xs:py-1.5 sm:py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700
+                      text-[8px] xs:text-[9px] sm:text-[10px] md:text-sm lg:text-base 
                       focus:outline-none focus:bg-blue-50 focus:text-blue-600
                       dark:focus:bg-blue-900 dark:focus:text-blue-300
                       transition-colors duration-200
@@ -40,8 +40,8 @@
             </a>
             {% for category in links %}
             <a href="{{ category.get_url }}" 
-               class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700
-                      text-xs sm:text-sm md:text-base lg:text-base 
+               class="block px-2 xs:px-2.5 sm:px-3 md:px-4 py-1 xs:py-1.5 sm:py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700
+                      text-[8px] xs:text-[9px] sm:text-[10px] md:text-sm lg:text-base 
                       focus:outline-none focus:bg-blue-50 focus:text-blue-600
                       dark:focus:bg-blue-900 dark:focus:text-blue-300
                       transition-colors duration-200
@@ -54,14 +54,15 @@
       </div>
 
       <!-- Search -->
-      <div class="flex-1 mx-2 sm:mx-6 md:mx-8 w-full">
+      <div class="flex-1 mx-2 sm:mx-6 md:mx-8 w-full relative">
         <form action="{% url 'search' %}" method="GET" class="relative group">
           <div class="flex bg-white dark:bg-gray-700 rounded-lg shadow-md group-focus-within:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-300 dark:border-gray-600 group-focus-within:border-blue-500 dark:group-focus-within:border-blue-400">
             
             <!-- Input -->
             <div class="flex-1 relative">
-              <input type="text" name="keyword" placeholder="Search" 
+              <input type="text" name="keyword" id="searchInput" placeholder="Search" 
                     value="{{ request.GET.keyword|default_if_none:'' }}"
+                    autocomplete="off"
                     class="w-full bg-transparent text-[9px] sm:text-[10px] md:text-sm lg:text-base
                             text-gray-900 dark:text-gray-100
                             pl-3 sm:pl-4 md:pl-5 pr-2 sm:pr-3 md:pr-4 py-1 sm:py-1.5 md:py-2
@@ -91,6 +92,32 @@
 
           </div>
         </form>
+
+        <!-- Search Suggestions Dropdown -->
+        <div id="searchSuggestions" class="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-600 z-50 hidden max-h-48 sm:max-h-64 md:max-h-80 lg:max-h-96 overflow-y-auto">
+          <!-- Loading state -->
+          <div id="loadingState" class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-center text-gray-500 dark:text-gray-400 text-[9px] sm:text-xs md:text-sm hidden">
+            <i data-feather="loader" class="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 inline-block animate-spin mr-1 sm:mr-1.5 md:mr-2"></i>
+            Searching...
+          </div>
+          
+          <!-- No results state -->
+          <div id="noResultsState" class="px-2 sm:px-3 md:px-4 py-4 sm:py-6 md:py-8 text-center hidden">
+            <div class="flex flex-col items-center justify-center space-y-1.5 sm:space-y-2 md:space-y-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <i data-feather="search" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-400 dark:text-gray-500"></i>
+              </div>
+              <div>
+                <p class="text-gray-600 dark:text-gray-400 font-medium text-[10px] sm:text-xs md:text-sm">No products found</p>
+                <p class="text-gray-500 dark:text-gray-500 text-[8px] sm:text-[10px] md:text-xs mt-0.5 sm:mt-1">Try searching with different keywords</p>
+              </div>
+            </div>
+          </div>
+          
+          <div id="suggestionsContent" class="py-1 sm:py-1.5 md:py-2">
+            <!-- Suggestions will be populated here -->
+          </div>
+        </div>
       </div>
 
       <!-- Auth + Dashboard -->
@@ -210,6 +237,11 @@
 
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
+    // Don't close dropdown if clicking on theme toggle
+    if (darkModeToggle && darkModeToggle.contains(e.target)) {
+      return;
+    }
+    
     if (!catToggle.contains(e.target) && !catMenu.contains(e.target)) {
       if (!catMenu.classList.contains('hidden')) {
         catMenu.style.opacity = '0';
@@ -227,11 +259,153 @@
 
   // Search Script
   const searchForm = document.querySelector('form[action="{% url "search" %}"]');
-  const searchInput = searchForm.querySelector('input[name="keyword"]');
+  const searchInput = document.getElementById('searchInput');
   searchForm.addEventListener('submit', function(e) {
     if (!searchInput.value.trim()) {
       e.preventDefault();
       searchInput.focus();
+    }
+  });
+  searchForm.addEventListener('submit', function(e) {
+    if (!searchInput.value.trim()) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+
+  // Live Search Suggestions
+  const searchSuggestions = document.getElementById('searchSuggestions');
+  const suggestionsContent = document.getElementById('suggestionsContent');
+  const loadingState = document.getElementById('loadingState');
+  const noResultsState = document.getElementById('noResultsState');
+  let searchTimeout;
+
+  function showSuggestions() {
+    searchSuggestions.classList.remove('hidden');
+  }
+
+  function hideSuggestions() {
+    searchSuggestions.classList.add('hidden');
+  }
+
+  function showLoading() {
+    suggestionsContent.innerHTML = '';
+    loadingState.classList.remove('hidden');
+    noResultsState.classList.add('hidden');
+    showSuggestions();
+  }
+
+  function showNoResults() {
+    suggestionsContent.innerHTML = '';
+    loadingState.classList.add('hidden');
+    noResultsState.classList.remove('hidden');
+    showSuggestions();
+  }
+
+  function hideStates() {
+    loadingState.classList.add('hidden');
+    noResultsState.classList.add('hidden');
+  }
+
+  function fetchSuggestions(query) {
+    if (query.length < 2) {
+      hideSuggestions();
+      return;
+    }
+
+    showLoading();
+
+    fetch(`{% url 'search_suggestions' %}?q=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+      .then(data => {
+        hideStates();
+        if (data.suggestions && data.suggestions.length > 0) {
+          renderSuggestions(data.suggestions);
+          showSuggestions();
+        } else {
+          showNoResults();
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching suggestions:', error);
+        hideStates();
+        hideSuggestions();
+      });
+  }
+
+  function renderSuggestions(suggestions) {
+    suggestionsContent.innerHTML = '';
+    
+    suggestions.forEach(suggestion => {
+      const suggestionItem = document.createElement('a');
+      suggestionItem.href = suggestion.url;
+      suggestionItem.className = `
+        flex items-center gap-2 sm:gap-2.5 md:gap-3 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 hover:bg-gray-50 dark:hover:bg-gray-700 
+        transition-colors duration-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0
+        focus:outline-none focus:bg-blue-50 focus:text-blue-600 dark:focus:bg-blue-900 dark:focus:text-blue-300
+      `;
+      
+      suggestionItem.innerHTML = `
+        <div class="flex-shrink-0">
+          ${suggestion.image ? 
+            `<img src="${suggestion.image}" alt="${suggestion.name}" class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover rounded-md border border-gray-200 dark:border-gray-600">` :
+            `<div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-gray-200 dark:bg-gray-600 rounded-md flex items-center justify-center">
+              <i data-feather="package" class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-gray-400"></i>
+            </div>`
+          }
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-[10px] sm:text-xs md:text-sm font-medium text-gray-900 dark:text-gray-100 truncate">${suggestion.name}</h4>
+          <p class="text-[8px] sm:text-[10px] md:text-xs text-gray-500 dark:text-gray-400 truncate">${suggestion.category}</p>
+          <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2 mt-0.5 sm:mt-1">
+            <span class="text-[9px] sm:text-xs md:text-sm font-semibold text-blue-600 dark:text-blue-400">Tk ${suggestion.price}</span>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <i data-feather="arrow-right" class="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-gray-400"></i>
+        </div>
+      `;
+      
+      suggestionsContent.appendChild(suggestionItem);
+    });
+    
+    // Re-initialize feather icons for new content
+    feather.replace();
+  }
+
+  // Search input event listeners
+  searchInput.addEventListener('input', function(e) {
+    const query = e.target.value.trim();
+    
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      fetchSuggestions(query);
+    }, 300); // 300ms debounce
+  });
+
+  searchInput.addEventListener('focus', function(e) {
+    const query = e.target.value.trim();
+    if (query.length >= 2) {
+      fetchSuggestions(query);
+    }
+  });
+
+  // Hide suggestions when clicking outside
+  document.addEventListener('click', function(e) {
+    // Don't close suggestions if clicking on theme toggle
+    if (darkModeToggle && darkModeToggle.contains(e.target)) {
+      return;
+    }
+    
+    if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+      hideSuggestions();
+    }
+  });
+
+  // Handle keyboard navigation (optional enhancement)
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      hideSuggestions();
     }
   });
 
@@ -253,6 +427,12 @@
 
   // Function to apply theme
   function applyTheme(theme) {
+    // Store dropdown states before theme change
+    const catMenuVisible = !catMenu.classList.contains('hidden');
+    const catMenuOpacity = catMenu.style.opacity;
+    const catMenuTransform = catMenu.style.transform;
+    const searchSuggestionsVisible = !searchSuggestions.classList.contains('hidden');
+    
     if (theme === 'dark') {
       html.classList.add('dark');
       updateDarkModeIcon(true);
@@ -260,6 +440,23 @@
       html.classList.remove('dark');
       updateDarkModeIcon(false);
     }
+    
+    // Use requestAnimationFrame to ensure theme is applied before restoring states
+    requestAnimationFrame(() => {
+      // Restore dropdown states without interfering with their functionality
+      if (catMenuVisible) {
+        catMenu.classList.remove('hidden');
+        // Restore the exact opacity and transform values
+        catMenu.style.opacity = catMenuOpacity === '1' || catMenuOpacity === '' ? '1' : catMenuOpacity;
+        catMenu.style.transform = catMenuTransform === 'scaleY(1)' || catMenuTransform === '' ? 'scaleY(1)' : catMenuTransform;
+        // Force a reflow to ensure the styles are applied properly
+        catMenu.offsetHeight;
+      }
+      
+      if (searchSuggestionsVisible) {
+        searchSuggestions.classList.remove('hidden');
+      }
+    });
   }
 
   // Check for saved dark mode preference or default to light mode
@@ -269,7 +466,10 @@
   applyTheme(savedTheme);
 
   // Toggle dark mode
-  darkModeToggle.addEventListener('click', () => {
+  darkModeToggle.addEventListener('click', (e) => {
+    // Prevent the click from bubbling up and triggering document click handlers
+    e.stopPropagation();
+    
     const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     

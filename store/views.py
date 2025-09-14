@@ -6,7 +6,7 @@ from django.db.models import Q, Max
 
 from carts.views import _cart_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .forms import ReviewForm
 from django.contrib import messages
 from orders.models import OrderProduct
@@ -213,3 +213,28 @@ def submit_review(request, product_id):
             return redirect(url)
     # fallback
     return redirect(url)
+
+
+def search_suggestions(request):
+    """AJAX view for live search suggestions"""
+    query = request.GET.get('q', '').strip()
+    suggestions = []
+    
+    if query and len(query) >= 2:  # Start suggesting after 2 characters
+        products = Product.objects.filter(
+            Q(product_name__icontains=query) | Q(description__icontains=query),
+            is_available=True
+        ).select_related('category')[:8]  # Limit to 8 suggestions
+        
+        for product in products:
+            suggestions.append({
+                'id': product.id,
+                'name': product.product_name,
+                'price': product.price,
+                'image': product.images.url if product.images else '',
+                'category': product.category.category_name,
+                'url': product.get_url(),
+                'stock': product.stock
+            })
+    
+    return JsonResponse({'suggestions': suggestions})
