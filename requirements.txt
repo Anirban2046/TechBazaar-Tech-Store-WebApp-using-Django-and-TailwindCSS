@@ -1,0 +1,97 @@
+# ================================
+# DJANGO FRAMEWORK & CORE PACKAGES
+# ================================
+Django==5.2.5                      # Main web framework
+asgiref==3.9.1                     # ASGI utilities for Django
+sqlparse==0.5.3                    # SQL parsing library for Django
+djangorestframework==3.16.1        # REST API framework for Django
+
+# ================================
+# DJANGO EXTENSIONS & UTILITIES
+# ================================
+django-admin-thumbnails==0.2.9     # Admin interface thumbnails
+django-widget-tweaks==1.5.0        # Enhanced form widgets and styling
+
+# ================================
+# DATABASE & DATA HANDLING
+# ================================
+psycopg2-binary==2.9.10            # PostgreSQL database adapter
+pillow==11.3.0                     # Image processing and manipulation
+
+# ================================
+# CONFIGURATION & ENVIRONMENT
+# ================================
+python-decouple==3.8               # Environment variables and configuration management
+
+# ================================
+# WEB REQUESTS & HTTP
+# ================================
+requests==2.32.5                   # HTTP requests library
+urllib3==2.5.0                     # HTTP client library
+certifi==2025.8.3                  # SSL certificate verification
+charset-normalizer==3.4.3          # Character encoding detection
+idna==3.10                          # Internationalized domain names
+
+# ================================
+# PAYMENT GATEWAY
+# ================================
+sslcommerz-lib==1.0                # SSLCommerz payment gateway integration
+
+# ================================
+# PDF GENERATION & DOCUMENT PROCESSING
+# ================================
+weasyprint==66.0                   # HTML to PDF conversion
+cssselect2==0.8.0                  # CSS selector engine for WeasyPrint
+tinycss2==1.4.0                    # CSS parser for WeasyPrint
+tinyhtml5==2.0.0                   # HTML5 parser for WeasyPrint
+webencodings==0.5.1                # Web encoding utilities
+fonttools==4.59.1                  # Font manipulation tools
+pyphen==0.17.2                     # Hyphenation library
+pydyf==0.11.0                      # PDF generation utilities
+cffi==1.17.1                       # C Foreign Function Interface
+pycparser==2.22                    # C parser for cffi
+
+# ================================
+# COMPRESSION & OPTIMIZATION
+# ================================
+Brotli==1.1.0                      # Brotli compression algorithm
+zopfli==0.2.3.post1                # Compression algorithm
+
+# ================================
+# TEXT PROCESSING & FORMATTING
+# ================================
+python-slugify==8.0.4              # URL-friendly slug generation
+text-unidecode==1.3                # ASCII transliteration
+markdown-it-py==4.0.0              # Markdown parsing and rendering
+mdurl==0.1.2                       # Markdown URL utilities
+rich==14.1.0                       # Rich text and beautiful formatting
+Pygments==2.19.2                   # Syntax highlighting
+
+# ================================
+# DATE & TIME UTILITIES
+# ================================
+arrow==1.3.0                       # Better date and time handling
+python-dateutil==2.9.0.post0       # Date parsing and manipulation
+types-python-dateutil==2.9.0.20250822  # Type hints for python-dateutil
+
+# ================================
+# TEMPLATE & MARKUP PROCESSING
+# ================================
+Jinja2==3.1.6                      # Template engine
+MarkupSafe==3.0.2                  # Safe markup handling for templates
+
+# ================================
+# DEVELOPMENT & PROJECT MANAGEMENT
+# ================================
+cookiecutter==2.6.0                # Project template creation
+binaryornot==0.4.4                 # Binary file detection utility
+click==8.2.1                       # Command line interface creation
+honcho==2.0.0                      # Process management
+chardet==5.2.0                     # Character encoding detection
+PyYAML==6.0.2                      # YAML parsing and generation
+
+# ================================
+# UTILITY LIBRARIES
+# ================================
+six==1.17.0                        # Python 2 and 3 compatibility
+typing_extensions==4.14.1          # Extended type hints support
