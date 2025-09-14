@@ -93,7 +93,7 @@
 ### **Frontend Technologies**
 | Technology | Version | Purpose | Features Used |
 |------------|---------|---------|---------------|
-| ![TailwindCSS](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white) | 3.x (CDN) | CSS Framework | Utility Classes, Responsive Design, Dark Mode, Custom Components |
+| ![TailwindCSS](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white) | (CDN) | CSS Framework | Utility Classes, Responsive Design, Dark Mode, Custom Components |
 | ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black) | ES6+ | Frontend Logic | DOM Manipulation, Event Handling, AJAX, LocalStorage |
 | ![jQuery](https://img.shields.io/badge/-jQuery-0769AD?logo=jquery&logoColor=white) | 3.5.1 | DOM Manipulation | Animations, AJAX Requests, Event Handling |
 | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white) | Latest | Markup | Semantic Elements, Forms, Accessibility |
