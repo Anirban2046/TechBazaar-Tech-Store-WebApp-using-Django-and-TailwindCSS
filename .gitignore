@@ -25,3 +25,8 @@ media/
 
 # Ignore VS Code settings
 .vscode/
+
+# PyCharm project settings
+.idea/
+*.iml
+
