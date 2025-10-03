@@ -208,8 +208,8 @@ python manage.py migrate
 # Create superuser for admin access
 python manage.py createsuperuser
 
-# Load sample data (optional)
-python manage.py loaddata fixtures/sample_data.json
+# Load pre-populated demo database
+python manage.py loaddata db.json
 ```
 
 ### 6. **Collect Static Files**

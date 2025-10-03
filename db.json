@@ -1,0 +1,382 @@
+[
+{
+  "model": "category.category",
+  "pk": 1,
+  "fields": {
+    "category_name": "Phone",
+    "slug": "phone",
+    "description": "Phone",
+    "cat_image": "photos/categories/phone_KkW2dzs.jpg"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 2,
+  "fields": {
+    "category_name": "Laptop",
+    "slug": "laptop",
+    "description": "Laptop",
+    "cat_image": "photos/categories/laptop_OPMkeuU.jpg"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 3,
+  "fields": {
+    "category_name": "Camera",
+    "slug": "camera",
+    "description": "Camera",
+    "cat_image": "photos/categories/camera_K5DK1yw.jpg"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 4,
+  "fields": {
+    "category_name": "Tablet",
+    "slug": "tablet",
+    "description": "Tablet",
+    "cat_image": "photos/categories/tablet_tq2g7Mn.jpg"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 5,
+  "fields": {
+    "category_name": "Gadget",
+    "slug": "gadget",
+    "description": "Gadget",
+    "cat_image": "photos/categories/gadget_UrC7WOB.jpg"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 6,
+  "fields": {
+    "category_name": "Accessories",
+    "slug": "accessories",
+    "description": "Accessories",
+    "cat_image": "photos/categories/accessories_r7eyWWZ.jpg"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 1,
+  "fields": {
+    "product_name": "Google Pixel 9a",
+    "slug": "google-pixel-9a",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Google Pixel 9a</strong><br><br>\r\n    The <strong>Google Pixel 9a</strong> combines cutting-edge technology with sleek design, \r\n    powered by the <strong>Google Tensor G4 chipset</strong> for seamless multitasking, gaming, \r\n    and efficient everyday performance.\r\n  </p>\r\n\r\n  <p>\r\n    Enjoy stunning visuals on the <strong>6.3-inch P-OLED display</strong> with \r\n    <strong>1080 × 2424 resolution</strong>, <strong>120Hz refresh rate</strong>, \r\n    HDR support, and <strong>2700 nits peak brightness</strong>, all protected by \r\n    <strong>Corning Gorilla Glass 3</strong> for durability.\r\n  </p>\r\n\r\n  <p>\r\n    Capture every moment with the <strong>dual-camera system</strong> featuring a \r\n    <strong>48MP wide lens</strong> and <strong>13MP ultrawide lens</strong>, enhanced by \r\n    <strong>Ultra HDR</strong> and <strong>Pixel Shift technology</strong>. Record in \r\n    <strong>4K</strong> at multiple frame rates and enjoy crystal-clear selfies with the \r\n    <strong>13MP front camera</strong>.\r\n  </p>\r\n\r\n  <p>\r\n    Stay powered all day with the <strong>5100 mAh battery</strong>, supporting \r\n    <strong>23W wired</strong> and <strong>7.5W wireless charging</strong>. \r\n    With <strong>IP68 water and dust resistance</strong>, the Pixel 9a is built \r\n    for durability in any environment.\r\n  </p>\r\n\r\n  <p>\r\n    The built-in <strong>Gemini AI assistant</strong> enhances your daily experience with \r\n    smart suggestions, seamless Google app integration, and creative tools like \r\n    photo editing and productivity support.\r\n  </p>\r\n\r\n  <p>\r\n    Running on <strong>Android 15</strong> with up to <strong>7 years of major OS upgrades</strong>, \r\n    the Pixel 9a delivers a future-proof smartphone experience with premium performance, \r\n    sustainability-focused design, and powerful AI integration.\r\n  </p>\r\n</div>",
+    "price": 66850,
+    "images": "photos/products/Google_Pixel_9a_N6CWVRb.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 1,
+    "created_date": "2025-08-24T16:51:51.345Z",
+    "modified_date": "2025-08-24T17:56:31.039Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 2,
+  "fields": {
+    "product_name": "Havit TW976 True Wireless Stereo Earbuds",
+    "slug": "havit-tw976-true-wireless-stereo-earbuds",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Havit TW976 True Wireless Stereo Earbuds</strong><br><br>\r\n    Ultra-light at only <strong>4g</strong> each, these earbuds fit securely and comfortably for all-day wear. \r\n    The <strong>5656C2 chip</strong> with <strong>Bluetooth 5.3</strong> ensures fast pairing and stable connection.\r\n  </p>\r\n\r\n  <p>\r\n    Equipped with a <strong>Type-C USB port</strong>, the charging case (<strong>300mAh</strong>) \r\n    quickly powers the earbuds (<strong>30mAh</strong> each). Enjoy up to <strong>5 hours of music</strong> \r\n    or <strong>3.5 hours of talk time</strong> on a single charge.\r\n  </p>\r\n\r\n  <p>\r\n    Featuring a <strong>13mm driver</strong>, <strong>32Ω impedance</strong>, and a frequency response of \r\n    <strong>20Hz–20kHz</strong>, the TW976 delivers immersive, balanced sound with minimal distortion.\r\n  </p>\r\n\r\n  <p>\r\n    With <strong>10m wireless range</strong> and <strong>power-efficient design</strong>, you get reliable audio \r\n    wherever you go, without draining the battery quickly.\r\n  </p>\r\n</div>",
+    "price": 1080,
+    "images": "photos/products/Havit_TW976_True_Wireless_Stereo_Earbuds_u0jtyxE.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 5,
+    "created_date": "2025-08-24T17:54:34.743Z",
+    "modified_date": "2025-09-13T19:22:28.568Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 3,
+  "fields": {
+    "product_name": "Onikuma GT820 Wireless Gaming Headphone",
+    "slug": "onikuma-gt820-wireless-gaming-headphone",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Onikuma GT820 Wireless Gaming Headphone</strong><br><br>\r\n    Built with the <strong>JL7006F4 chipset</strong>, this headset provides a stable wireless connection \r\n    with a range of up to <strong>15m</strong>, giving you freedom to move while gaming.\r\n  </p>\r\n\r\n  <p>\r\n    Its <strong>32mm drivers</strong> deliver powerful sound with <strong>32Ω impedance</strong>, \r\n    <strong>108dB sensitivity</strong>, and a frequency range of <strong>20Hz–20KHz</strong>, \r\n    perfect for clear footsteps, gunfire, and immersive game audio.\r\n  </p>\r\n\r\n  <p>\r\n    The <strong>built-in mic</strong> (-42dB ± 3dB) ensures smooth voice chat with teammates, \r\n    reducing background noise for clear communication.\r\n  </p>\r\n\r\n  <p>\r\n    With a <strong>500mAh battery</strong>, enjoy up to <strong>60 hours of playtime</strong> \r\n    at 50% volume—ideal for long gaming sessions without frequent charging.\r\n  </p>\r\n\r\n  <p>\r\n    Sleek, comfortable, and performance-driven, the GT820 is a reliable choice for gamers \r\n    seeking both <strong>high-quality sound</strong> and <strong>lasting comfort</strong>.\r\n  </p>\r\n</div>",
+    "price": 2000,
+    "images": "photos/products/Onikuma_GT820_Wireless_Gaming_Headphone_rFtsU5A.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 6,
+    "created_date": "2025-08-24T17:56:23.566Z",
+    "modified_date": "2025-09-13T19:21:22.704Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 4,
+  "fields": {
+    "product_name": "Redmi Watch 5 Lite",
+    "slug": "redmi-watch-5-lite",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Xiaomi Redmi Watch 5 Lite Bluetooth Calling Smart Watch</strong><br><br>\r\n    Featuring a vivid <strong>1.96-inch AMOLED display</strong> (410 × 502 px), the Redmi Watch 5 Lite \r\n    delivers sharp visuals even in bright sunlight. Its sleek design with a <strong>high-gloss NCVM frame</strong> \r\n    ensures durability and a premium look.\r\n  </p>\r\n\r\n  <p>\r\n    Stay connected with <strong>Bluetooth calling</strong> supported by dual-mic noise reduction for clear, \r\n    uninterrupted conversations directly from your wrist.\r\n  </p>\r\n\r\n  <p>\r\n    With <strong>150+ sports modes</strong> and automatic activity detection, the watch tracks running, \r\n    walking, cycling, and more. It also includes <strong>24h heart rate</strong>, \r\n    <strong>SpO2</strong>, <strong>sleep & stress</strong>, and <strong>female health tracking</strong>.\r\n  </p>\r\n\r\n  <p>\r\n    Built for everyday use, the watch is <strong>5ATM water-resistant</strong>, making it safe for \r\n    swimming, rain, or workouts in tough conditions.\r\n  </p>\r\n\r\n  <p>\r\n    Power through your schedule with a <strong>battery life of up to 18 days</strong>. \r\n    With <strong>GNSS navigation</strong>, customizable watch faces, and Mi Fitness app support, \r\n    it’s a reliable companion for health, fitness, and daily life.\r\n  </p>\r\n</div>",
+    "price": 5050,
+    "images": "photos/products/Redmi_Watch_5_Lite_EynLABz.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 5,
+    "created_date": "2025-08-24T17:57:36.354Z",
+    "modified_date": "2025-08-24T17:57:36.354Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 5,
+  "fields": {
+    "product_name": "QCY MX1 Wireless Bluetooth Speaker",
+    "slug": "qcy-mx1-wireless-bluetooth-speaker",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>QCY MX1 Wireless Bluetooth Speaker</strong><br><br>\r\n    Compact yet powerful, the MX1 delivers <strong>5W audio output</strong> through a <strong>76mm driver</strong>, \r\n    producing rich sound with deep bass and full-range clarity. With <strong>Bluetooth 5.2</strong> and a \r\n    <strong>15m wireless range</strong>, you’ll enjoy smooth, uninterrupted streaming.\r\n  </p>\r\n\r\n  <p>\r\n    Equipped with a <strong>2000mAh battery</strong>, the MX1 offers up to <strong>28 hours of playtime</strong> \r\n    (36 hours in loudspeaker mode) and recharges quickly via <strong>Type-C</strong> in just 4 hours.\r\n  </p>\r\n\r\n  <p>\r\n    Beyond music, it features <strong>FM radio</strong>, <strong>alarm clock</strong>, memory card support, \r\n    <strong>USB drive playback</strong>, and <strong>touch controls</strong>. \r\n    Anti-magnetic technology ensures interference-free listening.\r\n  </p>\r\n\r\n  <p>\r\n    Highly versatile, it connects to <strong>phones, PCs, TVs, home theaters, and karaoke systems</strong> \r\n    via Bluetooth or AUX input. A remote control adds extra convenience.\r\n  </p>\r\n\r\n  <p>\r\n    Whether at home, on the go, or hosting a party, the QCY MX1 is built to deliver \r\n    <strong>long-lasting, immersive audio</strong> with smart features for every occasion.\r\n  </p>\r\n</div>",
+    "price": 2300,
+    "images": "photos/products/QCY_MX1_Wireless_Bluetooth_Speaker_7C0KBMS.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 6,
+    "created_date": "2025-08-24T17:58:27.814Z",
+    "modified_date": "2025-09-13T19:21:31.230Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 6,
+  "fields": {
+    "product_name": "Fantech ATOM MK886 RGB Gaming Mechanical Keyboard",
+    "slug": "fantech-atom-mk886-rgb-gaming-mechanical-keyboard",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Fantech ATOM MK886 RGB Gaming Mechanical Keyboard</strong><br><br>\r\n    Built for durability and performance, this wired mechanical keyboard connects via \r\n    <strong>USB</strong> and works seamlessly with both <strong>Windows and Mac OS</strong>.\r\n  </p>\r\n\r\n  <p>\r\n    Featuring <strong>blue mechanical switches</strong> with tactile feedback and a loud click, \r\n    it enhances both typing and gaming precision. The <strong>104 double-injection keycaps</strong> \r\n    are rated for <strong>50 million keystrokes</strong>, ensuring long-lasting reliability.\r\n  </p>\r\n\r\n  <p>\r\n    Customize your setup with <strong>16 RGB lighting effects</strong> and adjustable height \r\n    for ergonomic comfort during extended use.\r\n  </p>\r\n\r\n  <p>\r\n    Equipped with <strong>anti-ghosting technology</strong> that supports up to <strong>25 simultaneous keys</strong>, \r\n    the MK886 guarantees every keystroke is accurately registered—perfect for competitive gaming.\r\n  </p>\r\n\r\n  <p>\r\n    Combining <strong>durability, comfort, and style</strong>, the Fantech ATOM MK886 is an \r\n    excellent choice for gamers and professionals seeking a high-performance keyboard.\r\n  </p>\r\n</div>",
+    "price": 3100,
+    "images": "photos/products/Fantech_ATOM_MK886_RGB_Gaming_Mechanical_Keyboard_8wEegQE.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 6,
+    "created_date": "2025-08-24T17:59:05.602Z",
+    "modified_date": "2025-09-13T19:22:46.259Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 7,
+  "fields": {
+    "product_name": "ASUS WT200 Optical Wireless Mouse",
+    "slug": "asus-wt200-optical-wireless-mouse",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>ASUS WT200 Optical Wireless Mouse</strong><br><br>\r\n    Designed for comfort and precision, the WT200 features an <strong>ergonomic design</strong> \r\n    suitable for both left- and right-handed users. Its <strong>1200 DPI sensor</strong> ensures smooth \r\n    and accurate cursor control.\r\n  </p>\r\n\r\n  <p>\r\n    With <strong>2.4GHz wireless technology</strong>, enjoy a stable, cable-free connection using the \r\n    included USB receiver. The WT200 works with <strong>Windows 7, 8, and 10</strong> for easy plug-and-play use.\r\n  </p>\r\n\r\n  <p>\r\n    Built to last, it supports up to <strong>3 million clicks</strong> and includes a \r\n    <strong>low-battery indicator</strong> plus a <strong>power switch</strong> to save energy when not in use.\r\n  </p>\r\n\r\n  <p>\r\n    Lightweight, reliable, and durable, the ASUS WT200 is an excellent choice for everyday \r\n    work and casual computing.\r\n  </p>\r\n</div>",
+    "price": 1050,
+    "images": "photos/products/ASUS_WT200_Optical_Wireless_Mouse_iiEKQKh.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 6,
+    "created_date": "2025-08-24T17:59:48.356Z",
+    "modified_date": "2025-09-13T19:22:17.552Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 8,
+  "fields": {
+    "product_name": "Lenovo HE05 Bluetooth Neckband Earphone Black",
+    "slug": "lenovo-he05-bluetooth-neckband-earphone-black",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Lenovo HE05 Bluetooth Neckband Earphone Black</strong><br><br>\r\n    Powered by an <strong>8mm driver</strong>, the HE05 delivers clear, dynamic sound for an enjoyable \r\n    listening experience. Its <strong>Bluetooth 5.0</strong> chip ensures a stable, fast wireless connection.\r\n  </p>\r\n\r\n  <p>\r\n    With a <strong>large-capacity battery</strong>, enjoy up to <strong>12 hours of playtime</strong> \r\n    and <strong>7 days standby</strong> on a single charge.\r\n  </p>\r\n\r\n  <p>\r\n    Built with an <strong>IPX5 waterproof rating</strong>, it resists rain and sweat—ideal for workouts \r\n    and outdoor use. The <strong>CVC noise-canceling microphone</strong> ensures clear calls, while the \r\n    <strong>magnetic earbud design</strong> makes storage easy.\r\n  </p>\r\n\r\n  <p>\r\n    Lightweight and ergonomically designed, the Lenovo HE05 offers <strong>all-day comfort</strong>.  \r\n    <em>Note: This earphone has no warranty.</em>\r\n  </p>\r\n</div>",
+    "price": 450,
+    "images": "photos/products/Lenovo_HE05_Bluetooth_Neckband_Earphone_Black_UOyyLt1.png",
+    "stock": 499,
+    "is_available": true,
+    "category": 5,
+    "created_date": "2025-08-24T18:02:36.029Z",
+    "modified_date": "2025-09-16T14:31:34.068Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 9,
+  "fields": {
+    "product_name": "Samsung Galaxy Tab A9 LTE (Wi-Fi + SIM)",
+    "slug": "samsung-galaxy-tab-a9-lte-wi-fi-sim",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Samsung Galaxy Tab A9 LTE 4GB RAM 64GB Storage 8.7\" Tablet (Wi-Fi + SIM)</strong><br><br>\r\n    Powered by the <strong>MediaTek Helio G99 octa-core chipset</strong> with <strong>Mali-G57 GPU</strong>, \r\n    the Galaxy Tab A9 LTE delivers smooth multitasking and reliable performance for work and entertainment.\r\n  </p>\r\n\r\n  <p>\r\n    The <strong>8.7-inch WXGA+ TFT display</strong> (1340 × 800) provides bright, clear visuals with fluid motion, \r\n    while <strong>Dolby Atmos stereo speakers</strong> create an immersive audio experience.\r\n  </p>\r\n\r\n  <p>\r\n    Capture memories with the <strong>8MP rear camera</strong> and <strong>2MP front camera</strong>. \r\n    Store more with <strong>64GB internal storage</strong>, expandable up to <strong>1TB</strong>, and enjoy \r\n    lag-free performance with <strong>4GB RAM</strong>.\r\n  </p>\r\n\r\n  <p>\r\n    Stay connected with <strong>LTE, Wi-Fi 802.11 a/b/g/n/ac</strong>, <strong>Bluetooth 5.3</strong>, GPS, \r\n    and a <strong>3.5mm earjack</strong>. Runs on <strong>Android OS</strong> with advanced security features \r\n    like Secure Folder and Privacy Dashboard.\r\n  </p>\r\n\r\n  <p>\r\n    A long-lasting <strong>5100mAh battery</strong> ensures hours of productivity, gaming, and streaming, making \r\n    the Galaxy Tab A9 LTE the perfect travel companion.\r\n  </p>\r\n</div>",
+    "price": 14500,
+    "images": "photos/products/Samsung_Galaxy_Tab_A9_LTE_Wi-Fi__SIM_27lAKWb.png",
+    "stock": 499,
+    "is_available": true,
+    "category": 4,
+    "created_date": "2025-08-24T18:04:09.875Z",
+    "modified_date": "2025-09-14T07:17:39.045Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 10,
+  "fields": {
+    "product_name": "Canon EOS R100 Mirrorless Camera with 18-45mm Lens",
+    "slug": "canon-eos-r100-mirrorless-camera-with-18-45mm-lens",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Canon EOS R100 Mirrorless Camera with 18-45mm Lens</strong><br><br>\r\n    Capture stunning photos and videos with the <strong>24.2MP APS-C CMOS sensor</strong> \r\n    and <strong>DIGIC 8 processor</strong>, delivering excellent detail, clarity, and low-light performance.\r\n  </p>\r\n\r\n  <p>\r\n    Record in <strong>4K 24p</strong> or <strong>Full HD 60p</strong>, and enjoy smooth action shots \r\n    with the <strong>6.5 fps electronic shutter</strong>. The <strong>2.36m-dot OLED EVF</strong> and \r\n    <strong>3\" LCD screen</strong> provide bright and immersive viewing.\r\n  </p>\r\n\r\n  <p>\r\n    The advanced <strong>Dual Pixel CMOS AF</strong> with <strong>143 zones</strong> ensures fast, accurate focusing \r\n    with eye and subject detection for sharp results every time.\r\n  </p>\r\n\r\n  <p>\r\n    Stay connected with <strong>Wi-Fi, Bluetooth, USB-C, micro-HDMI, and 3.5mm mic support</strong>, \r\n    making it easy to transfer, share, and record content on the go.\r\n  </p>\r\n\r\n  <p>\r\n    Paired with the <strong>RF-S 18-45mm f/4.5-6.3 IS STM lens</strong>, enjoy versatile wide-angle \r\n    to short-telephoto shooting. With <strong>Optical Image Stabilization</strong> (up to 4–6 stops) and \r\n    STM autofocus, it’s ideal for both stills and video.\r\n  </p>\r\n\r\n  <p>\r\n    Compact, powerful, and beginner-friendly, the EOS R100 is a great entry point into the Canon EOS R system, \r\n    perfect for everyday photography and creative projects.\r\n  </p>\r\n</div>",
+    "price": 67000,
+    "images": "photos/products/Canon_EOS_R100_Mirrorless_Camera_with_18-45mm_Lens_rACKXy5.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 3,
+    "created_date": "2025-08-24T18:04:43.188Z",
+    "modified_date": "2025-08-24T18:04:43.188Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 11,
+  "fields": {
+    "product_name": "ASUS TUF Gaming A16 FA617NSR Advantage Edition",
+    "slug": "asus-tuf-gaming-a16-fa617nsr-advantage-edition",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>ASUS TUF Gaming A16 FA617NSR Advantage Edition</strong><br><br>\r\n    Experience powerful gaming performance with the <strong>AMD Ryzen 7 7435HS processor</strong> \r\n    (8 cores, 16 threads, up to 4.5GHz) and <strong>AMD Radeon RX 7600S 8GB GDDR6 graphics</strong>, \r\n    delivering smooth multitasking and immersive gameplay.\r\n  </p>\r\n\r\n  <p>\r\n    Enjoy ultra-smooth visuals on the <strong>16-inch WUXGA (1920×1200) display</strong> with a \r\n    <strong>165Hz refresh rate</strong> and <strong>7ms response time</strong>, ensuring sharp details, vibrant colors, \r\n    and reduced motion blur during fast-paced action.\r\n  </p>\r\n\r\n  <p>\r\n    Equipped with <strong>16GB DDR5 RAM</strong> and a <strong>512GB PCIe 4.0 NVMe SSD</strong>, \r\n    this laptop offers fast load times and ample storage for games and applications.\r\n  </p>\r\n\r\n  <p>\r\n    Stay connected with <strong>Wi-Fi 6</strong>, <strong>Bluetooth 5.3</strong>, USB ports, and a 720p HD camera \r\n    with <strong>privacy shutter</strong>. AI noise-canceling technology ensures clear communication during online sessions.\r\n  </p>\r\n\r\n  <p>\r\n    Built with <strong>military-grade durability</strong>, the ASUS TUF Gaming A16 is designed to withstand \r\n    long hours of gaming while its <strong>backlit keyboard</strong> adds style and precision for every keystroke.\r\n  </p>\r\n\r\n  <p>\r\n    A perfect blend of power, speed, and reliability, the TUF Gaming A16 is ideal for gamers seeking \r\n    smooth performance and next-level visuals in every session.\r\n  </p>\r\n</div>",
+    "price": 144000,
+    "images": "photos/products/ASUS_TUF_Gaming_A16_FA617NSR_Advantage_Edition_hBs43A9.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 2,
+    "created_date": "2025-08-24T18:05:28.398Z",
+    "modified_date": "2025-08-24T18:05:28.398Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 12,
+  "fields": {
+    "product_name": "Xiaomi Mi Band 8 Smart Bracelet",
+    "slug": "xiaomi-mi-band-8-smart-bracelet",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Xiaomi Mi Band 8 Smart Bracelet</strong><br><br>\r\n    The <strong>Mi Band 8</strong> is a stylish fitness tracker with a \r\n    <strong>1.62-inch curved AMOLED display</strong> for vibrant visuals and smart notifications. \r\n    It supports <strong>120+ workout modes</strong> and monitors heart rate, SpO₂, sleep, stress, \r\n    and calories to keep you on top of your health.\r\n  </p>\r\n\r\n  <p>\r\n    With <strong>5ATM water resistance</strong> and <strong>Bluetooth 5.1</strong>, \r\n    it syncs seamlessly with Android and iOS devices. A <strong>190mAh battery</strong> \r\n    provides up to <strong>16 days of use</strong> (6 days with AOD) and recharges easily via \r\n    <strong>magnetic charging</strong>.\r\n  </p>\r\n\r\n  <p>\r\n    Extra features include <strong>smart home control</strong>, \r\n    <strong>women’s health tracking</strong>, and customizable watch faces, \r\n    making it both practical and versatile.\r\n  </p>\r\n</div>",
+    "price": 4000,
+    "images": "photos/products/Xiaomi_Mi_Band_8_Smart_Bracelet_lu9VfAY.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 5,
+    "created_date": "2025-08-24T18:06:03.950Z",
+    "modified_date": "2025-09-13T19:22:54.339Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 13,
+  "fields": {
+    "product_name": "OnePlus Nord CE4 Lite 5G",
+    "slug": "oneplus-nord-ce4-lite-5g",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>OnePlus Nord CE4 Lite 5G</strong><br><br>\r\n    Experience power and style with the <strong>6.67-inch 120Hz AMOLED display</strong>, \r\n    delivering <strong>FHD+ resolution</strong>, <strong>2100 nits peak brightness</strong>, \r\n    and smooth visuals with HDR streaming support. \r\n  </p>\r\n\r\n  <p>\r\n    Powered by the <strong>Snapdragon 695 5G chipset</strong> with <strong>8GB RAM</strong>, \r\n    <strong>256GB storage</strong>, and <strong>OxygenOS 14 (Android 14)</strong>, \r\n    it ensures seamless multitasking, optimized gaming, and fast 5G connectivity.\r\n  </p>\r\n\r\n  <p>\r\n    Capture sharp, vivid shots with the <strong>50MP Sony LYT-600 main camera (OIS + EIS)</strong>, \r\n    <strong>2MP depth camera</strong>, and <strong>16MP selfie camera</strong> with Nightscape & Face Unlock. \r\n    Features include <strong>slow motion</strong>, <strong>dual-view video</strong>, \r\n    and detailed <strong>portrait mode</strong>.\r\n  </p>\r\n\r\n  <p>\r\n    Stay powered with the <strong>5500mAh battery</strong> and \r\n    <strong>80W SUPERVOOC fast charging</strong>, giving 2 days of use with AI-driven \r\n    battery health optimization for longer lifespan.\r\n  </p>\r\n\r\n  <p>\r\n    Extra highlights include <strong>stereo speakers with 300% Ultra Volume Mode</strong>, \r\n    <strong>in-display fingerprint sensor</strong>, <strong>3.5mm headphone jack</strong>, \r\n    <strong>dual SIM 5G</strong>, Wi-Fi 5, Bluetooth 5.1, NFC, and USB-C.\r\n  </p>\r\n\r\n  <p>\r\n    Available in bold <strong>Mega Blue</strong>, sleek <strong>Light Blue</strong>, \r\n    and premium <strong>Super Silver</strong> finishes, combining smooth design with a modern feel.\r\n  </p>\r\n</div>",
+    "price": 23000,
+    "images": "photos/products/OnePlus_Nord_CE4_Lite_5G.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 1,
+    "created_date": "2025-08-26T10:02:25.697Z",
+    "modified_date": "2025-08-26T10:02:25.697Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 14,
+  "fields": {
+    "product_name": "HP Victus 15-fb2132AX",
+    "slug": "hp-victus-15-fb2132ax",
+    "description": "<div class=\"product-description text-gray-800 text-sm leading-relaxed space-y-4\">\r\n\r\n  <h2 class=\"text-lg font-semibold\">HP Victus 15-fb2132AX Ryzen 7 8845HS RTX 3050 Gaming Laptop</h2>\r\n  <p>\r\n    The HP Victus 15-fb2132AX is a powerful gaming and productivity laptop, powered by the \r\n    <strong>AMD Ryzen 7 8845HS</strong> processor with 8 cores, 16 threads, and a boost clock up to 5.1 GHz. \r\n    Combined with the <strong>NVIDIA GeForce RTX 3050 6GB</strong> graphics, it ensures smooth gaming and content creation.\r\n  </p>\r\n\r\n  <h3 class=\"font-semibold\">15.6\" 144Hz FHD Display</h3>\r\n  <p>\r\n    Enjoy stunning visuals on the <strong>15.6-inch FHD IPS screen</strong> with a \r\n    <strong>144Hz refresh rate</strong> and 300 nits brightness, offering responsive gameplay and vibrant colors.\r\n  </p>\r\n\r\n  <h3 class=\"font-semibold\">High-Speed Performance</h3>\r\n  <p>\r\n    Equipped with <strong>16GB DDR5 RAM</strong> and a <strong>1TB PCIe NVMe SSD</strong>, \r\n    the HP Victus ensures fast boot times, seamless multitasking, and ample storage for files and games.\r\n  </p>\r\n\r\n  <h3 class=\"font-semibold\">AMD Ryzen 7 8845HS</h3>\r\n  <p>\r\n    Built on <strong>Zen 4 architecture</strong>, the Ryzen 7 8845HS balances \r\n    strong multicore performance and efficiency. With <strong>16MB L3 cache</strong> \r\n    and integrated Radeon 780M graphics, it’s ideal for gaming, editing, and productivity.\r\n  </p>\r\n\r\n  <h3 class=\"font-semibold\">NVIDIA RTX 3050 Graphics</h3>\r\n  <p>\r\n    Featuring <strong>2,560 CUDA cores</strong> and <strong>6GB GDDR6 memory</strong>, \r\n    the RTX 3050 delivers smooth <strong>1080p gaming</strong>, real-time ray tracing, and AI-powered performance with DLSS.\r\n  </p>\r\n\r\n  <h3 class=\"font-semibold\">Design & Connectivity</h3>\r\n  <p>\r\n    The laptop comes in a sleek <strong>Performance Blue chassis</strong> with a full-size backlit keyboard. \r\n    Stay connected with <strong>Wi-Fi 6</strong>, <strong>Bluetooth 5.3</strong>, multiple USB and HDMI ports.\r\n  </p>\r\n\r\n  <h3 class=\"font-semibold\">Long Battery Life</h3>\r\n  <p>\r\n    The HP Victus offers up to <strong>7h 45m battery backup</strong>, \r\n    with <strong>fast charging</strong> that powers up to 50% in just 30 minutes.\r\n  </p>\r\n\r\n  <p class=\"font-semibold\">\r\n    Whether for <strong>gaming, content creation, or professional work</strong>, \r\n    the HP Victus 15-fb2132AX delivers performance, mobility, and style in one package.\r\n  </p>\r\n\r\n</div>",
+    "price": 153000,
+    "images": "photos/products/HP_Victus_15-fb2132AX.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 2,
+    "created_date": "2025-08-26T10:14:13.793Z",
+    "modified_date": "2025-09-13T19:21:59.633Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 15,
+  "fields": {
+    "product_name": "Nikon Z50 20.9MP Wi-Fi Mirrorless Digital Camera",
+    "slug": "nikon-z50-209mp-wi-fi-mirrorless-digital-camera",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Nikon Z50 20.9MP Wi-Fi Mirrorless Digital Camera with 16-50mm Lens</strong><br><br>\r\n    The <strong>Nikon Z50 Mirrorless Camera</strong> is a DX-format mirrorless system built around the powerful Z Mount, \r\n    delivering exceptional performance for both photography and videography. Equipped with a \r\n    <strong>20.9MP CMOS sensor</strong> and the <strong>EXPEED 6 image processor</strong>, the Z50 ensures sharp detail, \r\n    natural colors, and outstanding low-light performance. With burst shooting speeds of up to \r\n    <strong>11 frames per second</strong> and a <strong>209-point hybrid AF system with eye detection</strong>, \r\n    it provides precision and speed for every shot.\r\n  </p>\r\n\r\n  <p>\r\n    For video creators, the Z50 offers <strong>UHD 4K recording at 30 fps</strong> without crop, as well as \r\n    <strong>Full HD at up to 120 fps</strong> for cinematic slow-motion playback. In-camera time-lapse creation is supported, \r\n    letting you produce stunning <strong>UHD 4K time-lapse videos</strong> directly from the camera. Additional features such \r\n    as <strong>clip trimming, 20 Creative Picture Controls, and 10 Special Effects</strong> allow photographers and filmmakers \r\n    to customize their content with unique styles.\r\n  </p>\r\n\r\n  <p>\r\n    The <strong>ISO range of 100–51200</strong> (expandable to 204800) enables shooting in a wide variety of lighting \r\n    environments, from bright outdoor scenes to extreme low-light conditions. The APS-C \r\n    <strong>DX-format sensor</strong> delivers clean images, smooth tonal transitions, and reduced noise across its \r\n    sensitivity range. The EXPEED 6 processor also enhances overall system speed, supporting a continuous shooting \r\n    rate of <strong>11 fps at full resolution</strong> and up to <strong>30 fps at 8MP</strong> for capturing fast action.\r\n  </p>\r\n\r\n  <p>\r\n    The Z50 supports <strong>JPEG and RAW image formats</strong> with 14-bit color depth, ensuring high-quality files \r\n    suitable for both professionals and enthusiasts. Aspect ratios include <strong>1:1, 3:2, and 16:9</strong>, offering \r\n    versatility for both photography and video work. Movie files can be stored on in-camera memory cards or output \r\n    to an external recorder via HDMI.\r\n  </p>\r\n\r\n  <p>\r\n    Compact, lightweight, and intuitive, the <strong>Nikon Z50</strong> is designed to inspire creativity while providing \r\n    advanced control. Whether you are capturing breathtaking landscapes, portraits, or cinematic videos, this camera \r\n    combines <strong>portability, performance, and innovation</strong> in one elegant package.\r\n  </p>\r\n</div>",
+    "price": 92000,
+    "images": "photos/products/Nikon_Z50_20.9MP_Wi-Fi_Mirrorless_Digital_Camera.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 3,
+    "created_date": "2025-08-26T13:21:20.014Z",
+    "modified_date": "2025-09-13T19:21:38.827Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 16,
+  "fields": {
+    "product_name": "Samsung Galaxy A35 5G",
+    "slug": "samsung-galaxy-a35-5g",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Samsung Galaxy A35 5G</strong><br><br>\r\n    The <strong>Samsung Galaxy A35 5G Smartphone</strong> delivers an impressive combination of sleek design, \r\n    smooth performance, and advanced 5G connectivity. Featuring a <strong>6.6-inch Super AMOLED display</strong> \r\n    with <strong>120Hz refresh rate</strong>, <strong>1080 × 2340 resolution</strong>, and a peak brightness of \r\n    <strong>1000 nits (HBM)</strong>, the phone ensures vivid visuals and fluid animations even under bright sunlight. \r\n    With its <strong>~84.8% screen-to-body ratio</strong> and <strong>~390 ppi pixel density</strong>, this display \r\n    offers an immersive viewing experience ideal for movies, gaming, and everyday use.\r\n  </p>\r\n\r\n  <p>\r\n    Under the hood, it is powered by the efficient <strong>Exynos 1380 (5nm) chipset</strong>, featuring an \r\n    <strong>octa-core CPU</strong> (4×2.4 GHz Cortex-A78 + 4×2.0 GHz Cortex-A55) and a <strong>Mali-G68 MP5 GPU</strong>, \r\n    ensuring lag-free multitasking and smooth gaming performance. The device is equipped with <strong>8GB RAM</strong> and \r\n    <strong>128GB internal storage</strong>, expandable via <strong>microSD card up to 1.5TB</strong>, providing ample \r\n    space for apps, photos, and media files.\r\n  </p>\r\n\r\n  <p>\r\n    The <strong>triple rear camera system</strong> consists of a <strong>50MP primary sensor with OIS</strong>, \r\n    an <strong>8MP ultrawide lens</strong> offering a <strong>123° field of view</strong>, and a <strong>5MP macro lens</strong> \r\n    for detailed close-up shots. Video recording is supported up to <strong>4K at 30fps</strong> and \r\n    <strong>1080p at 60fps</strong> with <strong>gyro-EIS stabilization</strong> for smooth footage. On the front, \r\n    the <strong>13MP selfie camera</strong> supports <strong>4K video recording</strong>, ensuring sharp and vibrant selfies.\r\n  </p>\r\n\r\n  <p>\r\n    Enhancing the entertainment experience, the phone comes with <strong>stereo speakers</strong>, while audio connectivity \r\n    is managed via <strong>USB Type-C</strong> and wireless options, as the traditional headphone jack is not included. \r\n    The Galaxy A35 5G runs on <strong>Android 14 with One UI 6.1</strong>, offering a clean, intuitive interface and \r\n    guaranteed <strong>six major Android updates</strong> for long-term support.\r\n  </p>\r\n\r\n  <p>\r\n    In terms of connectivity, the device supports <strong>2G–5G networks</strong>, <strong>dual SIM (Nano + Hybrid)</strong>, \r\n    <strong>Wi-Fi 6</strong>, <strong>Bluetooth 5.3</strong>, <strong>NFC</strong>, <strong>GPS with multi-satellite support</strong>, \r\n    and <strong>USB Type-C with OTG</strong>. A <strong>5000mAh battery</strong> powers the phone, providing extended usage time, \r\n    with <strong>25W fast charging</strong> for quick recharging. Security is enhanced with an \r\n    <strong>under-display optical fingerprint sensor</strong> for safe and convenient access.\r\n  </p>\r\n\r\n  <p>\r\n    The Galaxy A35 5G is also <strong>IP54-rated</strong>, offering protection against dust and splashes, making it durable \r\n    for everyday use. Measuring <strong>161.7 × 78.0 × 8.2 mm</strong> and weighing <strong>209g</strong>, the phone strikes \r\n    a balance between premium feel and comfortable handling. With its robust feature set, the \r\n    <strong>Samsung Galaxy A35 5G</strong> is an ideal choice for users seeking a powerful, future-ready smartphone \r\n    with flagship-inspired features at an attractive price point.\r\n  </p>\r\n</div>",
+    "price": 60000,
+    "images": "photos/products/Samsung_Galaxy_A35_5G.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 1,
+    "created_date": "2025-08-29T16:20:59.278Z",
+    "modified_date": "2025-08-29T16:20:59.278Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 17,
+  "fields": {
+    "product_name": "Gigabyte A16 GA6H Core i7 13th Gen",
+    "slug": "gigabyte-a16-ga6h-core-i7-13th-gen",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    The <strong>Gigabyte Gaming A16 GA6H CMH</strong> is a powerful 16-inch gaming laptop built for speed, performance, and immersive entertainment. \r\n    Powered by the <strong>13th Gen Intel Core i7-13620H processor</strong> with 10 cores and 16 threads, it delivers turbo speeds up to <strong>4.90GHz</strong> \r\n    for seamless multitasking and ultra-responsive gaming. The laptop features a stunning <strong>16\" FHD+ WUXGA IPS display</strong> with \r\n    <strong>1920x1200 resolution</strong>, a <strong>165Hz refresh rate</strong>, and <strong>300-nit brightness</strong>, ensuring crisp visuals, smooth motion, \r\n    and excellent clarity for both work and play.  \r\n  </p>\r\n\r\n  <p>\r\n    For high-end graphics, it is equipped with the <strong>NVIDIA RTX 5050 8GB GDDR6 dedicated GPU</strong>, delivering ray tracing, \r\n    AI-enhanced rendering, and smooth frame rates for AAA titles, video editing, and creative workflows. Paired with \r\n    <strong>16GB DDR5 5200MHz RAM</strong> and a <strong>512GB Gen 4 NVMe SSD</strong>, this laptop ensures lightning-fast load times, \r\n    accelerated performance, and efficient multitasking without compromise.  \r\n  </p>\r\n\r\n  <p>\r\n    Designed with modern connectivity, the Gigabyte Gaming A16 GA6H CMH includes <strong>Wi-Fi 6E</strong>, <strong>Bluetooth 5.2</strong>, \r\n    and a versatile selection of ports including <strong>USB-C</strong>. The sleek <strong>Black Steel chassis</strong> features a \r\n    <strong>single-color backlit keyboard</strong> and <strong>Dolby Atmos audio</strong>, delivering both style and substance for gamers, \r\n    creators, and professionals. Preloaded with <strong>Windows 11 Home</strong>, this laptop is ready for next-gen gaming and productivity.  \r\n  </p>\r\n\r\n  <h3>Key Features:</h3>\r\n  <ul>\r\n    <li><strong>Display:</strong> 16-Inch FHD+ WUXGA (1920x1200), IPS, 165Hz refresh rate, 300-nit brightness</li>\r\n    <li><strong>Processor:</strong> Intel Core i7-13620H, 13th Gen, 10 cores/16 threads, up to 4.90GHz</li>\r\n    <li><strong>Graphics:</strong> NVIDIA RTX 5050, 8GB GDDR6 Dedicated GPU with ray tracing & AI rendering</li>\r\n    <li><strong>Memory:</strong> 16GB DDR5 5200MHz RAM</li>\r\n    <li><strong>Storage:</strong> 512GB Gen 4 NVMe SSD</li>\r\n    <li><strong>Audio:</strong> Dolby Atmos sound system</li>\r\n    <li><strong>Connectivity:</strong> Wi-Fi 6E, Bluetooth 5.2, USB-C & multiple ports</li>\r\n    <li><strong>Design:</strong> Black Steel chassis, slim bezels, single-color backlit keyboard</li>\r\n    <li><strong>OS:</strong> Windows 11 Home</li>\r\n  </ul>\r\n\r\n  <p>\r\n    The <strong>Gigabyte Gaming A16 GA6H CMH 16\" Laptop</strong> is designed for gamers, creators, and performance enthusiasts seeking \r\n    a balance of <em>power, speed, and portability</em>. Whether for gaming, streaming, or professional workflows, this laptop is \r\n    an excellent choice for anyone who demands reliable high-performance computing in a sleek form factor.  \r\n  </p>\r\n</div>",
+    "price": 145000,
+    "images": "photos/products/Gigabyte_A16_GA6H_Core_i7_13th_Gen.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 2,
+    "created_date": "2025-08-29T16:24:56.397Z",
+    "modified_date": "2025-08-29T16:24:56.397Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 18,
+  "fields": {
+    "product_name": "Apple iPad Air M2 11-inch",
+    "slug": "apple-ipad-air-m2-11-inch",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Apple iPad Air 11-inch (M2)</strong><br><br>\r\n    The <strong>Apple iPad Air 11-inch with M2 chip</strong> is a sleek, lightweight tablet built for performance, creativity, and everyday productivity. Featuring an <strong>11-inch Liquid Retina display</strong> with <strong>2360 × 1640 resolution</strong>, <strong>264 ppi</strong>, <strong>True Tone</strong>, <strong>Wide Color (P3)</strong>, <strong>500 nits brightness</strong>, and <strong>antireflective coating</strong>, it delivers stunning visuals with smooth <strong>165Hz refresh rate support</strong>, ideal for streaming, design, and gaming.\r\n  </p>\r\n\r\n  <p>\r\n    Powered by the advanced <strong>Apple M2 chip</strong> with an <strong>8-core CPU</strong>, <strong>9-core GPU</strong>, and <strong>16-core Neural Engine</strong>, the iPad Air ensures blazing-fast performance, effortless multitasking, and AI-driven efficiency. It comes with <strong>8GB of RAM</strong> and storage options up to <strong>1TB</strong>, making it suitable for professional apps, photo editing, and large media libraries, all while maintaining all-day battery life.\r\n  </p>\r\n\r\n  <p>\r\n    The <strong>rear 12MP Wide camera</strong> captures detailed photos and <strong>4K video</strong> with Smart HDR and cinematic stabilization, while the <strong>12MP Ultra Wide front camera</strong> supports <strong>Center Stage</strong> for smooth video calls. Paired with dual microphones and <strong>landscape stereo speakers</strong>, the iPad Air offers an immersive audio-visual experience.\r\n  </p>\r\n\r\n  <p>\r\n    For connectivity, it includes <strong>Wi-Fi 6E</strong>, <strong>Bluetooth 5.3</strong>, and a versatile <strong>USB-C port with DisplayPort & USB 3 (10Gb/s)</strong> support. It also features advanced sensors like <strong>Touch ID</strong>, accelerometer, gyroscope, ambient light, and barometer for secure access and seamless functionality across apps.\r\n  </p>\r\n\r\n  <p>\r\n    Running on <strong>iPadOS 17</strong>, the iPad Air provides powerful tools like Stage Manager multitasking, Freeform collaboration, and access to pro apps. It is fully compatible with the <strong>Apple Pencil Pro</strong> and <strong>Magic Keyboard</strong>, transforming the iPad Air into a versatile sketchbook, notebook, or laptop replacement.\r\n  </p>\r\n\r\n  <p>\r\n    Measuring just <strong>6.1mm thin</strong> and weighing about <strong>462g</strong>, the iPad Air 11-inch balances premium portability with robust performance. With its cutting-edge hardware, immersive display, and long-term software support, the <strong>Apple iPad Air (M2)</strong> is an ideal choice for students, professionals, and creators looking for a future-ready tablet.\r\n  </p>\r\n</div>",
+    "price": 100000,
+    "images": "photos/products/Apple_iPad_Air_M2_11-inch.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 4,
+    "created_date": "2025-08-29T16:36:25.038Z",
+    "modified_date": "2025-09-13T19:21:52.687Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 19,
+  "fields": {
+    "product_name": "Adata UV150 64GB USB 3.2 Gen 1 Pen Drive",
+    "slug": "adata-uv150-64gb-usb-32-gen-1-pen-drive",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Adata UV150 64GB USB 3.2 Gen 1 Pen Drive</strong><br><br>\r\n    The <strong>Adata UV150 Pen Drive</strong> offers <strong>64GB of storage</strong>, providing ample space for documents, media, and files. With a <strong>USB 3.2 Gen 1 interface</strong> and <strong>read speeds up to 100 MB/s</strong>, it ensures fast data transfer and efficient file management for everyday use.\r\n  </p>\r\n\r\n  <p>\r\n    Designed with a durable <strong>plastic textured casing</strong> in a stylish <strong>black and red combination</strong>, the UV150 is compact, portable, and easy to carry anywhere. Its plug-and-play functionality makes it convenient for work, school, or personal use without the need for additional drivers.\r\n  </p>\r\n\r\n  <p>\r\n    The pen drive is compatible with a wide range of operating systems including <strong>Windows XP, Vista, 7, 8, 8.1, 10</strong>, <strong>Mac OS X 10.6 or later</strong>, and <strong>Linux kernel 2.6+</strong>, making it a versatile choice for multiple devices.\r\n  </p>\r\n\r\n  <p>\r\n    Backed by a <strong>lifetime warranty</strong>, the <strong>Adata UV150 64GB Pen Drive</strong> provides reliable performance, long-lasting durability, and peace of mind for storing and transferring your important files safely and efficiently.\r\n  </p>\r\n</div>",
+    "price": 610,
+    "images": "photos/products/Adata_UV150_64GB_USB_3.2_Gen_1_Pen_Drive.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 6,
+    "created_date": "2025-08-29T16:40:44.623Z",
+    "modified_date": "2025-09-13T18:12:54.818Z"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 20,
+  "fields": {
+    "product_name": "Awei P6K 20000mAh Double USB Power Bank",
+    "slug": "awei-p6k-20000mah-double-usb-power-bank",
+    "description": "<div class=\"product-description\">\r\n  <p>\r\n    <strong>Awei P6K 20000mAh Double USB Power Bank</strong><br><br>\r\n    The <strong>Awei P6K Power Bank</strong> features a massive <strong>20,000mAh battery capacity</strong>, ensuring multiple recharges for your smartphones, tablets, and USB devices. Ideal for long journeys, busy days, or outdoor adventures, it keeps your devices powered and ready whenever you need them.\r\n  </p>\r\n\r\n  <p>\r\n    Built with high-quality <strong>polymer cells</strong>, the P6K offers enhanced <strong>safety, efficiency, and durability</strong> compared to conventional batteries. Its <strong>5V-2.1A input</strong> allows fast recharging of the power bank itself, while dual <strong>5V-2.1A outputs</strong> let you charge two devices simultaneously, making it perfect for sharing power with friends or family.\r\n  </p>\r\n\r\n  <p>\r\n    The compact and lightweight design ensures easy portability, fitting comfortably in a backpack or suitcase. <strong>Intelligent charging technology</strong> automatically detects the optimal charging speed for connected devices, delivering safe and efficient power transfer without overheating or overcharging.\r\n  </p>\r\n\r\n  <p>\r\n    Whether you're traveling, commuting, or enjoying outdoor activities, the <strong>Awei P6K 20000mAh Double USB Power Bank</strong> provides reliable and efficient charging, keeping your devices powered up whenever and wherever you need them.\r\n  </p>\r\n</div>",
+    "price": 1200,
+    "images": "photos/products/Awei_P6K_20000mAh_Double_USB_Power_Bank.png",
+    "stock": 500,
+    "is_available": true,
+    "category": 5,
+    "created_date": "2025-08-29T16:43:26.745Z",
+    "modified_date": "2025-09-13T19:21:45.872Z"
+  }
+}
+]
