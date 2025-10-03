@@ -378,5 +378,174 @@
     "created_date": "2025-08-29T16:43:26.745Z",
     "modified_date": "2025-09-13T19:21:45.872Z"
   }
+},
+{
+  "model": "store.variation",
+  "pk": 1,
+  "fields": {
+    "product": 2,
+    "variation_category": "color",
+    "variation_value": "Black",
+    "is_active": true,
+    "created_date": "2025-08-24T19:07:05.407Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 2,
+  "fields": {
+    "product": 2,
+    "variation_category": "color",
+    "variation_value": "Blue",
+    "is_active": true,
+    "created_date": "2025-08-24T19:07:16.594Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 3,
+  "fields": {
+    "product": 3,
+    "variation_category": "color",
+    "variation_value": "White",
+    "is_active": true,
+    "created_date": "2025-08-24T19:07:57.522Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 4,
+  "fields": {
+    "product": 3,
+    "variation_category": "color",
+    "variation_value": "Grey",
+    "is_active": true,
+    "created_date": "2025-08-24T19:08:05.487Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 5,
+  "fields": {
+    "product": 4,
+    "variation_category": "color",
+    "variation_value": "Black",
+    "is_active": true,
+    "created_date": "2025-08-24T19:08:23.376Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 6,
+  "fields": {
+    "product": 4,
+    "variation_category": "color",
+    "variation_value": "Gold",
+    "is_active": true,
+    "created_date": "2025-08-24T19:08:43.542Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 7,
+  "fields": {
+    "product": 9,
+    "variation_category": "color",
+    "variation_value": "Silver",
+    "is_active": true,
+    "created_date": "2025-08-24T19:08:56.542Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 8,
+  "fields": {
+    "product": 9,
+    "variation_category": "color",
+    "variation_value": "Graphite",
+    "is_active": true,
+    "created_date": "2025-08-24T19:09:30.770Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 9,
+  "fields": {
+    "product": 9,
+    "variation_category": "color",
+    "variation_value": "Navy",
+    "is_active": true,
+    "created_date": "2025-08-24T19:09:42.155Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 10,
+  "fields": {
+    "product": 13,
+    "variation_category": "color",
+    "variation_value": "Super Silver",
+    "is_active": true,
+    "created_date": "2025-08-26T10:03:01.991Z"
+  }
+},
+{
+  "model": "store.variation",
+  "pk": 11,
+  "fields": {
+    "product": 13,
+    "variation_category": "color",
+    "variation_value": "Mega Blue",
+    "is_active": true,
+    "created_date": "2025-08-26T10:03:16.480Z"
+  }
+},
+{
+  "model": "store.productgallery",
+  "pk": 1,
+  "fields": {
+    "product": 2,
+    "image": "store/products/Havit_TW976_True_Wireless_Stereo_Earbuds_2_0epeNFF.png"
+  }
+},
+{
+  "model": "store.productgallery",
+  "pk": 2,
+  "fields": {
+    "product": 3,
+    "image": "store/products/Onikuma_GT820_Wireless_Gaming_Headphone_2_YJTwoaf.png"
+  }
+},
+{
+  "model": "store.productgallery",
+  "pk": 3,
+  "fields": {
+    "product": 4,
+    "image": "store/products/Redmi_Watch_5_Lite_2_lKXIQX1.png"
+  }
+},
+{
+  "model": "store.productgallery",
+  "pk": 4,
+  "fields": {
+    "product": 9,
+    "image": "store/products/Samsung_Galaxy_Tab_A9_LTE_Wi-Fi__SIM_2_USKndHl.png"
+  }
+},
+{
+  "model": "store.productgallery",
+  "pk": 5,
+  "fields": {
+    "product": 9,
+    "image": "store/products/Samsung_Galaxy_Tab_A9_LTE_Wi-Fi__SIM_3_fA6SRN3.png"
+  }
+},
+{
+  "model": "store.productgallery",
+  "pk": 6,
+  "fields": {
+    "product": 13,
+    "image": "store/products/OnePlus_Nord_CE4_Lite_5G_2.png"
+  }
 }
 ]
